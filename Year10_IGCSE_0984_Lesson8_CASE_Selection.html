@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 8 – CASE Selection</title>
+<style>
+:root{--gold:#f4c542;--pale:#fff4c2;--olive:#556b2f;--dark:#35451d;--ink:#202817;--paper:#fffdf3;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff1b5,#f7f3d9 50%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--pale);font-weight:bold}.school{font-size:.85rem;margin-top:5px}h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.1)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--dark);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}.card h2{color:var(--dark);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--pale);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+label{display:block;margin:8px 0}input[type=text],input[type=number],select{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}input[type=radio]{margin-right:7px}
+.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-left:8px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #aaa;font-family:Consolas,monospace}.hidden{display:none}.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}.small{font-size:.9rem;color:#5d624d}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222}.code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+<div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+<h1>Lesson 8: CASE Selection</h1>
+<p>Cambridge IGCSE Computer Science 0984 · Selecting from several possible alternatives</p>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<button onclick="startTimer()">Start / Resume 50-minute lesson</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><button class="gold" onclick="window.print()">Print / Save as PDF</button>
+<span id="clock">50:00</span><div class="progress"><span id="bar"></span></div>
+</div>
+
+<section class="card">
+<span class="tag">50 minutes</span><span class="tag">CASE OF</span><span class="tag">Pseudocode first</span>
+<h2>Learning outcomes</h2>
+<ul>
+<li>Explain when CASE selection is useful.</li>
+<li>Recognise the structure of a Cambridge CASE statement.</li>
+<li>Use CASE OF to select a branch according to the value of an identifier.</li>
+<li>Use OTHERWISE for values that do not match a listed case.</li>
+<li>Trace and write simple CASE algorithms accurately.</li>
+</ul>
+<div class="note"><b>Lesson boundary:</b> This lesson focuses on simple CASE selection. It does not introduce iteration or combine CASE with loops.</div>
+</section>
+
+<section class="card">
+<h2>1. Recall – 5 minutes</h2>
+<p>Recall what you learned about IF and nested IF.</p>
+<div class="question"><b>1.</b> What value does a condition produce?
+<label><input type="radio" name="r1" value="a"> BOOLEAN</label><label><input type="radio" name="r1" value="b"> STRING</label><label><input type="radio" name="r1" value="c"> REAL</label></div>
+<div class="question"><b>2.</b> Which keyword begins the alternative branch of an IF statement?
+<label><input type="radio" name="r2" value="a"> CASE</label><label><input type="radio" name="r2" value="b"> ELSE</label><label><input type="radio" name="r2" value="c"> OTHERWISE</label></div>
+<div class="question"><b>3.</b> What does nested selection mean?
+<label><input type="radio" name="r3" value="a"> A decision inside another decision</label><label><input type="radio" name="r3" value="b"> Repeating a decision</label><label><input type="radio" name="r3" value="c"> Storing several values in an array</label></div>
+<button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+</section>
+
+<section class="card">
+<h2>2. Teacher demonstration – 10 minutes</h2>
+<h3>Why use CASE?</h3>
+<p>Suppose a program must display a different message for each of several menu choices. A long chain of IF…ELSE statements could be written, but CASE provides a clear structure when one identifier is compared with several possible values.</p>
+<h3>Cambridge Pseudocode structure</h3>
+<div class="code">CASE OF &lt;identifier&gt;
+  &lt;value 1&gt; : &lt;statements&gt;
+  &lt;value 2&gt; : &lt;statements&gt;
+  &lt;value 3&gt; : &lt;statements&gt;
+  OTHERWISE : &lt;statements&gt;
+ENDCASE</div>
+<div class="note"><b>Read the structure:</b> The identifier is evaluated. The statements associated with the matching value are executed. If none of the listed values matches, the OTHERWISE branch is executed. ENDCASE closes the CASE structure.</div>
+<h3>Worked example: Menu choice</h3>
+<div class="code">INPUT Choice
+CASE OF Choice
+  1 : OUTPUT "Add a record"
+  2 : OUTPUT "Display records"
+  3 : OUTPUT "Search records"
+  OTHERWISE : OUTPUT "Invalid choice"
+ENDCASE</div>
+<p>If Choice is 2, the program outputs “Display records”. If Choice is 5, no listed value matches, so the OTHERWISE branch outputs “Invalid choice”.</p>
+<h3>Python equivalent (comparison)</h3>
+<div class="code">choice = int(input("Enter choice: "))
+if choice == 1:
+    print("Add a record")
+elif choice == 2:
+    print("Display records")
+elif choice == 3:
+    print("Search records")
+else:
+    print("Invalid choice")</div>
+<p class="small">Python's if/elif/else can represent this decision pattern. It is a Python comparison, not Cambridge Pseudocode syntax.</p>
+<h3>Important points</h3>
+<ul>
+<li>Write <code>CASE OF</code> followed by the identifier being tested.</li>
+<li>Each case value is followed by a colon.</li>
+<li><code>OTHERWISE</code> handles values not listed in the CASE branches.</li>
+<li><code>ENDCASE</code> closes the structure.</li>
+<li>Use CASE when selecting between several alternatives based on the value of one identifier.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>3. Interactive exploration – 10 minutes</h2>
+<h3>Try the menu selector</h3>
+<label for="choice">Enter a menu choice:
+<select id="choice"><option value="1">1 – Add a record</option><option value="2">2 – Display records</option><option value="3">3 – Search records</option><option value="4">4 – Exit</option><option value="9">9 – Other value</option></select></label>
+<button onclick="runCase()">Run CASE algorithm</button>
+<div id="caseOutput" class="box" aria-live="polite">Choose an option and run the algorithm.</div>
+<h3>Trace table</h3>
+<table><thead><tr><th>Choice</th><th>Matching branch</th><th>Output</th></tr></thead>
+<tbody><tr><td>1</td><td>1</td><td>Add a record</td></tr><tr><td>2</td><td>2</td><td>Display records</td></tr><tr><td>3</td><td>3</td><td>Search records</td></tr><tr><td>4</td><td>OTHERWISE</td><td>Invalid choice</td></tr></tbody></table>
+<div class="note">Notice that this example has no case for 4. The OTHERWISE branch therefore runs. The table and simulator use the same four-branch logic shown in the Pseudocode.</div>
+</section>
+
+<section class="card">
+<h2>4. Formal practice – 15 minutes</h2>
+<p>Write each solution using Cambridge Pseudocode. Use CASE OF, a colon after each case value, OTHERWISE where appropriate, and ENDCASE.</p>
+<div class="box">
+<h3>Task 1 – Day number</h3>
+<p>Input an integer DayNumber. Use CASE to output the day name for values 1 to 5: Monday, Tuesday, Wednesday, Thursday and Friday. For any other value, output <code>"Not a school day"</code>.</p>
+<textarea rows="8" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('sol1')">Show suggested answer</button>
+<div id="sol1" class="code hidden">INPUT DayNumber
+CASE OF DayNumber
+  1 : OUTPUT "Monday"
+  2 : OUTPUT "Tuesday"
+  3 : OUTPUT "Wednesday"
+  4 : OUTPUT "Thursday"
+  5 : OUTPUT "Friday"
+  OTHERWISE : OUTPUT "Not a school day"
+ENDCASE</div>
+</div>
+<div class="box">
+<h3>Task 2 – Calculator operation</h3>
+<p>Input two numbers, Number1 and Number2, and an operation code. If the code is 1, output their sum. If it is 2, output Number1 minus Number2. If it is 3, output their product. For any other code, output <code>"Invalid operation"</code>.</p>
+<textarea rows="9" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('sol2')">Show suggested answer</button>
+<div id="sol2" class="code hidden">INPUT Number1
+INPUT Number2
+INPUT Operation
+CASE OF Operation
+  1 : OUTPUT Number1 + Number2
+  2 : OUTPUT Number1 - Number2
+  3 : OUTPUT Number1 * Number2
+  OTHERWISE : OUTPUT "Invalid operation"
+ENDCASE</div>
+</div>
+<div class="box">
+<h3>Task 3 – Grade description</h3>
+<p>Input a grade character. Use CASE to output <code>"Excellent"</code> for A, <code>"Very good"</code> for B, <code>"Good"</code> for C, and <code>"Needs improvement"</code> for D. For any other character, output <code>"Grade not recognised"</code>.</p>
+<textarea rows="9" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('sol3')">Show suggested answer</button>
+<div id="sol3" class="code hidden">INPUT Grade
+CASE OF Grade
+  "A" : OUTPUT "Excellent"
+  "B" : OUTPUT "Very good"
+  "C" : OUTPUT "Good"
+  "D" : OUTPUT "Needs improvement"
+  OTHERWISE : OUTPUT "Grade not recognised"
+ENDCASE</div>
+</div>
+<p class="small">Attempt each task before revealing the suggested answer. These are practice questions; equivalent correct solutions are acceptable.</p>
+</section>
+
+<section class="card">
+<h2>5. Assessment and feedback – 10 minutes</h2>
+<p>Enter your full name and answer all six questions.</p>
+<label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+<form id="quiz">
+<div class="question"><b>1.</b> When is CASE particularly useful?
+<label><input type="radio" name="q1" value="a"> When selecting between several alternatives based on one identifier</label>
+<label><input type="radio" name="q1" value="b"> When repeating statements a fixed number of times</label>
+<label><input type="radio" name="q1" value="c"> When declaring a constant</label></div>
+<div class="question"><b>2.</b> Which keyword follows CASE in Cambridge Pseudocode?
+<label><input type="radio" name="q2" value="a"> THEN</label><label><input type="radio" name="q2" value="b"> OF</label><label><input type="radio" name="q2" value="c"> ELSE</label></div>
+<div class="question"><b>3.</b> What punctuation follows a case value?
+<label><input type="radio" name="q3" value="a"> A comma</label><label><input type="radio" name="q3" value="b"> A semicolon</label><label><input type="radio" name="q3" value="c"> A colon</label></div>
+<div class="question"><b>4.</b> What is the purpose of OTHERWISE?
+<label><input type="radio" name="q4" value="a"> To handle a value that does not match any listed case</label><label><input type="radio" name="q4" value="b"> To repeat the CASE statement</label><label><input type="radio" name="q4" value="c"> To close the CASE statement</label></div>
+<div class="question"><b>5.</b> Which keyword closes a CASE structure?
+<label><input type="radio" name="q5" value="a"> ENDIF</label><label><input type="radio" name="q5" value="b"> ENDCASE</label><label><input type="radio" name="q5" value="c"> ENDWHILE</label></div>
+<div class="question"><b>6.</b> In the menu example, what is output when Choice = 7?
+<label><input type="radio" name="q6" value="a"> Add a record</label><label><input type="radio" name="q6" value="b"> Search records</label><label><input type="radio" name="q6" value="c"> Invalid choice</label></div>
+</form>
+<button class="gold" onclick="submitQuiz()">Submit assessment</button>
+<div id="result" class="card hidden" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Teacher checkpoint</h2>
+<ul>
+<li>Students can explain why CASE may be clearer than a long chain of IF…ELSE statements for a multi-way choice.</li>
+<li>Students write CASE OF followed by the correct identifier.</li>
+<li>Students include a colon after each case value.</li>
+<li>Students use OTHERWISE for unmatched values and ENDCASE to close the structure.</li>
+<li>Students can trace the matching case for a given input.</li>
+</ul>
+<div class="note"><b>Next lesson:</b> Consolidate selection by comparing IF, nested IF and CASE, then practise choosing an appropriate structure for a problem.</div>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=3000,timer=null;
+function draw(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%'}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;draw()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;draw()}draw();
+function checkRecall(){let k=['a','a','a'],n=0;k.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)n++});document.getElementById('recallFeedback').textContent=' '+n+'/3 correct.'}
+function runCase(){let v=document.getElementById('choice').value;let messages={'1':'Add a record','2':'Display records','3':'Search records'};let matched=messages[v]!==undefined;document.getElementById('caseOutput').innerHTML='<b>CASE OF Choice</b><br>Input Choice = '+v+'<br>Selected branch: <b>'+(matched?v:'OTHERWISE')+'</b><br>Output: <b>'+(matched?messages[v]:'Invalid choice')+'</b>'}
+function toggle(id){document.getElementById(id).classList.toggle('hidden')}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name.');document.getElementById('studentName').focus();return}let key={q1:'a',q2:'b',q3:'c',q4:'a',q5:'b',q6:'c'},score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let p=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+esc(name)+'</p><p><b>Score:</b> '+score+'/6 ('+p+'%)</p><p class="'+(p>=70?'good':'bad')+'">'+(p>=70?'Well done! You have achieved 70% or above.':'Review the CASE structure and try the practice questions again.')+'</p><p class="small">The result is displayed on this device. Use Print / Save as PDF to save the page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>

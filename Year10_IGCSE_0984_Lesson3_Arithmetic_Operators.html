@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 3 | Arithmetic Operators and Expressions | IGCSE 0984</title>
+<style>
+:root{--gold:#f4c542;--goldlight:#fff3bd;--olive:#465b25;--dark:#263817;--cream:#fffbea;--ink:#20251b;--muted:#59634d;--line:#d8d9bd;--green:#e5f1d8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:white;padding:27px 5vw 24px;border-bottom:8px solid var(--gold)}
+.header-inner{max-width:1150px;margin:auto}.brand{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#f8df7d;font-weight:bold}
+h1{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:10px 0}.subtitle{font-size:1.08rem;color:#f4f0d9;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.meta span{background:#ffffff18;border:1px solid #ffffff55;padding:7px 12px;border-radius:20px;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;background:#fffdf1;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #26381712}
+.nav-inner{max-width:1150px;margin:auto;display:flex;gap:5px;overflow-x:auto;padding:9px 12px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--dark);font-weight:bold;font-size:.88rem;padding:8px 10px;border-radius:20px}nav a:hover{background:var(--goldlight)}
+main{max-width:1100px;margin:27px auto;padding:0 18px 55px}
+section{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin:19px 0;box-shadow:0 5px 18px #2638170b}
+h2{color:var(--dark);margin:0 0 12px;font-size:1.55rem}h3{color:var(--olive);margin:17px 0 7px}
+.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#8a6b00;font-weight:bold}
+.time{display:inline-block;background:var(--olive);color:white;padding:4px 10px;border-radius:15px;font-size:.82rem;font-weight:bold;margin:0 0 9px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fffef8}.card strong{color:var(--dark)}
+.callout,.success,.warning{padding:13px 16px;border-radius:9px;margin:13px 0}.callout{background:var(--goldlight);border-left:5px solid #d6a900}.success{background:var(--green);border-left:5px solid var(--olive)}.warning{background:#fff0e7;border-left:5px solid #b85b28}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#eef0dc;color:var(--dark)}
+pre{background:#182318;color:#f5f3d7;padding:16px;border-radius:12px;overflow-x:auto;font-size:.94rem;line-height:1.55;border:1px solid #31452a}
+code{font-family:Consolas,Monaco,monospace}.inline{background:#f0f1e5;padding:2px 5px;border-radius:4px;font-family:Consolas,monospace}
+button{border:0;background:var(--olive);color:white;padding:10px 15px;border-radius:8px;font-weight:bold;cursor:pointer}button:hover{background:var(--dark)}button.secondary{background:#e8edda;color:var(--dark);border:1px solid var(--line)}
+textarea{width:100%;min-height:105px;resize:vertical;font:inherit;padding:10px;border:1px solid #aeb59a;border-radius:8px}
+details{border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:10px 0;background:#fffef8}summary{cursor:pointer;font-weight:bold;color:var(--dark)}
+.quiz-item{padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fffef8}.quiz-item label{display:inline-block;margin:7px 12px 3px 0}.feedback{font-weight:bold;margin-top:5px}
+.timerbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f4f5e8;padding:13px;border-radius:12px}#clock{font-size:1.6rem;font-weight:bold;color:var(--dark);font-variant-numeric:tabular-nums;min-width:90px}
+footer{text-align:center;background:var(--dark);color:#f7f0cf;padding:22px}footer strong{color:var(--gold)}
+@media print{nav,.no-print,button{display:none!important}body{background:white;font-size:11pt}header{background:white!important;color:black;border-bottom:3px solid #777;padding:14px}.brand,.subtitle{color:#333}section{box-shadow:none;break-inside:avoid}pre{background:#eee;color:#111;white-space:pre-wrap}}
+</style>
+</head>
+<body>
+<header><div class="header-inner">
+ <div class="brand">Modern English School Cairo · Care · Challenge · Inspire</div>
+ <h1>Arithmetic Operators and Expressions</h1>
+ <p class="subtitle">Year 10 · Cambridge IGCSE Computer Science 0984 · Lesson 3</p>
+ <div class="meta"><span>50-minute lesson</span><span>Sequential programming</span><span>Cambridge Pseudocode first</span><span>Ravi Raju’s Programming Lab</span></div>
+</div></header>
+<nav><div class="nav-inner">
+ <a href="#recall">Recall</a><a href="#demo">Demonstration</a><a href="#explore">Explore operators</a><a href="#precedence">Precedence</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+</div></nav>
+<main>
+<section>
+ <div class="kicker">Syllabus alignment</div><h2>Cambridge reference</h2>
+ <p>This lesson is aligned to <strong>Cambridge IGCSE (9–1) Computer Science 0984, syllabus for examination in 2026, 2027 and 2028</strong>, Topic 8.1.4(f): arithmetic operators.</p>
+ <p>The arithmetic operators specified are: <strong>+, −, /, *, ^, MOD and DIV</strong>. The official pseudocode reference explains DIV and MOD using the forms <code class="inline">DIV(identifier1, identifier2)</code> and <code class="inline">MOD(identifier1, identifier2)</code>.</p>
+ <div class="warning"><strong>Exam-year reminder:</strong> This is the 2026–2028 pseudocode pathway. The 2029–2031 syllabus removes pseudocode and uses Python 3. Confirm the examination year for the class before using this sequence as its exam preparation route.</div>
+</section>
+<section>
+ <div class="kicker">Learning goals</div><h2>By the end of this lesson, you should be able to…</h2>
+ <div class="grid">
+  <div class="card">Use the seven arithmetic operators required by the syllabus.</div>
+  <div class="card">Evaluate arithmetic expressions accurately.</div>
+  <div class="card">Apply operator precedence and parentheses.</div>
+  <div class="card">Explain the difference between <strong>DIV</strong> and <strong>MOD</strong>.</div>
+  <div class="card">Write a short sequential algorithm using arithmetic expressions.</div>
+  <div class="card">Compare Cambridge Pseudocode with equivalent Python expressions.</div>
+ </div>
+ <div class="callout"><strong>Today's learning sequence:</strong> Understand the problem → write Cambridge Pseudocode → trace the calculation → compare with Python.</div>
+ <div class="timerbox no-print"><strong>Lesson timer</strong><span id="clock">50:00</span><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><span class="small">Suggested timings total 50 minutes.</span></div>
+</section>
+
+<section id="recall">
+ <div class="kicker">Activity 1</div><span class="time">5 minutes · Recall</span>
+ <h2>What do you remember about variables?</h2>
+ <div class="quiz-item"><p><strong>1.</strong> Which statement assigns a value to a variable?</p>
+  <label><input type="radio" name="r1" value="a"> INPUT</label><label><input type="radio" name="r1" value="b"> OUTPUT</label><label><input type="radio" name="r1" value="c"> Assignment using ←</label><div class="feedback" id="rf1"></div></div>
+ <div class="quiz-item"><p><strong>2.</strong> Which data type is suitable for a number such as 12.5?</p>
+  <label><input type="radio" name="r2" value="a"> INTEGER</label><label><input type="radio" name="r2" value="b"> REAL</label><label><input type="radio" name="r2" value="c"> CHAR</label><div class="feedback" id="rf2"></div></div>
+ <button onclick="checkRecall()">Check recall</button>
+</section>
+
+<section id="demo">
+ <div class="kicker">Activity 2</div><span class="time">10 minutes · Teacher demonstration</span>
+ <h2>Start with a real problem</h2>
+ <p><strong>Problem:</strong> A student buys 4 notebooks. Each notebook costs 12.50. Calculate the total cost.</p>
+ <p>Ask students: What information do we know? What calculation is needed? Which variables should we declare?</p>
+ <pre><code>// Calculate the total cost of notebooks
+DECLARE Quantity : INTEGER
+DECLARE UnitPrice : REAL
+DECLARE TotalCost : REAL
+
+Quantity ← 4
+UnitPrice ← 12.50
+
+TotalCost ← Quantity * UnitPrice
+
+OUTPUT TotalCost</code></pre>
+ <div class="success"><strong>Expected output:</strong> 50.0 (the numeric value is fifty; the displayed formatting may vary).</div>
+ <p>Ask students to identify the multiplication operator and explain why <code class="inline">UnitPrice</code> is REAL while <code class="inline">Quantity</code> is INTEGER.</p>
+</section>
+
+<section id="explore">
+ <div class="kicker">Activity 3</div><span class="time">10 minutes · Interactive exploration</span>
+ <h2>The seven arithmetic operators</h2>
+ <table><thead><tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr></thead>
+ <tbody>
+  <tr><td><strong>+</strong></td><td>Addition</td><td><code>8 + 3</code></td><td>11</td></tr>
+  <tr><td><strong>−</strong></td><td>Subtraction</td><td><code>8 - 3</code></td><td>5</td></tr>
+  <tr><td><strong>*</strong></td><td>Multiplication</td><td><code>8 * 3</code></td><td>24</td></tr>
+  <tr><td><strong>/</strong></td><td>Division</td><td><code>8 / 4</code></td><td>2</td></tr>
+  <tr><td><strong>^</strong></td><td>Raised to the power of</td><td><code>2 ^ 3</code></td><td>8</td></tr>
+  <tr><td><strong>DIV</strong></td><td>Integer division: quotient with fractional part discarded</td><td><code>DIV(10, 3)</code></td><td>3</td></tr>
+  <tr><td><strong>MOD</strong></td><td>Remainder after integer division</td><td><code>MOD(10, 3)</code></td><td>1</td></tr>
+ </tbody></table>
+ <h3>Understand DIV and MOD together</h3>
+ <p>10 divided by 3 gives a quotient of 3 and a remainder of 1.</p>
+ <div class="grid">
+  <div class="card"><strong>DIV(10, 3) = 3</strong><p>How many complete groups of 3 can be made from 10?</p></div>
+  <div class="card"><strong>MOD(10, 3) = 1</strong><p>How many are left over after making those complete groups?</p></div>
+ </div>
+ <div class="callout"><strong>Cambridge notation:</strong> Use <code class="inline">DIV(Identifier1, Identifier2)</code> and <code class="inline">MOD(Identifier1, Identifier2)</code>. The identifiers used as operands are INTEGER. Do not replace these with Python symbols in a Cambridge Pseudocode answer.</div>
+ <h3>Example using declared integer variables</h3>
+ <pre><code>DECLARE NumberA : INTEGER
+DECLARE NumberB : INTEGER
+DECLARE Quotient : INTEGER
+DECLARE Remainder : INTEGER
+
+NumberA ← 10
+NumberB ← 3
+
+Quotient ← DIV(NumberA, NumberB)
+Remainder ← MOD(NumberA, NumberB)
+
+OUTPUT Quotient
+OUTPUT Remainder</code></pre>
+ <h3>Python comparison</h3>
+ <table><thead><tr><th>Cambridge Pseudocode</th><th>Python 3</th></tr></thead><tbody>
+  <tr><td><code>A + B</code></td><td><code>A + B</code></td></tr>
+  <tr><td><code>A - B</code></td><td><code>A - B</code></td></tr>
+  <tr><td><code>A * B</code></td><td><code>A * B</code></td></tr>
+  <tr><td><code>A / B</code></td><td><code>A / B</code></td></tr>
+  <tr><td><code>A ^ B</code></td><td><code>A ** B</code></td></tr>
+  <tr><td><code>DIV(A, B)</code></td><td><code>A // B</code> for positive integer operands</td></tr>
+  <tr><td><code>MOD(A, B)</code></td><td><code>A % B</code> for positive integer operands</td></tr>
+ </tbody></table>
+ <div class="warning"><strong>Important Python difference:</strong> Python uses <code class="inline">**</code> for powers; <code class="inline">^</code> in Python is not exponentiation. Also, Python floor division with negative numbers can behave differently from Cambridge's description of discarding the fractional part. Our direct DIV/MOD comparisons here use positive integers.</div>
+</section>
+
+<section id="precedence">
+ <div class="kicker">Guided exploration</div><span class="time">Included in teacher demonstration and exploration</span>
+ <h2>Which calculation happens first?</h2>
+ <p>Multiplication and division have higher precedence than addition and subtraction. Use parentheses to make complex expressions clear.</p>
+ <table><thead><tr><th>Expression</th><th>Order</th><th>Answer</th></tr></thead><tbody>
+  <tr><td><code>4 + 3 * 2</code></td><td>3 × 2 first, then + 4</td><td>10</td></tr>
+  <tr><td><code>(4 + 3) * 2</code></td><td>Parentheses first</td><td>14</td></tr>
+  <tr><td><code>20 - 12 / 4</code></td><td>12 ÷ 4 first, then subtract</td><td>17</td></tr>
+  <tr><td><code>2 ^ 3 + 1</code></td><td>Power first, then addition</td><td>9</td></tr>
+ </tbody></table>
+ <div class="callout"><strong>Cambridge guidance:</strong> Multiplication and division have higher precedence than addition and subtraction. For complex expressions, use parentheses to make the intended order explicit.</div>
+ <h3>Try it: predict the result</h3>
+ <div class="quiz-item"><p><strong>1.</strong> What is the result of <code>6 + 2 * 5</code>?</p>
+  <label><input type="radio" name="p1" value="a"> 40</label><label><input type="radio" name="p1" value="b"> 16</label><label><input type="radio" name="p1" value="c"> 20</label><div class="feedback" id="pf1"></div></div>
+ <div class="quiz-item"><p><strong>2.</strong> What is the result of <code>(6 + 2) * 5</code>?</p>
+  <label><input type="radio" name="p2" value="a"> 40</label><label><input type="radio" name="p2" value="b"> 16</label><label><input type="radio" name="p2" value="c"> 20</label><div class="feedback" id="pf2"></div></div>
+ <button onclick="checkPrecedence()">Check answers</button>
+</section>
+
+<section id="practice">
+ <div class="kicker">Activity 4</div><span class="time">15 minutes · Formal practice</span>
+ <h2>Write the algorithm</h2>
+ <p>For each task, identify the inputs, choose suitable data types, write the Cambridge Pseudocode, and check your calculations.</p>
+ <div class="task"><h3>Question 1 · Perimeter</h3>
+  <p>Input the length and width of a rectangle. Calculate and display its perimeter.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Perimeter pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Calculate the perimeter of a rectangle
+DECLARE Length : REAL
+DECLARE Width : REAL
+DECLARE Perimeter : REAL
+
+INPUT Length
+INPUT Width
+
+Perimeter ← 2 * (Length + Width)
+
+OUTPUT Perimeter</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 2 · Complete groups and remainder</h3>
+  <p>Input the number of students and the number of students in each group. Display how many complete groups can be formed and how many students remain. Assume both inputs are positive integers and the group size is greater than zero.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Groups and remainder pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Find complete groups and students remaining
+DECLARE NumberOfStudents : INTEGER
+DECLARE GroupSize : INTEGER
+DECLARE CompleteGroups : INTEGER
+DECLARE StudentsLeft : INTEGER
+
+INPUT NumberOfStudents
+INPUT GroupSize
+
+CompleteGroups ← DIV(NumberOfStudents, GroupSize)
+StudentsLeft ← MOD(NumberOfStudents, GroupSize)
+
+OUTPUT CompleteGroups
+OUTPUT StudentsLeft</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 3 · Calculate a final price</h3>
+  <p>Input the price of an item and the number of items purchased. Calculate the total price. Then calculate a discount equal to 10% of the total and display the discount and the amount to pay.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Discount pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Calculate a 10 percent discount and final price
+DECLARE UnitPrice : REAL
+DECLARE Quantity : INTEGER
+DECLARE TotalPrice : REAL
+DECLARE Discount : REAL
+DECLARE AmountToPay : REAL
+
+INPUT UnitPrice
+INPUT Quantity
+
+TotalPrice ← UnitPrice * Quantity
+Discount ← TotalPrice * 0.10
+AmountToPay ← TotalPrice - Discount
+
+OUTPUT Discount
+OUTPUT AmountToPay</code></pre></details>
+ </div>
+ <p class="small">Teacher note: Accept equivalent correct expressions. Ensure students use Cambridge operators and meaningful identifiers. Do not require selection or iteration in this lesson.</p>
+</section>
+
+<section id="assessment">
+ <div class="kicker">Activity 5</div><span class="time">10 minutes · Assessment and feedback</span>
+ <h2>Check your understanding</h2>
+ <p>Answer all six questions, then submit to see your score and explanations.</p>
+ <div id="assessmentQuiz"></div>
+ <button onclick="markAssessment()">Submit assessment</button> <button class="secondary" onclick="resetAssessment()">Reset</button>
+ <div id="assessmentResult" class="success" aria-live="polite">Your result will appear here.</div>
+</section>
+
+<section>
+ <h2>Lesson reflection</h2>
+ <ol>
+  <li>What is the difference between DIV and MOD?</li>
+  <li>Why does <code class="inline">4 + 3 * 2</code> give 10 rather than 14?</li>
+  <li>Which symbol represents exponentiation in Cambridge Pseudocode?</li>
+  <li>What Python operator is used for exponentiation?</li>
+ </ol>
+ <div class="success"><strong>Key message:</strong> Understand the operation, apply the correct Cambridge symbol, respect operator precedence, and use parentheses when they make an expression clearer.</div>
+ <p class="small">Next lesson: relational operators and Boolean expressions, followed by logical operators as a separate learning step.</p>
+ <div class="no-print"><button onclick="window.print()">Print lesson / Save as PDF</button></div>
+</section>
+</main>
+<footer><strong>Ravi Raju’s Programming Lab</strong><br>Modern English School Cairo · Care · Challenge · Inspire<br><span class="small" style="color:#e6e4cc">Year 10 · Cambridge IGCSE Computer Science 0984</span></footer>
+<script>
+let remaining=50*60, timer=null;
+function showTime(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(timer!==null)return;timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else pauseTimer()},1000)}
+function pauseTimer(){if(timer!==null){clearInterval(timer);timer=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTime()}showTime();
+function checkRecall(){let keys={r1:'c',r2:'b'},s=0;Object.keys(keys).forEach((k,i)=>{let x=document.querySelector('input[name="'+k+'"]:checked'),ok=x&&x.value===keys[k];if(ok)s++;let f=document.getElementById('rf'+(i+1));f.textContent=ok?'Correct!':'Review the relevant statement or data type.';f.style.color=ok?'#365d20':'#8b3030'});alert('Recall score: '+s+'/2')}
+function checkPrecedence(){let keys={p1:'b',p2:'a'};Object.keys(keys).forEach((k,i)=>{let x=document.querySelector('input[name="'+k+'"]:checked'),ok=x&&x.value===keys[k];let f=document.getElementById('pf'+(i+1));f.textContent=ok?'Correct!':'Not quite. Remember that multiplication is evaluated before addition, unless parentheses change the order.';f.style.color=ok?'#365d20':'#8b3030'})}
+const items=[
+{q:'What is the result of 9 + 4?',o:['13','36','5'],a:0,e:'Addition combines the values: 9 + 4 = 13.'},
+{q:'Which Cambridge operator means “raised to the power of”?',o:['*','^','/'],a:1,e:'The Cambridge Pseudocode exponentiation operator is ^.'},
+{q:'What does DIV(17, 5) return?',o:['3','2','3.4'],a:0,e:'DIV returns the quotient with the fractional part discarded: 3.'},
+{q:'What does MOD(17, 5) return?',o:['3','2','5'],a:1,e:'17 divided by 5 gives 3 remainder 2.'},
+{q:'What is the result of 5 + 4 * 2?',o:['18','13','26'],a:1,e:'Multiplication first: 4 * 2 = 8, then 5 + 8 = 13.'},
+{q:'Which Python operator performs exponentiation?',o:['^','**','//'],a:1,e:'Python uses ** for exponentiation. Python ^ is not a power operator.'}
+];
+function buildAssessment(){let root=document.getElementById('assessmentQuiz');root.innerHTML='';items.forEach((it,i)=>{let d=document.createElement('div');d.className='quiz-item';d.innerHTML='<p><strong>'+(i+1)+'. '+it.q+'</strong></p>'+it.o.map((op,j)=>'<label><input type="radio" name="a'+i+'" value="'+j+'"> '+op+'</label>').join('')+'<div class="feedback" id="af'+i+'"></div>';root.appendChild(d)})}
+function markAssessment(){let score=0;items.forEach((it,i)=>{let x=document.querySelector('input[name="a'+i+'"]:checked'),ok=x&&Number(x.value)===it.a;if(ok)score++;let f=document.getElementById('af'+i);f.textContent=(ok?'Correct. ':'Review: ')+it.e;f.style.color=ok?'#365d20':'#8b3030'});document.getElementById('assessmentResult').textContent='Your score: '+score+'/'+items.length+'. '+(score>=5?'Excellent – you are ready to apply arithmetic expressions in longer algorithms.':score>=4?'Good progress. Review any missed explanation.':'Revisit the operator table and worked examples, then try again.')}
+function resetAssessment(){buildAssessment();document.getElementById('assessmentResult').textContent='Your result will appear here.'}
+buildAssessment();
+</script>
+</body>
+</html>

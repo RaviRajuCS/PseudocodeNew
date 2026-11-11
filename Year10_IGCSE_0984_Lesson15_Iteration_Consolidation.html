@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 15 – Iteration Consolidation</title>
+<style>
+:root{--gold:#f2c94c;--gold2:#ffe99a;--olive:#596b22;--olive2:#354515;--ink:#202414;--paper:#fffdf2;--line:#d8cf9c;--red:#8b2e20}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f7dc75,#fff3bd);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:var(--olive2);color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold);text-align:center}
+header h1{margin:4px 0;font-size:clamp(1.5rem,4vw,2.5rem)}header p{margin:4px}.brand{font-weight:bold;color:var(--gold2);letter-spacing:.5px}
+.wrap{max-width:1120px;margin:22px auto;padding:0 16px}.card{background:var(--paper);border:2px solid var(--olive);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 5px 14px #6b5b2030}
+h2{color:var(--olive2);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:7px}h3{color:var(--olive)}
+.badge{display:inline-block;background:var(--gold);color:#302900;border-radius:20px;padding:4px 11px;font-weight:bold;font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid var(--line);border-radius:12px;padding:13px}
+pre{background:#202719;color:#f8f2cf;padding:16px;border-radius:10px;overflow-x:auto;font-size:1rem;line-height:1.5}code{font-family:Consolas,monospace}
+button{background:var(--olive);color:white;border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;margin:5px}button:hover{background:var(--olive2)}button.secondary{background:#8a741b}
+input[type=text],input[type=number]{padding:10px;border:2px solid var(--olive);border-radius:8px;font-size:1rem;max-width:100%}
+label{font-weight:bold;display:block;margin:8px 0 4px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}
+th,td{border:1px solid #b7b18c;padding:9px;text-align:left;vertical-align:top}th{background:#e9edcf}
+.note{border-left:6px solid var(--gold);background:#fff6cf;padding:12px;border-radius:8px}.good{color:#315a18;font-weight:bold}.warn{color:var(--red);font-weight:bold}
+.timer{font-size:1.7rem;font-weight:bold;color:var(--olive2)}.question{padding:12px;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:#fff}
+.options label{font-weight:normal;display:block;margin:7px 0}footer{text-align:center;padding:20px;color:#354515;font-weight:bold}.small{font-size:.92rem;color:#4d4d36}
+details{background:#fff9df;padding:12px;border-radius:9px;margin:10px 0}
+@media print{body{background:white}.card{box-shadow:none;break-inside:avoid}button,.no-print,#timerControls{display:none!important}header{background:#fff;color:#111;border:2px solid #333}.brand{color:#333}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">MODERN ENGLISH SCHOOL CAIRO · CARE · CHALLENGE · INSPIRE</div>
+ <h1>IGCSE Computer Science (0984)</h1>
+ <p><strong>Year 10 · Lesson 15</strong></p>
+ <h2 style="color:#ffe99a;border:0;margin:8px 0">Iteration Consolidation — FOR, WHILE and REPEAT</h2>
+ <p>Ravi Raju’s Programming Lab</p>
+</header>
+<main class="wrap">
+<section class="card">
+ <span class="badge">50-minute lesson</span> <span class="badge">Cambridge 2026–2028 syllabus</span>
+ <h2>Learning objectives</h2>
+ <p>By the end of this lesson, you should be able to:</p>
+ <ul>
+  <li>Distinguish between count-controlled and condition-controlled iteration.</li>
+  <li>Select a suitable FOR…NEXT, WHILE…DO or REPEAT…UNTIL structure for a problem.</li>
+  <li>Trace nested steps in an iteration algorithm using a trace table.</li>
+  <li>Identify incorrect loop conditions, missing updates and possible infinite loops.</li>
+  <li>Write complete Cambridge pseudocode solutions involving iteration.</li>
+ </ul>
+ <div class="note"><strong>Today's focus:</strong> Do not choose a loop simply because you remember its syntax. Read the problem, identify when the repetition should stop, and then select the appropriate structure.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson timer and learning route</h2>
+ <div class="grid">
+  <div class="box"><strong>Recall</strong><br>5 minutes<br>Retrieve the three loop structures.</div>
+  <div class="box"><strong>Teacher demonstration</strong><br>10 minutes<br>Compare loop selection and tracing.</div>
+  <div class="box"><strong>Interactive exploration</strong><br>10 minutes<br>Choose a loop and test its behaviour.</div>
+  <div class="box"><strong>Formal practice</strong><br>15 minutes<br>Solve mixed programming problems.</div>
+  <div class="box"><strong>Assessment and feedback</strong><br>10 minutes<br>Complete the six-question check.</div>
+ </div>
+ <div class="timer" id="timer">50:00</div>
+ <div id="timerControls" class="no-print">
+  <button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button>
+ </div>
+</section>
+
+<section class="card">
+ <h2>1. Recall — The three iteration structures</h2>
+ <div class="grid">
+  <div class="box"><h3>FOR…NEXT</h3><p>Use when the number of repetitions is known or controlled by a counting variable.</p><pre><code>FOR Count ← 1 TO 5
+    OUTPUT Count
+NEXT Count</code></pre></div>
+  <div class="box"><h3>WHILE…DO</h3><p>Use when repetition continues while a condition is TRUE. The condition is checked first.</p><pre><code>WHILE Count &lt;= 5 DO
+    OUTPUT Count
+    Count ← Count + 1
+ENDWHILE</code></pre></div>
+  <div class="box"><h3>REPEAT…UNTIL</h3><p>Use when the body must execute before the stopping condition is checked.</p><pre><code>REPEAT
+    OUTPUT Count
+    Count ← Count + 1
+UNTIL Count &gt; 5</code></pre></div>
+ </div>
+</section>
+
+<section class="card">
+ <h2>2. Teacher demonstration — How do I choose?</h2>
+ <table>
+  <tr><th>Problem wording / requirement</th><th>Suitable structure</th><th>Reason</th></tr>
+  <tr><td>Repeat exactly 20 times.</td><td><strong>FOR…NEXT</strong></td><td>The number of repetitions is known.</td></tr>
+  <tr><td>Continue while the balance is greater than zero.</td><td><strong>WHILE…DO</strong></td><td>The condition is checked before each pass; zero passes are possible.</td></tr>
+  <tr><td>Ask the user to enter a password at least once, then stop when it is correct.</td><td><strong>REPEAT…UNTIL</strong></td><td>The input must happen before the stopping condition can be checked.</td></tr>
+  <tr><td>Process each of the 30 values in a fixed data set.</td><td><strong>FOR…NEXT</strong></td><td>There are 30 known items to process.</td></tr>
+ </table>
+ <h3>Worked example — Total of five entered values</h3>
+ <p>The program must input exactly five values and output their total. The number of repetitions is known, so FOR…NEXT is a natural choice.</p>
+ <pre><code>DECLARE Number : INTEGER
+DECLARE Total : INTEGER
+DECLARE Count : INTEGER
+
+Total ← 0
+
+FOR Count ← 1 TO 5
+    INPUT Number
+    Total ← Total + Number
+NEXT Count
+
+OUTPUT Total</code></pre>
+ <h3>Trace the accumulator</h3>
+ <p>Suppose the user enters 4, 7, 2, 5 and 2.</p>
+ <table>
+  <tr><th>Pass</th><th>Number entered</th><th>Total before addition</th><th>Total after addition</th></tr>
+  <tr><td>1</td><td>4</td><td>0</td><td>4</td></tr>
+  <tr><td>2</td><td>7</td><td>4</td><td>11</td></tr>
+  <tr><td>3</td><td>2</td><td>11</td><td>13</td></tr>
+  <tr><td>4</td><td>5</td><td>13</td><td>18</td></tr>
+  <tr><td>5</td><td>2</td><td>18</td><td>20</td></tr>
+ </table>
+ <p><strong>Final output:</strong> 20.</p>
+ <div class="note"><strong>Exam technique:</strong> Initialise a total to 0 before the loop. Initialise a counter before a condition-controlled loop. Check that every condition-controlled loop can eventually terminate.</div>
+</section>
+
+<section class="card">
+ <h2>3. Interactive exploration — Choose the correct loop</h2>
+ <p>Read each requirement and select the most suitable structure. Then check your answer and explanation.</p>
+ <div class="question">
+  <p><strong>Scenario A:</strong> A program must display the numbers from 1 to 100.</p>
+  <label><input type="radio" name="choiceA" value="FOR"> FOR…NEXT</label>
+  <label><input type="radio" name="choiceA" value="WHILE"> WHILE…DO</label>
+  <label><input type="radio" name="choiceA" value="REPEAT"> REPEAT…UNTIL</label>
+  <div id="feedbackA" class="small"></div>
+ </div>
+ <div class="question">
+  <p><strong>Scenario B:</strong> A program must keep asking for a temperature while the value is below 0. The first temperature is already available before the loop starts.</p>
+  <label><input type="radio" name="choiceB" value="FOR"> FOR…NEXT</label>
+  <label><input type="radio" name="choiceB" value="WHILE"> WHILE…DO</label>
+  <label><input type="radio" name="choiceB" value="REPEAT"> REPEAT…UNTIL</label>
+  <div id="feedbackB" class="small"></div>
+ </div>
+ <div class="question">
+  <p><strong>Scenario C:</strong> A program must request a PIN at least once and continue requesting it until the correct PIN is entered.</p>
+  <label><input type="radio" name="choiceC" value="FOR"> FOR…NEXT</label>
+  <label><input type="radio" name="choiceC" value="WHILE"> WHILE…DO</label>
+  <label><input type="radio" name="choiceC" value="REPEAT"> REPEAT…UNTIL</label>
+  <div id="feedbackC" class="small"></div>
+ </div>
+ <button onclick="checkChoices()">Check my choices</button>
+ <button class="secondary" onclick="resetChoices()">Reset</button>
+</section>
+
+<section class="card">
+ <h2>4. Tracing challenge</h2>
+ <p>Study the algorithm and predict the output before opening the answer.</p>
+ <pre><code>DECLARE X : INTEGER
+X ← 2
+
+WHILE X &lt; 10 DO
+    OUTPUT X
+    X ← X + 3
+ENDWHILE
+
+OUTPUT X</code></pre>
+ <p>Complete this trace in your notebook:</p>
+ <table>
+  <tr><th>Condition test</th><th>X at test</th><th>Condition X &lt; 10</th><th>Output in loop</th><th>X after update</th></tr>
+  <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+ </table>
+ <details><summary><strong>Reveal the trace and output</strong></summary>
+  <table>
+   <tr><th>Test</th><th>X</th><th>Condition</th><th>Loop output</th><th>Updated X</th></tr>
+   <tr><td>1</td><td>2</td><td>TRUE</td><td>2</td><td>5</td></tr>
+   <tr><td>2</td><td>5</td><td>TRUE</td><td>5</td><td>8</td></tr>
+   <tr><td>3</td><td>8</td><td>TRUE</td><td>8</td><td>11</td></tr>
+   <tr><td>4</td><td>11</td><td>FALSE</td><td>—</td><td>Loop ends</td></tr>
+  </table>
+  <p>The final OUTPUT statement displays 11. Complete output: <strong>2, 5, 8, 11</strong>.</p>
+ </details>
+</section>
+
+<section class="card">
+ <h2>5. Formal practice — Cambridge-style programming problems</h2>
+ <p>Write complete solutions in Cambridge pseudocode. Use suitable declarations, initial values, input/output statements and iteration structures.</p>
+ <ol>
+  <li><strong>Known repetitions:</strong> Write an algorithm to input 8 examination marks and output the total of the marks.</li>
+  <li><strong>Condition-controlled repetition:</strong> A variable <code>Balance</code> is initialised to 100. While the balance is greater than 20, subtract 15. Output the final balance.</li>
+  <li><strong>Post-condition repetition:</strong> Write an algorithm that asks a user to enter a whole number between 1 and 10 inclusive. Continue asking until a valid number is entered, then output the accepted number.</li>
+  <li><strong>Counting and totalling:</strong> A program inputs exactly 10 examination marks. Use a loop to calculate and output the total and average mark. Assume marks are integers and the average may be a real value.</li>
+  <li><strong>Find the error:</strong> Explain why the following algorithm does not terminate normally. Rewrite it correctly so that it outputs 1 to 5.</li>
+ </ol>
+ <pre><code>Count ← 1
+WHILE Count &lt;= 5 DO
+    OUTPUT Count
+ENDWHILE</code></pre>
+ <details><summary><strong>Show guidance and sample solutions</strong></summary>
+  <h3>Question 1 — FOR…NEXT</h3>
+  <pre><code>DECLARE Mark : INTEGER
+DECLARE Total : INTEGER
+DECLARE Count : INTEGER
+
+Total ← 0
+FOR Count ← 1 TO 8
+    INPUT Mark
+    Total ← Total + Mark
+NEXT Count
+OUTPUT Total</code></pre>
+  <h3>Question 2 — WHILE…DO</h3>
+  <pre><code>DECLARE Balance : INTEGER
+Balance ← 100
+
+WHILE Balance &gt; 20 DO
+    Balance ← Balance - 15
+ENDWHILE
+
+OUTPUT Balance</code></pre>
+  <h3>Question 3 — REPEAT…UNTIL</h3>
+  <pre><code>DECLARE Number : INTEGER
+REPEAT
+    OUTPUT "Enter a number from 1 to 10"
+    INPUT Number
+UNTIL Number &gt;= 1 AND Number &lt;= 10
+OUTPUT Number</code></pre>
+  <h3>Question 4 — FOR…NEXT, total and average</h3>
+  <pre><code>DECLARE Mark : INTEGER
+DECLARE Total : INTEGER
+DECLARE Average : REAL
+DECLARE Count : INTEGER
+
+Total ← 0
+FOR Count ← 1 TO 10
+    INPUT Mark
+    Total ← Total + Mark
+NEXT Count
+
+Average ← Total / 10
+OUTPUT Total
+OUTPUT Average</code></pre>
+  <h3>Question 5 — Missing update</h3>
+  <p>Count is never changed, so the condition Count &lt;= 5 remains TRUE. This creates an infinite loop. Add an increment:</p>
+  <pre><code>DECLARE Count : INTEGER
+Count ← 1
+WHILE Count &lt;= 5 DO
+    OUTPUT Count
+    Count ← Count + 1
+ENDWHILE</code></pre>
+ </details>
+</section>
+
+<section class="card">
+ <h2>6. Formal assessment — 6 questions</h2>
+ <p>Enter your full name before beginning. Each question is worth 1 mark. A score of 70% or above unlocks the achievement message.</p>
+ <label for="studentName">Student full name (required)</label>
+ <input id="studentName" type="text" style="width:min(100%,480px)" placeholder="Enter your full name">
+ <form id="quiz">
+  <div class="question"><p><strong>1.</strong> Which loop is most suitable when the number of repetitions is known?</p><div class="options">
+   <label><input type="radio" name="q1" value="a"> FOR…NEXT</label>
+   <label><input type="radio" name="q1" value="b"> WHILE…DO only</label>
+   <label><input type="radio" name="q1" value="c"> REPEAT…UNTIL only</label>
+  </div></div>
+  <div class="question"><p><strong>2.</strong> Which loop checks its condition before the body executes?</p><div class="options">
+   <label><input type="radio" name="q2" value="a"> REPEAT…UNTIL</label>
+   <label><input type="radio" name="q2" value="b"> WHILE…DO</label>
+   <label><input type="radio" name="q2" value="c"> Both always check after the body</label>
+  </div></div>
+  <div class="question"><p><strong>3.</strong> Which loop always executes its body at least once?</p><div class="options">
+   <label><input type="radio" name="q3" value="a"> FOR…NEXT</label>
+   <label><input type="radio" name="q3" value="b"> WHILE…DO</label>
+   <label><input type="radio" name="q3" value="c"> REPEAT…UNTIL</label>
+  </div></div>
+  <div class="question"><p><strong>4.</strong> Why should a total usually be initialised to 0 before totalling values?</p><div class="options">
+   <label><input type="radio" name="q4" value="a"> To provide a known starting value for accumulation</label>
+   <label><input type="radio" name="q4" value="b"> To make the loop execute once</label>
+   <label><input type="radio" name="q4" value="c"> To stop the loop immediately</label>
+  </div></div>
+  <div class="question"><p><strong>5.</strong> What is the problem with this loop?</p><pre><code>Count ← 1
+WHILE Count &lt;= 4 DO
+    OUTPUT Count
+ENDWHILE</code></pre><div class="options">
+   <label><input type="radio" name="q5" value="a"> The condition is BOOLEAN</label>
+   <label><input type="radio" name="q5" value="b"> Count is not updated, so the loop may be infinite</label>
+   <label><input type="radio" name="q5" value="c"> OUTPUT cannot be used in a loop</label>
+  </div></div>
+  <div class="question"><p><strong>6.</strong> A user must enter a value at least once; the program repeats until the value is 0. Which structure is most directly suited?</p><div class="options">
+   <label><input type="radio" name="q6" value="a"> REPEAT…UNTIL</label>
+   <label><input type="radio" name="q6" value="b"> FOR…NEXT</label>
+   <label><input type="radio" name="q6" value="c"> CASE</label>
+  </div></div>
+  <button type="button" onclick="markQuiz()">Submit assessment</button>
+  <button type="button" class="secondary" onclick="resetQuiz()">Reset answers</button>
+ </form>
+ <div id="result" class="box" aria-live="polite">Your result will appear here after submission.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson summary — Your iteration decision guide</h2>
+ <ul>
+  <li><strong>FOR…NEXT:</strong> the number of repetitions is known or controlled by a counting variable.</li>
+  <li><strong>WHILE…DO:</strong> test first; repeat while the condition is TRUE; zero passes are possible.</li>
+  <li><strong>REPEAT…UNTIL:</strong> execute first; stop when the condition is TRUE; at least one pass occurs.</li>
+  <li>Use trace tables to follow variable values and condition tests.</li>
+  <li>Initialise counters and accumulators correctly.</li>
+  <li>Make sure every condition-controlled loop can reach its stopping condition.</li>
+ </ul>
+ <p class="note"><strong>Next lesson:</strong> Two-dimensional arrays — introduction to rows, columns and accessing individual elements, if this is the next item in your class sequence.</p>
+ <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care Challenge Inspire</footer>
+<script>
+let remaining=3000,timerHandle=null;
+function showTimer(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function startTimer(){if(timerHandle!==null)return;timerHandle=setInterval(()=>{if(remaining>0){remaining--;showTimer()}else{pauseTimer();alert('Lesson time is complete.')}},1000)}
+function pauseTimer(){if(timerHandle!==null){clearInterval(timerHandle);timerHandle=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTimer()}
+function checkChoices(){
+ const data=[['A','FOR','Correct. A fixed range from 1 to 100 is a known number of repetitions.'],['B','WHILE','Correct. The temperature is already available and the condition is tested before another pass.'],['C','REPEAT','Correct. The PIN must be requested at least once before testing whether it is correct.']];
+ data.forEach(([id,ans,why])=>{const selected=document.querySelector('input[name="choice'+id+'"]:checked');const el=document.getElementById('feedback'+id);el.textContent=!selected?'Please choose an answer.':selected.value===ans?why:'Not quite. Re-read the requirement and consider when the condition should be tested.';el.style.color=selected&&selected.value===ans?'#315a18':'#8b2e20'});
+}
+function resetChoices(){['A','B','C'].forEach(id=>{document.querySelectorAll('input[name="choice'+id+'"]').forEach(x=>x.checked=false);document.getElementById('feedback'+id).textContent=''})}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const answers={q1:'a',q2:'b',q3:'c',q4:'a',q5:'b',q6:'a'};
+function markQuiz(){
+ const name=document.getElementById('studentName').value.trim(),result=document.getElementById('result');
+ if(!name){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}
+ let score=0,unanswered=[];
+ for(let i=1;i<=6;i++){let chosen=document.querySelector('input[name="q'+i+'"]:checked');if(!chosen)unanswered.push(i);else if(chosen.value===answers['q'+i])score++}
+ if(unanswered.length){result.innerHTML='Please answer all questions. Still unanswered: '+unanswered.join(', ')+'.';return}
+ const percent=Math.round(score/6*100);
+ result.innerHTML='<strong>'+escapeHtml(name)+'</strong><br>Score: <strong>'+score+'/6 ('+percent+'%)</strong><br>'+(percent>=70?'<span class="good">Well done! You have achieved 70% or above. You may proceed to the extension challenge set by your teacher.</span>':'<span class="warn">Keep practising. Review the loop comparison table and worked examples, then discuss any misunderstandings with your teacher.</span>');
+}
+function resetQuiz(){document.getElementById('quiz').reset();document.getElementById('result').textContent='Your result will appear here after submission.'}
+showTimer();
+</script>
+</body>
+</html>

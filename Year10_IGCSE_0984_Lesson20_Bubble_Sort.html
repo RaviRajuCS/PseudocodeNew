@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 20 – Bubble Sort</title>
+<style>
+:root{--gold:#f4c542;--gold2:#ffe89a;--olive:#596b22;--olive2:#354313;--cream:#fff9e8;--ink:#263016;--green:#e9f2d4;--red:#8b2e22}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff4c7,#f8e7a4);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--olive2),var(--olive));color:white;padding:25px 5%;border-bottom:7px solid var(--gold)}
+header .tag{color:var(--gold2);font-weight:bold;letter-spacing:1px;text-transform:uppercase;font-size:.85rem}
+h1{margin:8px 0;font-size:clamp(1.6rem,4vw,2.5rem)}header p{margin:5px 0}
+.wrap{max-width:1100px;margin:auto;padding:22px}
+.banner{background:var(--gold);border:2px solid var(--olive);border-radius:14px;padding:14px 18px;margin:18px 0;font-weight:bold}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+nav a,.btn{background:var(--olive);color:white;text-decoration:none;border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:bold}
+nav a:hover,.btn:hover{background:var(--olive2)}
+.card{background:var(--cream);border:1px solid #d8c77e;border-left:6px solid var(--olive);border-radius:12px;padding:20px;margin:18px 0;box-shadow:0 3px 10px #6b5b2020}
+h2{color:var(--olive2);margin-top:0}h3{color:#58651f}
+code,pre{font-family:Consolas,monospace}pre{background:#202719;color:#f7f1d8;padding:17px;border-radius:9px;overflow-x:auto;line-height:1.5}
+.note{background:#edf4dc;border-left:5px solid var(--olive);padding:12px 15px;border-radius:7px;margin:12px 0}
+.warn{background:#fff0e8;border-left:5px solid var(--red);padding:12px 15px;border-radius:7px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+label{display:block;font-weight:bold;margin:9px 0 4px}input[type=text],input[type=number]{width:100%;padding:10px;border:1px solid #a9a16d;border-radius:7px;font-size:1rem}
+table{width:100%;border-collapse:collapse;margin:12px 0;background:white}th,td{border:1px solid #c8c39e;padding:9px;text-align:center}th{background:#e6d78f}
+.small{font-size:.92rem;color:#53583b}.result{font-weight:bold;margin-top:12px;padding:12px;border-radius:8px;background:#edf4dc}
+.step{display:inline-block;padding:7px 10px;margin:3px;border:1px solid #9ca66e;border-radius:7px;background:#f4f6e9;font-weight:bold}
+.timer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-weight:bold}.timer strong{font-size:1.5rem;color:var(--olive2)}
+.question{padding:12px;border-bottom:1px solid #ded6aa}.question p{font-weight:bold}
+footer{text-align:center;background:var(--olive2);color:white;padding:18px;margin-top:35px}
+@media print{body{background:white}.no-print,nav,.timer button{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#000;border-bottom:3px solid #333}header .tag{color:#333}pre{background:#eee;color:#111}}
+</style>
+</head>
+<body>
+<header>
+ <div class="tag">Ravi Raju’s Programming Lab · Modern English School Cairo</div>
+ <h1>Lesson 20 – Sorting Arrays: Bubble Sort</h1>
+ <p>Cambridge IGCSE Computer Science 0984 · Year 10 · Topic 7: Algorithm Design and Problem-solving</p>
+ <p><strong>Care · Challenge · Inspire</strong></p>
+</header>
+<div class="wrap">
+ <div class="banner">50-minute lesson: Recall 5 min · Teacher Session 10 min · Interactive Exploration 10 min · Formal Practice 15 min · Assessment & Feedback 10 min</div>
+ <nav class="no-print"><a href="#recall">Recall</a><a href="#teach">Learn</a><a href="#explore">Explore</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a></nav>
+ <section class="card">
+  <h2>Learning objectives</h2>
+  <ul><li>Explain the purpose of sorting an array.</li><li>Describe how Bubble Sort compares adjacent elements.</li><li>Trace a Bubble Sort pass and identify when two values are swapped.</li><li>Write Cambridge Pseudocode to sort an array into ascending order.</li></ul>
+  <div class="note"><strong>Cambridge focus:</strong> Bubble sort is one of the standard methods of solution named in the Cambridge IGCSE 0984 syllabus. This lesson focuses on the ascending-order bubble sort algorithm.</div>
+  <label for="studentName">Enter your full name to begin (required)</label>
+  <input id="studentName" type="text" placeholder="First name and surname">
+  <p class="small">Your name is used on the practice assessment printout.</p>
+ </section>
+ <section class="card" id="recall">
+  <h2>1. Recall – 5 minutes</h2>
+  <p>Recall these skills from previous lessons:</p>
+  <ul><li>Access an array element using its index.</li><li>Traverse an array using <code>FOR…NEXT</code>.</li><li>Compare two values using <code>&gt;</code> and <code>&lt;</code>.</li><li>Use a temporary variable to preserve a value when swapping.</li></ul>
+  <p><strong>Quick question:</strong> If two adjacent values are 18 and 7, which value should come first in ascending order?</p>
+  <details><summary>Reveal the answer</summary><p>7 should come before 18. Since 18 is currently on the left and is greater than 7, the two values must be swapped.</p></details>
+ </section>
+ <section class="card" id="teach">
+  <h2>2. Teacher session – 10 minutes</h2>
+  <h3>What is sorting?</h3>
+  <p>Sorting means arranging data into a particular order. In this lesson, we arrange integer values in <strong>ascending order</strong> – from the smallest to the largest.</p>
+  <h3>How Bubble Sort works</h3>
+  <p>Bubble Sort repeatedly compares <strong>adjacent pairs</strong> of elements. If the left value is greater than the right value, the values are swapped. At the end of each complete pass, the largest value that has not already reached its final position will have moved to the right-hand end of the unsorted section.</p>
+  <div class="note"><strong>Remember the rule for ascending order:</strong> If <code>Array[Index] &gt; Array[Index + 1]</code>, swap the two values. If the left value is smaller or equal, leave them in place.</div>
+  <h3>Example: sort six values</h3>
+  <p>Starting array: <strong>29, 10, 14, 37, 13, 5</strong></p>
+  <p><strong>Pass 1</strong> – compare adjacent values from left to right:</p>
+  <div class="step">29, 10 → swap</div><div class="step">29, 14 → swap</div><div class="step">29, 37 → no swap</div><div class="step">37, 13 → swap</div><div class="step">37, 5 → swap</div>
+  <p>After Pass 1: <strong>10, 14, 29, 13, 5, 37</strong>. The largest value, 37, is now in its final position.</p>
+  <p><strong>Pass 2:</strong> compare only the first five positions. After Pass 2: <strong>10, 14, 13, 5, 29, 37</strong>.</p>
+  <p><strong>Pass 3:</strong> compare the first four positions. After Pass 3: <strong>10, 13, 5, 14, 29, 37</strong>.</p>
+  <p><strong>Pass 4:</strong> compare the first three positions. After Pass 4: <strong>10, 5, 13, 14, 29, 37</strong>.</p>
+  <p><strong>Pass 5:</strong> compare the first two positions. After Pass 5: <strong>5, 10, 13, 14, 29, 37</strong>.</p>
+  <h3>Swapping two values</h3>
+  <p>A temporary variable is needed so that neither value is lost during the exchange.</p>
+<pre>Temp ← Array[Index]
+Array[Index] ← Array[Index + 1]
+Array[Index + 1] ← Temp</pre>
+  <h3>Complete Cambridge Pseudocode – ascending Bubble Sort</h3>
+<pre>DECLARE Values : ARRAY[1:6] OF INTEGER
+DECLARE Pass : INTEGER
+DECLARE Index : INTEGER
+DECLARE Temp : INTEGER
+
+FOR Index ← 1 TO 6
+    INPUT Values[Index]
+NEXT Index
+
+FOR Pass ← 1 TO 5
+    FOR Index ← 1 TO 6 - Pass
+        IF Values[Index] > Values[Index + 1] THEN
+            Temp ← Values[Index]
+            Values[Index] ← Values[Index + 1]
+            Values[Index + 1] ← Temp
+        ENDIF
+    NEXT Index
+NEXT Pass
+
+FOR Index ← 1 TO 6
+    OUTPUT Values[Index]
+NEXT Index</pre>
+  <div class="note"><strong>Why does the inner loop get shorter?</strong> After each pass, one more largest value is in its final position at the right-hand end. There is no need to compare that finalised position again.</div>
+  <div class="warn"><strong>Common mistake:</strong> Do not swap when the left value is smaller. For ascending order, the comparison is <code>&gt;</code>. Using <code>&lt;</code> would move the algorithm towards descending order.</div>
+  <h3>Python equivalent (supporting comparison)</h3>
+<pre>values = []
+
+for index in range(6):
+    values.append(int(input("Enter an integer: ")))
+
+for pass_number in range(5):
+    for index in range(5 - pass_number):
+        if values[index] > values[index + 1]:
+            temp = values[index]
+            values[index] = values[index + 1]
+            values[index + 1] = temp
+
+print(values)</pre>
+  <p class="small">Cambridge Pseudocode is the primary language for this lesson. Python is included as a comparison to reinforce the same algorithm.</p>
+ </section>
+ <section class="card" id="explore">
+  <h2>3. Interactive exploration – 10 minutes</h2>
+  <p>Enter six integers, then run the simulator. It will show the array after every pass and identify the adjacent swaps.</p>
+  <div class="grid">
+   <div><label>Value 1</label><input class="sortVal" type="number" value="29"></div>
+   <div><label>Value 2</label><input class="sortVal" type="number" value="10"></div>
+   <div><label>Value 3</label><input class="sortVal" type="number" value="14"></div>
+   <div><label>Value 4</label><input class="sortVal" type="number" value="37"></div>
+   <div><label>Value 5</label><input class="sortVal" type="number" value="13"></div>
+   <div><label>Value 6</label><input class="sortVal" type="number" value="5"></div>
+  </div>
+  <button class="btn no-print" onclick="runSort()">Run Bubble Sort</button>
+  <div id="sortResult" class="result" aria-live="polite">Run the simulator to see each pass.</div>
+  <div id="sortTrace"></div>
+ </section>
+ <section class="card" id="practice">
+  <h2>4. Formal practice – 15 minutes</h2>
+  <p>Write Cambridge Pseudocode for each task. Use adjacent comparisons and a temporary variable to swap values.</p>
+  <ol>
+   <li><strong>Five numbers:</strong> Input five integer values into an array and use Bubble Sort to output them in ascending order.</li>
+   <li><strong>Trace:</strong> Trace the first two passes of Bubble Sort for <code>[16, 9, 21, 4, 12]</code>. Show the array after each pass.</li>
+   <li><strong>Identify the error:</strong> A student uses <code>IF Values[Index] &lt; Values[Index + 1] THEN</code> before swapping. Explain why this does not produce ascending order.</li>
+   <li><strong>Adapt the algorithm:</strong> Change the number of elements in the given six-element algorithm to eight. State the correct number of outer passes and the inner-loop range for each pass.</li>
+   <li><strong>Explain:</strong> Why is a temporary variable required when swapping two array elements? Explain what could go wrong if the first value is overwritten before it is saved.</li>
+  </ol>
+  <details><summary>Check your approach – sample solution for Question 1</summary>
+<pre>DECLARE Numbers : ARRAY[1:5] OF INTEGER
+DECLARE Pass : INTEGER
+DECLARE Index : INTEGER
+DECLARE Temp : INTEGER
+
+FOR Index ← 1 TO 5
+    INPUT Numbers[Index]
+NEXT Index
+
+FOR Pass ← 1 TO 4
+    FOR Index ← 1 TO 5 - Pass
+        IF Numbers[Index] > Numbers[Index + 1] THEN
+            Temp ← Numbers[Index]
+            Numbers[Index] ← Numbers[Index + 1]
+            Numbers[Index + 1] ← Temp
+        ENDIF
+    NEXT Index
+NEXT Pass
+
+FOR Index ← 1 TO 5
+    OUTPUT Numbers[Index]
+NEXT Index</pre>
+  </details>
+ </section>
+ <section class="card" id="assessment">
+  <h2>5. Assessment and feedback – 10 minutes</h2>
+  <p>Answer all six questions. Each question is worth one mark. Your score is based only on this assessment.</p>
+  <form id="quiz">
+   <div class="question"><p>1. What is the purpose of sorting?</p>
+    <label><input type="radio" name="q1" value="a"> To arrange data into an order</label>
+    <label><input type="radio" name="q1" value="b"> To remove every repeated value</label>
+    <label><input type="radio" name="q1" value="c"> To find the number of elements</label></div>
+   <div class="question"><p>2. Which pair does Bubble Sort compare?</p>
+    <label><input type="radio" name="q2" value="a"> The first and last elements only</label>
+    <label><input type="radio" name="q2" value="b"> Adjacent elements</label>
+    <label><input type="radio" name="q2" value="c"> Random elements</label></div>
+   <div class="question"><p>3. For ascending order, when should adjacent values be swapped?</p>
+    <label><input type="radio" name="q3" value="a"> When the left value is greater than the right value</label>
+    <label><input type="radio" name="q3" value="b"> When the left value is smaller than the right value</label>
+    <label><input type="radio" name="q3" value="c"> Every time two values are compared</label></div>
+   <div class="question"><p>4. What is the purpose of Temp in a swap?</p>
+    <label><input type="radio" name="q4" value="a"> To count the number of passes</label>
+    <label><input type="radio" name="q4" value="b"> To store a value temporarily so it is not lost</label>
+    <label><input type="radio" name="q4" value="c"> To store the largest array index</label></div>
+   <div class="question"><p>5. In a six-element Bubble Sort using this method, how many outer passes are needed?</p>
+    <label><input type="radio" name="q5" value="a"> 6</label>
+    <label><input type="radio" name="q5" value="b"> 5</label>
+    <label><input type="radio" name="q5" value="c"> 3</label></div>
+   <div class="question"><p>6. After the first complete pass in ascending Bubble Sort, which value is guaranteed to be in its final position?</p>
+    <label><input type="radio" name="q6" value="a"> The smallest value</label>
+    <label><input type="radio" name="q6" value="b"> The middle value</label>
+    <label><input type="radio" name="q6" value="c"> The largest value</label></div>
+   <button type="button" class="btn no-print" onclick="markQuiz()">Submit assessment</button>
+  </form>
+  <div id="quizResult" class="result" aria-live="polite">Your result will appear here after submission.</div>
+  <div id="nextStep"></div>
+ </section>
+ <section class="card no-print">
+  <h2>Lesson timer</h2>
+  <div class="timer"><strong id="clock">50:00</strong><button class="btn" onclick="startTimer()">Start</button><button class="btn" onclick="pauseTimer()">Pause</button><button class="btn" onclick="resetTimer()">Reset</button></div>
+  <p class="small">The timer is a classroom guide for the 50-minute lesson.</p>
+ </section>
+ <section class="card no-print"><h2>Finish and print</h2><button class="btn" onclick="window.print()">Print / Save as PDF</button><p class="small">Use your browser’s print dialog and choose “Save as PDF”.</p></section>
+</div>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+function runSort(){
+ const inputs=[...document.querySelectorAll('.sortVal')];
+ if(inputs.some(x=>x.value.trim()==='')){document.getElementById('sortResult').textContent='Please enter all six values.';return}
+ let a=inputs.map(x=>Number(x.value));
+ if(a.some(x=>!Number.isFinite(x)||!Number.isInteger(x))){document.getElementById('sortResult').textContent='Please enter integers only.';return}
+ let trace='<h3>Pass-by-pass trace</h3><table><tr><th>Pass</th><th>Comparisons / swaps</th><th>Array after pass</th></tr>';
+ for(let p=1;p<=5;p++){
+  let swaps=0,notes=[];
+  for(let i=0;i<6-p;i++){
+   if(a[i]>a[i+1]){let t=a[i];a[i]=a[i+1];a[i+1]=t;swaps++;notes.push(`Swap ${i+1} and ${i+2}`)}
+   else{notes.push(`No swap at ${i+1} and ${i+2}`)}
+  }
+  trace+=`<tr><td>${p}</td><td>${notes.join('<br>')}<br><strong>${swaps} swap(s)</strong></td><td>${a.join(', ')}</td></tr>`;
+ }
+ trace+='</table>';
+ document.getElementById('sortResult').textContent='Sorted array (ascending): '+a.join(', ');
+ document.getElementById('sortTrace').innerHTML=trace;
+}
+const answers={q1:'a',q2:'b',q3:'a',q4:'b',q5:'b',q6:'c'};
+function markQuiz(){
+ const name=document.getElementById('studentName').value.trim();
+ if(name.length<3){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}
+ let score=0,unanswered=0;
+ for(const [q,a] of Object.entries(answers)){const chosen=document.querySelector(`input[name="${q}"]:checked`);if(!chosen)unanswered++;else if(chosen.value===a)score++}
+ if(unanswered){document.getElementById('quizResult').textContent=`Please answer all six questions. ${unanswered} question(s) remain unanswered.`;return}
+ const pct=Math.round(score/6*100);
+ document.getElementById('quizResult').innerHTML=`Student: ${escapeHTML(name)}<br>Score: ${score}/6 (${pct}%)<br>${pct>=70?'Well done! You have reached the 70% target.':'You are below 70%. Review the adjacent comparison and swapping steps, then try again.'}`;
+ document.getElementById('nextStep').innerHTML=pct>=70?'<div class="note"><strong>Challenge unlocked:</strong> Trace Bubble Sort on eight values of your choice. Record every swap and explain why the largest unsorted value moves to the right during each pass.</div>':'<div class="warn"><strong>Remedial practice:</strong> Practise comparing one adjacent pair at a time. Write out the three swap statements and trace a single pass before repeating the assessment.</div>';
+}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+let remaining=3000,interval=null;
+function showClock(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(interval)return;interval=setInterval(()=>{if(remaining>0){remaining--;showClock()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(interval);interval=null}
+function resetTimer(){pauseTimer();remaining=3000;showClock()}
+showClock();
+</script>
+</body>
+</html>

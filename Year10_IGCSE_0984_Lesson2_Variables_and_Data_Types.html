@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2 | Variables and Data Types | IGCSE 0984</title>
+<style>
+:root{--gold:#f4c542;--goldlight:#fff3bd;--olive:#465b25;--dark:#263817;--cream:#fffbea;--ink:#20251b;--muted:#59634d;--line:#d8d9bd;--white:#fff;--green:#e5f1d8;--red:#f8e2df}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:28px 5vw 25px;border-bottom:8px solid var(--gold)}
+.header-inner{max-width:1150px;margin:auto}.brand{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#f8df7d;font-weight:bold}
+h1{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:10px 0}.subtitle{font-size:1.08rem;color:#f4f0d9;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.meta span{background:#ffffff18;border:1px solid #ffffff55;padding:7px 12px;border-radius:20px;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;background:#fffdf1;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #26381712}
+.nav-inner{max-width:1150px;margin:auto;display:flex;gap:5px;overflow-x:auto;padding:9px 12px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--dark);font-weight:bold;font-size:.88rem;padding:8px 10px;border-radius:20px}nav a:hover{background:var(--goldlight)}
+main{max-width:1100px;margin:27px auto;padding:0 18px 55px}
+section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin:19px 0;box-shadow:0 5px 18px #2638170b}
+h2{color:var(--dark);margin:0 0 12px;font-size:1.55rem}h3{color:var(--olive);margin:17px 0 7px}
+.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#8a6b00;font-weight:bold}
+.time{display:inline-block;background:var(--olive);color:#fff;padding:4px 10px;border-radius:15px;font-size:.82rem;font-weight:bold;margin:0 0 9px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fffef8}.card strong{color:var(--dark)}
+.callout,.success,.warning{padding:13px 16px;border-radius:9px;margin:13px 0}.callout{background:var(--goldlight);border-left:5px solid #d6a900}.success{background:var(--green);border-left:5px solid var(--olive)}.warning{background:#fff0e7;border-left:5px solid #b85b28}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#eef0dc;color:var(--dark)}
+pre{background:#182318;color:#f5f3d7;padding:16px;border-radius:12px;overflow-x:auto;font-size:.94rem;line-height:1.55;border:1px solid #31452a}
+code{font-family:Consolas,Monaco,monospace}.inline{background:#f0f1e5;padding:2px 5px;border-radius:4px;font-family:Consolas,monospace}
+button{border:0;background:var(--olive);color:#fff;padding:10px 15px;border-radius:8px;font-weight:bold;cursor:pointer}button:hover{background:var(--dark)}button.secondary{background:#e8edda;color:var(--dark);border:1px solid var(--line)}
+input[type=text],select,textarea{font:inherit;padding:9px;border:1px solid #aeb59a;border-radius:7px;background:white}
+textarea{width:100%;min-height:105px;resize:vertical}.small{font-size:.9rem;color:var(--muted)}
+details{border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:10px 0;background:#fffef8}summary{cursor:pointer;font-weight:bold;color:var(--dark)}
+.quiz-item{padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fffef8}
+.quiz-item label{display:inline-block;margin:7px 12px 3px 0}.feedback{font-weight:bold;margin-top:5px}
+.timerbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f4f5e8;padding:13px;border-radius:12px}
+#clock{font-size:1.6rem;font-weight:bold;color:var(--dark);font-variant-numeric:tabular-nums;min-width:90px}
+footer{text-align:center;background:var(--dark);color:#f7f0cf;padding:22px}footer strong{color:var(--gold)}
+@media print{nav,.no-print,button{display:none!important}body{background:white;font-size:11pt}header{background:white!important;color:black;border-bottom:3px solid #777;padding:14px}.brand,.subtitle{color:#333}section{box-shadow:none;break-inside:avoid}pre{background:#eee;color:#111;white-space:pre-wrap}}
+</style>
+</head>
+<body>
+<header><div class="header-inner">
+ <div class="brand">Modern English School Cairo · Care · Challenge · Inspire</div>
+ <h1>Variables and Data Types</h1>
+ <p class="subtitle">Year 10 · Cambridge IGCSE Computer Science 0984 · Lesson 2</p>
+ <div class="meta"><span>50-minute lesson</span><span>Sequential programming</span><span>Pseudocode first · Python comparison</span><span>Ravi Raju’s Programming Lab</span></div>
+</div></header>
+<nav><div class="nav-inner">
+ <a href="#recall">Recall</a><a href="#teacher">Teacher demo</a><a href="#explore">Explore</a><a href="#quiz">20-value challenge</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+</div></nav>
+<main>
+<section>
+ <div class="kicker">Learning goals</div><h2>By the end of this lesson, you should be able to…</h2>
+ <div class="grid">
+  <div class="card">Explain what a <strong>variable</strong> is and why an algorithm needs one.</div>
+  <div class="card">Use <strong>DECLARE</strong> with an appropriate data type.</div>
+  <div class="card">Choose between <strong>INTEGER, REAL, CHAR, STRING</strong> and <strong>BOOLEAN</strong>.</div>
+  <div class="card">Assign a value, initialise a variable and update its value.</div>
+  <div class="card">Relate Cambridge Pseudocode to an equivalent Python statement.</div>
+ </div>
+ <div class="callout"><strong>Today's learning sequence:</strong> Understand the problem → write Cambridge Pseudocode → compare with Python where useful. Cambridge Pseudocode remains the main focus.</div>
+ <div class="timerbox no-print"><strong>Lesson timer</strong><span id="clock">50:00</span><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><span class="small">Suggested timings add up to 50 minutes.</span></div>
+</section>
+
+<section id="recall">
+ <div class="kicker">Activity 1</div><span class="time">5 minutes · Recall</span>
+ <h2>Wake up your programming memory</h2>
+ <p>Last lesson, you used <strong>DECLARE, INPUT, assignment and OUTPUT</strong>. Complete these quick questions.</p>
+ <div class="quiz-item"><p><strong>1.</strong> Which statement receives data from the user?</p>
+  <label><input type="radio" name="r1" value="a"> OUTPUT</label><label><input type="radio" name="r1" value="b"> INPUT</label><label><input type="radio" name="r1" value="c"> COMMENT</label><div class="feedback" id="rf1"></div></div>
+ <div class="quiz-item"><p><strong>2.</strong> What does the assignment arrow mean?</p>
+  <label><input type="radio" name="r2" value="a"> Compare two values</label><label><input type="radio" name="r2" value="b"> Display a value</label><label><input type="radio" name="r2" value="c"> Store a value in a variable</label><div class="feedback" id="rf2"></div></div>
+ <button onclick="checkRecall()">Check recall</button>
+ <details><summary>Recall answer explanation</summary><p>INPUT receives data. The assignment arrow <code class="inline">←</code> stores the value or result on its right in the variable on its left.</p></details>
+</section>
+
+<section id="teacher">
+ <div class="kicker">Activity 2</div><span class="time">10 minutes · Teacher demonstration</span>
+ <h2>What is a variable?</h2>
+ <p>Imagine a labelled box in the computer's memory. The label is the variable name; the value is the information stored inside it. The value can change while the algorithm runs.</p>
+ <div class="grid">
+  <div class="card"><strong>Variable name</strong><p><code class="inline">Score</code> – the label used to refer to the stored value.</p></div>
+  <div class="card"><strong>Value</strong><p><code class="inline">75</code> – the current information stored in the variable.</p></div>
+  <div class="card"><strong>Data type</strong><p><code class="inline">INTEGER</code> – describes what kind of value the variable is intended to store.</p></div>
+ </div>
+ <h3>Declare a variable</h3>
+ <pre><code>DECLARE Score : INTEGER</code></pre>
+ <p>This declares a variable named <code class="inline">Score</code> with the data type <code class="inline">INTEGER</code>.</p>
+ <h3>Assign and change a value</h3>
+ <pre><code>DECLARE Score : INTEGER
+
+Score ← 10
+Score ← 15
+Score ← Score + 5
+
+OUTPUT Score</code></pre>
+ <p>Ask students to predict the final output. It is <strong>20</strong>: the second assignment replaces 10 with 15, and the third adds 5 to the current value.</p>
+ <h3>Initialisation</h3>
+ <p><strong>Initialising</strong> means giving a variable its first value before it is used. For example:</p>
+ <pre><code>DECLARE Attempts : INTEGER
+Attempts ← 0</code></pre>
+ <div class="callout"><strong>Important:</strong> DECLARE introduces the variable and its type. Assignment gives the variable a value. Do not assume that declaring a variable automatically gives it a useful starting value.</div>
+ <h3>Variable naming habits</h3>
+ <ul>
+  <li>Choose meaningful names, such as <code class="inline">StudentAge</code> or <code class="inline">TotalMark</code>.</li>
+  <li>Use letters and digits sensibly; begin a name with a letter.</li>
+  <li>Avoid spaces and punctuation in identifiers.</li>
+  <li>Use the same spelling consistently throughout the algorithm.</li>
+  <li>Follow the naming rules and conventions used by your course or pseudocode environment.</li>
+ </ul>
+</section>
+
+<section id="explore">
+ <div class="kicker">Activity 3</div><span class="time">10 minutes · Interactive exploration</span>
+ <h2>Meet the five data types</h2>
+ <table>
+  <thead><tr><th>Data type</th><th>What it represents</th><th>Example value</th><th>Think of…</th></tr></thead>
+  <tbody>
+   <tr><td><strong>INTEGER</strong></td><td>Whole numbers, with no fractional part</td><td><code>25</code>, <code>-8</code>, <code>0</code></td><td>Number of students</td></tr>
+   <tr><td><strong>REAL</strong></td><td>Numbers that can have a fractional part</td><td><code>15.75</code>, <code>-2.5</code></td><td>Temperature or price</td></tr>
+   <tr><td><strong>CHAR</strong></td><td>A single character</td><td><code>'A'</code>, <code>'7'</code>, <code>'?'</code></td><td>One initial or symbol</td></tr>
+   <tr><td><strong>STRING</strong></td><td>A sequence of characters</td><td><code>"Ravi"</code>, <code>"Year 10"</code></td><td>A name or message</td></tr>
+   <tr><td><strong>BOOLEAN</strong></td><td>One of two logical values</td><td><code>TRUE</code> or <code>FALSE</code></td><td>Whether a condition is true</td></tr>
+  </tbody>
+ </table>
+ <div class="warning"><strong>Watch the difference:</strong> <code>7</code> is an INTEGER, while <code>'7'</code> is a CHAR. The value's meaning and representation matter, not just what it looks like.</div>
+ <h3>Try a declaration for each type</h3>
+ <pre><code>DECLARE NumberOfBooks : INTEGER
+DECLARE Temperature : REAL
+DECLARE Initial : CHAR
+DECLARE StudentName : STRING
+DECLARE IsPresent : BOOLEAN</code></pre>
+ <h3>Python comparison</h3>
+ <p>Python does not use a DECLARE statement. A variable is created when a value is assigned. Python also uses <code class="inline">str</code> for text and <code class="inline">bool</code> for Boolean values.</p>
+ <table>
+  <thead><tr><th>Purpose</th><th>Cambridge Pseudocode</th><th>Python 3</th></tr></thead>
+  <tbody>
+   <tr><td>Whole number</td><td><code>DECLARE Age : INTEGER</code><br><code>Age ← 16</code></td><td><code>Age = 16</code></td></tr>
+   <tr><td>Real number</td><td><code>DECLARE Price : REAL</code><br><code>Price ← 15.75</code></td><td><code>Price = 15.75</code></td></tr>
+   <tr><td>Single character</td><td><code>DECLARE Initial : CHAR</code><br><code>Initial ← 'R'</code></td><td><code>Initial = 'R'</code></td></tr>
+   <tr><td>Text</td><td><code>DECLARE Name : STRING</code><br><code>Name ← "Ravi"</code></td><td><code>Name = "Ravi"</code></td></tr>
+   <tr><td>Logical value</td><td><code>DECLARE IsReady : BOOLEAN</code><br><code>IsReady ← TRUE</code></td><td><code>IsReady = True</code></td></tr>
+  </tbody>
+ </table>
+ <div class="callout"><strong>Python input reminder:</strong> Python's <code class="inline">input()</code> returns text. Convert it when a numeric value is needed, for example <code class="inline">Age = int(input("Enter age: "))</code> or <code class="inline">Price = float(input("Enter price: "))</code>.</div>
+</section>
+
+<section id="quiz">
+ <div class="kicker">Interactive challenge</div><span class="time">Included in the 10-minute exploration</span>
+ <h2>Guess the Data Type! – 20 values</h2>
+ <p>Choose the most appropriate Cambridge data type for each value. Complete all 20, then select <strong>Mark my answers</strong>.</p>
+ <div id="typeQuiz"></div>
+ <button onclick="markTypes()">Mark my answers</button> <button class="secondary" onclick="resetTypes()">Try again</button>
+ <div id="typeResult" class="success" aria-live="polite">Your score will appear here.</div>
+</section>
+
+<section id="practice">
+ <div class="kicker">Activity 4</div><span class="time">15 minutes · Formal practice</span>
+ <h2>Write the Cambridge Pseudocode</h2>
+ <p>For each problem: identify the information needed, choose suitable data types, declare variables, then write the algorithm. Add meaningful comments.</p>
+ <div class="task"><h3>Question 1 · Student profile</h3>
+  <p>Input a student's name, age and whether the student is present. Display all three values.</p>
+  <textarea placeholder="Write your Pseudocode here…" aria-label="Student profile pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Input and display a student's details
+DECLARE StudentName : STRING
+DECLARE Age : INTEGER
+DECLARE IsPresent : BOOLEAN
+
+INPUT StudentName
+INPUT Age
+INPUT IsPresent
+
+OUTPUT StudentName
+OUTPUT Age
+OUTPUT IsPresent</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 2 · Product price</h3>
+  <p>Input the price of a product and the quantity purchased. Calculate and display the total cost.</p>
+  <textarea placeholder="Write your Pseudocode here…" aria-label="Product price pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Calculate the total cost of a purchase
+DECLARE UnitPrice : REAL
+DECLARE Quantity : INTEGER
+DECLARE TotalCost : REAL
+
+INPUT UnitPrice
+INPUT Quantity
+
+TotalCost ← UnitPrice * Quantity
+
+OUTPUT TotalCost</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 3 · Update a score</h3>
+  <p>Declare an integer variable called <code class="inline">Score</code>. Initialise it to 0. Add 10, then add 5. Display the final score.</p>
+  <textarea placeholder="Write your Pseudocode here…" aria-label="Update score pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Initialise and update the score
+DECLARE Score : INTEGER
+
+Score ← 0
+Score ← Score + 10
+Score ← Score + 5
+
+OUTPUT Score</code></pre><p>Final output: 15.</p></details>
+ </div>
+ <p class="small">Teacher note: Accept any logically correct solution using suitable declarations, assignment and output. These tasks practise sequential structure only.</p>
+</section>
+
+<section id="assessment">
+ <div class="kicker">Activity 5</div><span class="time">10 minutes · Assessment and feedback</span>
+ <h2>Can you choose and use data types?</h2>
+ <p>Answer all five questions. Select <strong>Submit assessment</strong> to receive your score and feedback.</p>
+ <div id="assessmentQuiz"></div>
+ <button onclick="markAssessment()">Submit assessment</button> <button class="secondary" onclick="resetAssessment()">Reset</button>
+ <div id="assessmentResult" class="success" aria-live="polite">Your result will appear here.</div>
+ <details><summary>Extension challenge for early finishers</summary>
+  <p>Write a short algorithm that inputs a student's name, number of completed assignments and average mark. Choose suitable data types and display the three values. Then explain why each data type is appropriate.</p>
+ </details>
+</section>
+
+<section>
+ <h2>Lesson reflection</h2>
+ <p>Before leaving, complete these statements orally or in your notebook:</p>
+ <ol>
+  <li>A variable is…</li>
+  <li>DECLARE is used to…</li>
+  <li>The difference between CHAR and STRING is…</li>
+  <li>Initialising a variable means…</li>
+  <li>In Python, a variable is created when…</li>
+ </ol>
+ <div class="success"><strong>Key message:</strong> Choose a data type that matches the kind of information the variable needs to store. Declare it clearly in Cambridge Pseudocode, then use assignment to give it a value.</div>
+ <p class="small">Next lesson: arithmetic operators and expressions – using variables to calculate results.</p>
+ <div class="no-print"><button onclick="window.print()">Print lesson / Save as PDF</button></div>
+</section>
+</main>
+<footer><strong>Ravi Raju’s Programming Lab</strong><br>Modern English School Cairo · Care · Challenge · Inspire<br><span class="small" style="color:#e6e4cc">Year 10 · Cambridge IGCSE Computer Science 0984</span></footer>
+
+<script>
+let remaining=50*60, timer=null;
+function showTime(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(timer!==null)return;timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else{pauseTimer()}},1000)}
+function pauseTimer(){if(timer!==null){clearInterval(timer);timer=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTime()}showTime();
+
+function checkRecall(){
+ const keys={r1:'b',r2:'c'};let score=0;
+ Object.keys(keys).forEach((k,i)=>{let chosen=document.querySelector('input[name="'+k+'"]:checked');let ok=chosen&&chosen.value===keys[k];if(ok)score++;document.getElementById('rf'+(i+1)).textContent=ok?'Correct!':'Not quite. Review the explanation below.';document.getElementById('rf'+(i+1)).style.color=ok?'#365d20':'#8b3030'});
+ alert('Recall score: '+score+'/2');
+}
+
+const typeItems=[
+ ['25','INTEGER'],['15.75','REAL'],["'A'",'CHAR'],['"Ravi"','STRING'],['TRUE','BOOLEAN'],
+ ['-8','INTEGER'],['0','INTEGER'],['-2.5','REAL'],["'7'",'CHAR'],['"Year 10"','STRING'],
+ ['FALSE','BOOLEAN'],['1000','INTEGER'],['3.14159','REAL'],["'?' ",'CHAR'],['"Computer Science"','STRING'],
+ ['TRUE','BOOLEAN'],['-45','INTEGER'],['0.5','REAL'],["'z'",'CHAR'],['" " (a space in a string)','STRING']
+];
+const types=['INTEGER','REAL','CHAR','STRING','BOOLEAN'];
+function buildTypeQuiz(){
+ const root=document.getElementById('typeQuiz');root.innerHTML='';
+ typeItems.forEach((item,i)=>{
+  let div=document.createElement('div');div.className='quiz-item';
+  let label=document.createElement('p');label.innerHTML='<strong>'+(i+1)+'.</strong> <code>'+item[0]+'</code>';div.appendChild(label);
+  let select=document.createElement('select');select.id='type'+i;select.innerHTML='<option value="">Choose a data type…</option>'+types.map(t=>'<option>'+t+'</option>').join('');
+  div.appendChild(select);let fb=document.createElement('div');fb.className='feedback';fb.id='typefb'+i;div.appendChild(fb);root.appendChild(div);
+ });
+}
+function markTypes(){
+ let score=0;
+ typeItems.forEach((item,i)=>{let val=document.getElementById('type'+i).value;let ok=val===item[1];if(ok)score++;let fb=document.getElementById('typefb'+i);fb.textContent=ok?'Correct':'Correct answer: '+item[1];fb.style.color=ok?'#365d20':'#8b3030'});
+ document.getElementById('typeResult').textContent='Your score: '+score+'/20 ('+Math.round(score/20*100)+'%). '+(score>=16?'Excellent – you are identifying the types confidently.':score>=12?'Good effort – review the values you missed.':'Keep practising – revisit the five data type examples and try again.');
+}
+function resetTypes(){buildTypeQuiz();document.getElementById('typeResult').textContent='Your score will appear here.'}
+buildTypeQuiz();
+
+const assessmentItems=[
+ {q:'Which data type is most suitable for the number of books in a library?',o:['REAL','INTEGER','STRING'],a:1,e:'A count is a whole number, so INTEGER is suitable.'},
+ {q:'Which data type can store a value such as 18.6?',o:['CHAR','BOOLEAN','REAL'],a:2,e:'REAL can represent a number with a fractional part.'},
+ {q:"Which data type is suitable for one character such as 'K'?",o:['CHAR','STRING','INTEGER'],a:0,e:'CHAR represents a single character.'},
+ {q:'Which data type represents TRUE or FALSE?',o:['REAL','BOOLEAN','STRING'],a:1,e:'BOOLEAN represents one of two logical values: TRUE or FALSE.'},
+ {q:'What does this instruction do: Score ← Score + 2 ?',o:['Displays Score','Adds 2 to the current Score and stores the result','Declares Score'],a:1,e:'It calculates a new value and assigns it back to Score.'}
+];
+function buildAssessment(){
+ const root=document.getElementById('assessmentQuiz');root.innerHTML='';
+ assessmentItems.forEach((it,i)=>{let d=document.createElement('div');d.className='quiz-item';d.innerHTML='<p><strong>'+(i+1)+'. '+it.q+'</strong></p>'+it.o.map((op,j)=>'<label><input type="radio" name="a'+i+'" value="'+j+'"> '+op+'</label>').join('')+'<div class="feedback" id="afb'+i+'"></div>';root.appendChild(d)});
+}
+function markAssessment(){
+ let score=0;
+ assessmentItems.forEach((it,i)=>{let selected=document.querySelector('input[name="a'+i+'"]:checked');let ok=selected&&Number(selected.value)===it.a;if(ok)score++;let f=document.getElementById('afb'+i);f.textContent=(ok?'Correct. ':'Review: ')+it.e;f.style.color=ok?'#365d20':'#8b3030'});
+ document.getElementById('assessmentResult').textContent='Assessment score: '+score+'/5. '+(score>=4?'You are ready to move towards arithmetic expressions.':score>=3?'Nearly there. Review the feedback and practise again.':'Revisit the data type table and variable update example, then retry.');
+}
+function resetAssessment(){buildAssessment();document.getElementById('assessmentResult').textContent='Your result will appear here.'}
+buildAssessment();
+</script>
+</body>
+</html>

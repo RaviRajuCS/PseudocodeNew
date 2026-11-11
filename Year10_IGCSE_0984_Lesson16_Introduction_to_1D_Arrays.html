@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 16 – Introduction to 1D Arrays</title>
+<style>
+:root{--gold:#f2c94c;--gold2:#ffe99a;--olive:#596b22;--olive2:#354515;--ink:#202414;--paper:#fffdf2;--line:#d8cf9c;--red:#8b2e20}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f7dc75,#fff3bd);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:var(--olive2);color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold);text-align:center}
+header h1{margin:4px 0;font-size:clamp(1.5rem,4vw,2.5rem)}header p{margin:4px}.brand{font-weight:bold;color:var(--gold2);letter-spacing:.5px}
+.wrap{max-width:1120px;margin:22px auto;padding:0 16px}.card{background:var(--paper);border:2px solid var(--olive);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 5px 14px #6b5b2030}
+h2{color:var(--olive2);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:7px}h3{color:var(--olive)}
+.badge{display:inline-block;background:var(--gold);color:#302900;border-radius:20px;padding:4px 11px;font-weight:bold;font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid var(--line);border-radius:12px;padding:13px}
+pre{background:#202719;color:#f8f2cf;padding:16px;border-radius:10px;overflow-x:auto;font-size:1rem;line-height:1.5}code{font-family:Consolas,monospace}
+button{background:var(--olive);color:white;border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;margin:5px}button:hover{background:var(--olive2)}button.secondary{background:#8a741b}
+input[type=text],input[type=number]{padding:10px;border:2px solid var(--olive);border-radius:8px;font-size:1rem;max-width:100%}
+label{font-weight:bold;display:block;margin:8px 0 4px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}
+th,td{border:1px solid #b7b18c;padding:9px;text-align:center;vertical-align:top}th{background:#e9edcf}
+.note{border-left:6px solid var(--gold);background:#fff6cf;padding:12px;border-radius:8px}.good{color:#315a18;font-weight:bold}.warn{color:var(--red);font-weight:bold}
+.timer{font-size:1.7rem;font-weight:bold;color:var(--olive2)}.question{padding:12px;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:#fff}
+.options label{font-weight:normal;display:block;margin:7px 0}footer{text-align:center;padding:20px;color:#354515;font-weight:bold}.small{font-size:.92rem;color:#4d4d36}
+details{background:#fff9df;padding:12px;border-radius:9px;margin:10px 0}
+.array-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:12px 0}
+.cell{background:#e9edcf;border:2px solid var(--olive);border-radius:8px;text-align:center;padding:9px 3px}
+.cell strong{display:block;font-size:.85rem;color:#4d5d1e}.cell span{display:block;font-size:1.15rem;font-weight:bold;margin-top:4px}
+@media print{body{background:white}.card{box-shadow:none;break-inside:avoid}button,.no-print,#timerControls{display:none!important}header{background:#fff;color:#111;border:2px solid #333}.brand{color:#333}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">MODERN ENGLISH SCHOOL CAIRO · CARE · CHALLENGE · INSPIRE</div>
+ <h1>IGCSE Computer Science (0984)</h1>
+ <p><strong>Year 10 · Lesson 16</strong></p>
+ <h2 style="color:#ffe99a;border:0;margin:8px 0">Introduction to One-Dimensional Arrays</h2>
+ <p>Ravi Raju’s Programming Lab</p>
+</header>
+<main class="wrap">
+<section class="card">
+ <span class="badge">50-minute lesson</span> <span class="badge">Cambridge 2026–2028 syllabus · 8.2.1</span>
+ <h2>Learning objectives</h2>
+ <p>By the end of this lesson, you should be able to:</p>
+ <ul>
+  <li>Explain what an array is and why it is useful.</li>
+  <li>Identify the elements and index positions of a one-dimensional array.</li>
+  <li>Declare a 1D array using Cambridge pseudocode.</li>
+  <li>Read a value from an array and assign a value to an individual element.</li>
+  <li>Explain the difference between an array index and the value stored at that index.</li>
+ </ul>
+ <div class="note"><strong>Key idea:</strong> An array stores a fixed number of values of the same data type. Each value is accessed using its index (position).</div>
+</section>
+
+<section class="card">
+ <h2>Lesson timer and learning route</h2>
+ <div class="grid">
+  <div class="box"><strong>Recall</strong><br>5 minutes<br>Revise variables and data types.</div>
+  <div class="box"><strong>Teacher demonstration</strong><br>10 minutes<br>Understand array structure and declaration.</div>
+  <div class="box"><strong>Interactive exploration</strong><br>10 minutes<br>Inspect and change array elements.</div>
+  <div class="box"><strong>Formal practice</strong><br>15 minutes<br>Write declarations and array operations.</div>
+  <div class="box"><strong>Assessment and feedback</strong><br>10 minutes<br>Complete the six-question check.</div>
+ </div>
+ <div class="timer" id="timer">50:00</div>
+ <div id="timerControls" class="no-print"><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button></div>
+</section>
+
+<section class="card">
+ <h2>1. Recall — Variables and data types</h2>
+ <p>A variable stores one value at a time. For example:</p>
+ <pre><code>DECLARE Score : INTEGER
+Score ← 85</code></pre>
+ <p>If a program needs to store the marks of 30 students, declaring 30 separate variables would be inconvenient:</p>
+ <pre><code>Mark1, Mark2, Mark3, ... Mark30</code></pre>
+ <p>An array provides a more organised way to store a collection of related values under one identifier.</p>
+</section>
+
+<section class="card">
+ <h2>2. Teacher demonstration — What is an array?</h2>
+ <p>An <strong>array</strong> is a fixed-length data structure that stores a number of elements of the <strong>same data type</strong>. Each element can be accessed using an index number.</p>
+ <div class="grid">
+  <div class="box"><strong>Fixed length</strong><br>The number of elements is set when the array is declared.</div>
+  <div class="box"><strong>Same data type</strong><br>All elements in one array have the declared data type.</div>
+  <div class="box"><strong>Index</strong><br>Each element has a position number used to access it.</div>
+  <div class="box"><strong>One identifier</strong><br>One array name represents the whole collection.</div>
+ </div>
+ <h3>Visual example — Scores array</h3>
+ <p>Suppose an array named <code>Scores</code> stores five integer marks.</p>
+ <div class="array-strip">
+  <div class="cell"><strong>Index 1</strong><span>72</span></div>
+  <div class="cell"><strong>Index 2</strong><span>85</span></div>
+  <div class="cell"><strong>Index 3</strong><span>64</span></div>
+  <div class="cell"><strong>Index 4</strong><span>91</span></div>
+  <div class="cell"><strong>Index 5</strong><span>78</span></div>
+ </div>
+ <p><code>Scores[1]</code> contains 72. <code>Scores[3]</code> contains 64. <code>Scores[5]</code> contains 78.</p>
+ <h3>Cambridge pseudocode — Declaring a 1D array</h3>
+ <pre><code>DECLARE Scores : ARRAY[1:5] OF INTEGER</code></pre>
+ <p>Breakdown:</p>
+ <table>
+  <tr><th>Part</th><th>Meaning</th></tr>
+  <tr><td><code>Scores</code></td><td>Identifier (name) of the array.</td></tr>
+  <tr><td><code>ARRAY</code></td><td>Declares an array data structure.</td></tr>
+  <tr><td><code>[1:5]</code></td><td>Index range: first index is 1 and last index is 5.</td></tr>
+  <tr><td><code>OF INTEGER</code></td><td>Every element stores an INTEGER value.</td></tr>
+ </table>
+ <div class="note"><strong>Cambridge convention:</strong> State the lower and upper bounds explicitly. The first index may be 0 or 1; for our examples we will generally use 1, as recommended in the syllabus. Array indices are written inside square brackets. citeturn419357search12</div>
+ <h3>Accessing an individual element</h3>
+ <pre><code>Scores[1] ← 72
+Scores[2] ← 85
+Scores[3] ← 64
+
+OUTPUT Scores[2]</code></pre>
+ <p>The output is <strong>85</strong>, because the value stored at index 2 is 85.</p>
+ <h3>Changing an element</h3>
+ <pre><code>Scores[3] ← 70</code></pre>
+ <p>The value at index 3 changes from 64 to 70. The other elements remain unchanged.</p>
+</section>
+
+<section class="card">
+ <h2>3. Index versus value — Do not confuse them</h2>
+ <table>
+  <tr><th>Expression</th><th>Meaning</th><th>Result / effect</th></tr>
+  <tr><td><code>Scores[2]</code></td><td>Element at index 2</td><td>Reads the stored value (85 in our example).</td></tr>
+  <tr><td><code>Scores[2] ← 90</code></td><td>Assignment to element 2</td><td>Changes the stored value at index 2 to 90.</td></tr>
+  <tr><td><code>Scores[5]</code></td><td>Element at index 5</td><td>Reads the stored value (78 in our example).</td></tr>
+ </table>
+ <div class="note"><strong>Remember:</strong> The index identifies the position. The value is the data stored in that position.</div>
+ <h3>What happens if the index is outside the declared range?</h3>
+ <p>For <code>Scores : ARRAY[1:5] OF INTEGER</code>, valid indices are 1, 2, 3, 4 and 5. An attempt to access <code>Scores[0]</code> or <code>Scores[6]</code> is outside the declared range and is an invalid array access.</p>
+</section>
+
+<section class="card">
+ <h2>4. Interactive exploration — Array viewer</h2>
+ <p>Select an index to inspect its value. You can also change an element. This small activity models an array with five INTEGER elements.</p>
+ <div class="array-strip" id="arrayView">
+  <div class="cell"><strong>[1]</strong><span id="v1">72</span></div>
+  <div class="cell"><strong>[2]</strong><span id="v2">85</span></div>
+  <div class="cell"><strong>[3]</strong><span id="v3">64</span></div>
+  <div class="cell"><strong>[4]</strong><span id="v4">91</span></div>
+  <div class="cell"><strong>[5]</strong><span id="v5">78</span></div>
+ </div>
+ <div class="grid">
+  <div><label for="arrayIndex">Index to access (1–5)</label><input id="arrayIndex" type="number" min="1" max="5" value="3"></div>
+  <div><label for="newValue">New INTEGER value (for assignment)</label><input id="newValue" type="number" value="70"></div>
+ </div>
+ <button onclick="readElement()">Read element</button><button onclick="writeElement()">Assign new value</button><button class="secondary" onclick="resetArray()">Reset array</button>
+ <div id="arrayFeedback" class="box" aria-live="polite">Choose an index and read or change the element.</div>
+</section>
+
+<section class="card">
+ <h2>5. A first look at array input and output</h2>
+ <p>For now, focus on understanding the array and individual elements. In the next lesson, we will use iteration to input values into every element and then process the array.</p>
+ <p>Here is a short example showing individual input and output operations:</p>
+ <pre><code>DECLARE Names : ARRAY[1:3] OF STRING
+
+INPUT Names[1]
+INPUT Names[2]
+INPUT Names[3]
+
+OUTPUT Names[1]
+OUTPUT Names[2]
+OUTPUT Names[3]</code></pre>
+ <p>This works, but it becomes repetitive for a large array. An iteration structure can perform the same operation for every index. We will develop that method in the next lesson.</p>
+ <div class="note"><strong>Important distinction:</strong> Declaring an array creates its fixed structure. It does not automatically mean that meaningful data has been entered into every element.</div>
+</section>
+
+<section class="card">
+ <h2>6. Formal practice — Arrays without loops</h2>
+ <p>Answer in your notebook using Cambridge pseudocode. Do not use iteration in these questions yet.</p>
+ <ol>
+  <li>Declare an array named <code>Temperatures</code> that stores 7 INTEGER values, with indices from 1 to 7.</li>
+  <li>Declare an array named <code>StudentNames</code> that stores 25 STRING values, with indices from 1 to 25.</li>
+  <li>Declare an array named <code>Prices</code> that stores 10 REAL values, with indices from 1 to 10.</li>
+  <li>An array <code>Results</code> has been declared as <code>ARRAY[1:4] OF INTEGER</code>. Write pseudocode to store 68, 74, 89 and 91 in its four elements, then output the value at index 3.</li>
+  <li>The array <code>Attempts</code> is declared as <code>ARRAY[1:6] OF INTEGER</code>. Write an assignment to change the value at index 5 to 3. State whether <code>Attempts[0]</code> is a valid access.</li>
+ </ol>
+ <details><summary><strong>Show sample solutions</strong></summary>
+  <h3>Question 1</h3><pre><code>DECLARE Temperatures : ARRAY[1:7] OF INTEGER</code></pre>
+  <h3>Question 2</h3><pre><code>DECLARE StudentNames : ARRAY[1:25] OF STRING</code></pre>
+  <h3>Question 3</h3><pre><code>DECLARE Prices : ARRAY[1:10] OF REAL</code></pre>
+  <h3>Question 4</h3><pre><code>DECLARE Results : ARRAY[1:4] OF INTEGER
+Results[1] ← 68
+Results[2] ← 74
+Results[3] ← 89
+Results[4] ← 91
+OUTPUT Results[3]</code></pre>
+  <p>Output: 89.</p>
+  <h3>Question 5</h3><pre><code>Attempts[5] ← 3</code></pre>
+  <p><code>Attempts[0]</code> is invalid because the declared index range is 1 to 6.</p>
+ </details>
+</section>
+
+<section class="card" id="assessment">
+ <h2>7. Formal assessment — 6 questions</h2>
+ <p>Enter your full name before beginning. Each question is worth 1 mark. A score of 70% or above unlocks the achievement message.</p>
+ <label for="studentName">Student full name (required)</label>
+ <input id="studentName" type="text" style="width:min(100%,480px)" placeholder="Enter your full name">
+ <form id="quiz">
+  <div class="question"><p><strong>1.</strong> Which statement best describes an array?</p><div class="options">
+   <label><input type="radio" name="q1" value="a"> A structure that stores a fixed number of elements of the same data type</label>
+   <label><input type="radio" name="q1" value="b"> A structure that stores only one value</label>
+   <label><input type="radio" name="q1" value="c"> A structure that must store different data types</label>
+  </div></div>
+  <div class="question"><p><strong>2.</strong> What does the declaration mean?</p><pre><code>DECLARE Scores : ARRAY[1:8] OF INTEGER</code></pre><div class="options">
+   <label><input type="radio" name="q2" value="a"> Eight STRING values</label>
+   <label><input type="radio" name="q2" value="b"> Eight INTEGER elements indexed from 1 to 8</label>
+   <label><input type="radio" name="q2" value="c"> One INTEGER value at index 8 only</label>
+  </div></div>
+  <div class="question"><p><strong>3.</strong> In <code>Scores[4]</code>, what does 4 represent?</p><div class="options">
+   <label><input type="radio" name="q3" value="a"> The value stored</label>
+   <label><input type="radio" name="q3" value="b"> The data type</label>
+   <label><input type="radio" name="q3" value="c"> The index (position)</label>
+  </div></div>
+  <div class="question"><p><strong>4.</strong> If <code>Scores[2]</code> contains 85, what does <code>OUTPUT Scores[2]</code> display?</p><div class="options">
+   <label><input type="radio" name="q4" value="a"> 2</label>
+   <label><input type="radio" name="q4" value="b"> 85</label>
+   <label><input type="radio" name="q4" value="c"> Scores</label>
+  </div></div>
+  <div class="question"><p><strong>5.</strong> An array is declared as <code>ARRAY[1:5] OF INTEGER</code>. Which is an invalid index?</p><div class="options">
+   <label><input type="radio" name="q5" value="a"> 1</label>
+   <label><input type="radio" name="q5" value="b"> 5</label>
+   <label><input type="radio" name="q5" value="c"> 6</label>
+  </div></div>
+  <div class="question"><p><strong>6.</strong> Which statement changes the value stored at index 3 to 99?</p><div class="options">
+   <label><input type="radio" name="q6" value="a"> <code>Scores[3] ← 99</code></label>
+   <label><input type="radio" name="q6" value="b"> <code>Scores ← 3</code></label>
+   <label><input type="radio" name="q6" value="c"> <code>99 ← Scores[3]</code></label>
+  </div></div>
+  <button type="button" onclick="markQuiz()">Submit assessment</button><button type="button" class="secondary" onclick="resetQuiz()">Reset answers</button>
+ </form>
+ <div id="result" class="box" aria-live="polite">Your result will appear here after submission.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson summary</h2>
+ <ul>
+  <li>An array stores a fixed number of elements of the same data type.</li>
+  <li>Each element is accessed using an index inside square brackets.</li>
+  <li>Declare an array by stating its identifier, index range and data type.</li>
+  <li>Use assignment to change an individual element.</li>
+  <li>Use INPUT and OUTPUT with an indexed element to read and display data.</li>
+  <li>Always stay within the declared index range.</li>
+ </ul>
+ <p class="note"><strong>Next lesson:</strong> Using FOR…NEXT to populate a 1D array, read its elements and process the stored values. We will build on the array structure introduced today.</p>
+ <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care Challenge Inspire</footer>
+<script>
+let remaining=3000,timerHandle=null;
+function showTimer(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function startTimer(){if(timerHandle!==null)return;timerHandle=setInterval(()=>{if(remaining>0){remaining--;showTimer()}else{pauseTimer();alert('Lesson time is complete.')}},1000)}
+function pauseTimer(){if(timerHandle!==null){clearInterval(timerHandle);timerHandle=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTimer()}
+let values=[72,85,64,91,78];
+function renderArray(){values.forEach((v,i)=>document.getElementById('v'+(i+1)).textContent=v)}
+function getIndex(){const n=Number(document.getElementById('arrayIndex').value);if(!Number.isInteger(n)||n<1||n>5){document.getElementById('arrayFeedback').innerHTML='<span class="warn">Invalid index. Enter an integer from 1 to 5.</span>';return null}return n}
+function readElement(){const n=getIndex();if(n===null)return;document.getElementById('arrayFeedback').textContent='Scores['+n+'] contains '+values[n-1]+'. The index is '+n+'; the stored value is '+values[n-1]+'.'}
+function writeElement(){const n=getIndex();if(n===null)return;const raw=document.getElementById('newValue').value;if(raw.trim()===''||!Number.isInteger(Number(raw))){document.getElementById('arrayFeedback').innerHTML='<span class="warn">Enter a valid INTEGER value.</span>';return}values[n-1]=Number(raw);renderArray();document.getElementById('arrayFeedback').textContent='Assignment completed: Scores['+n+'] ← '+values[n-1]+'.'}
+function resetArray(){values=[72,85,64,91,78];renderArray();document.getElementById('arrayFeedback').textContent='Array reset to its original values.'}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const answers={q1:'a',q2:'b',q3:'c',q4:'b',q5:'c',q6:'a'};
+function markQuiz(){const name=document.getElementById('studentName').value.trim(),result=document.getElementById('result');if(!name){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}let score=0,unanswered=[];for(let i=1;i<=6;i++){const chosen=document.querySelector('input[name="q'+i+'"]:checked');if(!chosen)unanswered.push(i);else if(chosen.value===answers['q'+i])score++}if(unanswered.length){result.textContent='Please answer all questions. Still unanswered: '+unanswered.join(', ')+'.';return}const percent=Math.round(score/6*100);result.innerHTML='<strong>'+escapeHtml(name)+'</strong><br>Score: <strong>'+score+'/6 ('+percent+'%)</strong><br>'+(percent>=70?'<span class="good">Well done! You have achieved 70% or above. You may proceed to the extension challenge set by your teacher.</span>':'<span class="warn">Keep practising. Review the array declaration and index examples, then discuss any misunderstandings with your teacher.</span>')}
+function resetQuiz(){document.getElementById('quiz').reset();document.getElementById('result').textContent='Your result will appear here after submission.'}
+showTimer();renderArray();
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 5 | Logical Operators | IGCSE 0984</title>
+<style>
+:root{--gold:#f4c542;--goldlight:#fff3bd;--olive:#465b25;--dark:#263817;--cream:#fffbea;--ink:#20251b;--muted:#59634d;--line:#d8d9bd;--green:#e5f1d8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:27px 5vw 24px;border-bottom:8px solid var(--gold)}
+.header-inner{max-width:1150px;margin:auto}.brand{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#f8df7d;font-weight:bold}
+h1{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:10px 0}.subtitle{font-size:1.08rem;color:#f4f0d9;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.meta span{background:#ffffff18;border:1px solid #ffffff55;padding:7px 12px;border-radius:20px;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;background:#fffdf1;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #26381712}
+.nav-inner{max-width:1150px;margin:auto;display:flex;gap:5px;overflow-x:auto;padding:9px 12px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--dark);font-weight:bold;font-size:.88rem;padding:8px 10px;border-radius:20px}nav a:hover{background:var(--goldlight)}
+main{max-width:1100px;margin:27px auto;padding:0 18px 55px}
+section{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin:19px 0;box-shadow:0 5px 18px #2638170b}
+h2{color:var(--dark);margin:0 0 12px;font-size:1.55rem}h3{color:var(--olive);margin:17px 0 7px}
+.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#8a6b00;font-weight:bold}
+.time{display:inline-block;background:var(--olive);color:#fff;padding:4px 10px;border-radius:15px;font-size:.82rem;font-weight:bold;margin:0 0 9px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fffef8}.card strong{color:var(--dark)}
+.callout,.success,.warning{padding:13px 16px;border-radius:9px;margin:13px 0}.callout{background:var(--goldlight);border-left:5px solid #d6a900}.success{background:var(--green);border-left:5px solid var(--olive)}.warning{background:#fff0e7;border-left:5px solid #b85b28}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#eef0dc;color:var(--dark)}
+pre{background:#182318;color:#f5f3d7;padding:16px;border-radius:12px;overflow-x:auto;font-size:.94rem;line-height:1.55;border:1px solid #31452a}
+code{font-family:Consolas,Monaco,monospace}.inline{background:#f0f1e5;padding:2px 5px;border-radius:4px;font-family:Consolas,monospace}
+button{border:0;background:var(--olive);color:#fff;padding:10px 15px;border-radius:8px;font-weight:bold;cursor:pointer}button:hover{background:var(--dark)}button.secondary{background:#e8edda;color:var(--dark);border:1px solid var(--line)}
+textarea{width:100%;min-height:100px;resize:vertical;font:inherit;padding:10px;border:1px solid #aeb59a;border-radius:8px}
+details{border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:10px 0;background:#fffef8}summary{cursor:pointer;font-weight:bold;color:var(--dark)}
+.quiz-item{padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fffef8}.quiz-item label{display:inline-block;margin:7px 12px 3px 0}.feedback{font-weight:bold;margin-top:5px}
+.timerbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f4f5e8;padding:13px;border-radius:12px}#clock{font-size:1.6rem;font-weight:bold;color:var(--dark);font-variant-numeric:tabular-nums;min-width:90px}
+footer{text-align:center;background:var(--dark);color:#f7f0cf;padding:22px}footer strong{color:var(--gold)}
+@media print{nav,.no-print,button{display:none!important}body{background:white;font-size:11pt}header{background:white!important;color:black;border-bottom:3px solid #777;padding:14px}.brand,.subtitle{color:#333}section{box-shadow:none;break-inside:avoid}pre{background:#eee;color:#111;white-space:pre-wrap}}
+</style>
+</head>
+<body>
+<header><div class="header-inner">
+ <div class="brand">Modern English School Cairo · Care · Challenge · Inspire</div>
+ <h1>Logical Operators</h1>
+ <p class="subtitle">Year 10 · Cambridge IGCSE Computer Science 0984 · Lesson 5</p>
+ <div class="meta"><span>50-minute lesson</span><span>Boolean expressions</span><span>Cambridge Pseudocode first</span><span>Ravi Raju’s Programming Lab</span></div>
+</div></header>
+<nav><div class="nav-inner">
+ <a href="#recall">Recall</a><a href="#demo">Demonstration</a><a href="#operators">AND · OR · NOT</a><a href="#truth">Truth tables</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+</div></nav>
+<main>
+<section>
+ <div class="kicker">Syllabus alignment</div><h2>Cambridge reference</h2>
+ <p>This lesson follows <strong>Cambridge IGCSE (9–1) Computer Science 0984, syllabus for examination in 2026, 2027 and 2028</strong>, Topic 8.1.4(f): logical operations.</p>
+ <p>Cambridge specifies only three logical operators for this part of the syllabus: <strong>AND, OR and NOT</strong>. Their operands and results are always of data type <strong>BOOLEAN</strong>.</p>
+ <div class="warning"><strong>Keep the topics separate:</strong> This lesson is about logical operators in Pseudocode expressions. It is not the separate Boolean logic topic on drawing and analysing logic-gate circuits. We will also teach selection statements as a separate lesson sequence.</div>
+ <p class="small">Official source: <a href="https://www.cambridgeinternational.org/Images/697248-2026-2028-syllabus.pdf" target="_blank" rel="noopener">Cambridge 0984 syllabus 2026–2028, Pseudocode reference, logical operations (PDF)</a>.</p>
+</section>
+
+<section>
+ <div class="kicker">Learning goals</div><h2>By the end of this lesson, you should be able to…</h2>
+ <div class="grid">
+  <div class="card">Explain the purpose of <strong>AND, OR and NOT</strong>.</div>
+  <div class="card">Recognise that logical operands and results are BOOLEAN.</div>
+  <div class="card">Evaluate expressions using TRUE and FALSE.</div>
+  <div class="card">Combine relational comparisons using logical operators.</div>
+  <div class="card">Use parentheses to make complex expressions clear.</div>
+  <div class="card">Compare Cambridge Pseudocode with equivalent Python expressions.</div>
+ </div>
+ <div class="callout"><strong>Three-stage learning:</strong> Understand the problem → write Cambridge Pseudocode → evaluate the Boolean result → compare with Python.</div>
+ <div class="timerbox no-print"><strong>Lesson timer</strong><span id="clock">50:00</span><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><span class="small">Suggested timings total 50 minutes.</span></div>
+</section>
+
+<section id="recall">
+ <div class="kicker">Activity 1</div><span class="time">5 minutes · Recall</span>
+ <h2>Recall: relational operators</h2>
+ <div class="quiz-item"><p><strong>1.</strong> What data type is produced by a relational comparison?</p>
+  <label><input type="radio" name="r1" value="a"> INTEGER</label><label><input type="radio" name="r1" value="b"> BOOLEAN</label><label><input type="radio" name="r1" value="c"> STRING</label><div class="feedback" id="rf1"></div></div>
+ <div class="quiz-item"><p><strong>2.</strong> If <code>Age = 15</code>, what is the result of <code>Age >= 16</code>?</p>
+  <label><input type="radio" name="r2" value="a"> TRUE</label><label><input type="radio" name="r2" value="b"> FALSE</label><label><input type="radio" name="r2" value="c"> 1</label><div class="feedback" id="rf2"></div></div>
+ <button onclick="checkRecall()">Check recall</button>
+</section>
+
+<section id="demo">
+ <div class="kicker">Activity 2</div><span class="time">10 minutes · Teacher demonstration</span>
+ <h2>When does a student qualify?</h2>
+ <p><strong>Problem:</strong> A student qualifies for a certificate only if their attendance is at least 90% <em>and</em> their mark is at least 60.</p>
+ <p>Ask students to identify the two separate comparisons. Each comparison produces a Boolean value. AND combines those Boolean values.</p>
+ <pre><code>// Check whether a student qualifies
+DECLARE Attendance : INTEGER
+DECLARE Mark : INTEGER
+DECLARE Qualifies : BOOLEAN
+
+Attendance ← 95
+Mark ← 72
+
+Qualifies ← (Attendance >= 90) AND (Mark >= 60)
+
+OUTPUT Qualifies</code></pre>
+ <div class="success"><strong>Expected result:</strong> TRUE AND TRUE gives TRUE.</div>
+ <p>Change <code class="inline">Mark</code> to 55. Now the expression becomes TRUE AND FALSE, so the result is FALSE.</p>
+ <div class="callout"><strong>Key idea:</strong> AND and OR combine Boolean values. NOT reverses a Boolean value. These operators do not add or compare numerical values directly.</div>
+</section>
+
+<section id="operators">
+ <div class="kicker">Core knowledge</div><h2>The three Cambridge logical operators</h2>
+ <div class="grid">
+  <div class="card"><h3>AND</h3><p>TRUE only when <strong>both</strong> operands are TRUE.</p><pre><code>TRUE AND TRUE
+Result: TRUE</code></pre></div>
+  <div class="card"><h3>OR</h3><p>TRUE when <strong>at least one</strong> operand is TRUE. It is FALSE only when both are FALSE.</p><pre><code>TRUE OR FALSE
+Result: TRUE</code></pre></div>
+  <div class="card"><h3>NOT</h3><p>Reverses a Boolean value: TRUE becomes FALSE; FALSE becomes TRUE.</p><pre><code>NOT TRUE
+Result: FALSE</code></pre></div>
+ </div>
+ <h3>Cambridge Pseudocode examples</h3>
+ <pre><code>// AND: both conditions must be true
+IsEligible ← (Age >= 16) AND (Score >= 50)
+
+// OR: at least one condition must be true
+NeedsSupport ← (Score < 40) OR (Attendance < 80)
+
+// NOT: reverse a Boolean value
+IsNotReady ← NOT IsReady</code></pre>
+ <div class="warning"><strong>Operand rule:</strong> The operands and results of logical operations are BOOLEAN. In examples such as <code class="inline">Age &gt;= 16</code>, the relational comparison is evaluated to produce a Boolean value before AND, OR or NOT is applied.</div>
+ <h3>Python comparison</h3>
+ <table><thead><tr><th>Cambridge Pseudocode</th><th>Python 3</th></tr></thead><tbody>
+  <tr><td><code>A AND B</code></td><td><code>A and B</code></td></tr>
+  <tr><td><code>A OR B</code></td><td><code>A or B</code></td></tr>
+  <tr><td><code>NOT A</code></td><td><code>not A</code></td></tr>
+ </tbody></table>
+ <p>Python uses lowercase <code class="inline">and</code>, <code class="inline">or</code> and <code class="inline">not</code>. Cambridge Pseudocode writes them in uppercase.</p>
+</section>
+
+<section id="truth">
+ <div class="kicker">Activity 3</div><span class="time">10 minutes · Interactive exploration</span>
+ <h2>Truth tables: understand every possible result</h2>
+ <p>A truth table lists all possible Boolean inputs and the result of an operation.</p>
+ <h3>AND truth table</h3>
+ <table><thead><tr><th>A</th><th>B</th><th>A AND B</th></tr></thead><tbody>
+  <tr><td>FALSE</td><td>FALSE</td><td>FALSE</td></tr>
+  <tr><td>FALSE</td><td>TRUE</td><td>FALSE</td></tr>
+  <tr><td>TRUE</td><td>FALSE</td><td>FALSE</td></tr>
+  <tr><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
+ </tbody></table>
+ <h3>OR truth table</h3>
+ <table><thead><tr><th>A</th><th>B</th><th>A OR B</th></tr></thead><tbody>
+  <tr><td>FALSE</td><td>FALSE</td><td>FALSE</td></tr>
+  <tr><td>FALSE</td><td>TRUE</td><td>TRUE</td></tr>
+  <tr><td>TRUE</td><td>FALSE</td><td>TRUE</td></tr>
+  <tr><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
+ </tbody></table>
+ <h3>NOT truth table</h3>
+ <table><thead><tr><th>A</th><th>NOT A</th></tr></thead><tbody>
+  <tr><td>FALSE</td><td>TRUE</td></tr><tr><td>TRUE</td><td>FALSE</td></tr>
+ </tbody></table>
+ <div class="callout"><strong>Memory aid:</strong> AND needs both TRUE. OR needs at least one TRUE. NOT flips the value.</div>
+ <h3>Try the eight-question challenge</h3>
+ <div id="truthQuiz"></div>
+ <button onclick="markTruth()">Mark my answers</button> <button class="secondary" onclick="resetTruth()">Try again</button>
+ <div id="truthResult" class="success" aria-live="polite">Your score will appear here.</div>
+</section>
+
+<section id="practice">
+ <div class="kicker">Activity 4</div><span class="time">15 minutes · Formal practice</span>
+ <h2>Write and evaluate logical expressions</h2>
+ <p>For each problem, identify the Boolean conditions, write the Cambridge Pseudocode expression, and state the result for the supplied values.</p>
+ <div class="task"><h3>Question 1 · Access requirement</h3>
+  <p>A user may access a resource if their age is at least 13 and their account is active. Input the age and a Boolean value <code class="inline">AccountActive</code>. Store the result in <code class="inline">CanAccess</code> and display it.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Access requirement pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Check the age and account status
+DECLARE Age : INTEGER
+DECLARE AccountActive : BOOLEAN
+DECLARE CanAccess : BOOLEAN
+
+INPUT Age
+INPUT AccountActive
+
+CanAccess ← (Age >= 13) AND AccountActive
+OUTPUT CanAccess</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 2 · Support flag</h3>
+  <p>Input a student's mark and attendance percentage. Set <code class="inline">NeedsSupport</code> to TRUE if the mark is below 40 or attendance is below 80. Display the result.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Support flag pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Check whether the student needs support
+DECLARE Mark : INTEGER
+DECLARE Attendance : INTEGER
+DECLARE NeedsSupport : BOOLEAN
+
+INPUT Mark
+INPUT Attendance
+
+NeedsSupport ← (Mark < 40) OR (Attendance < 80)
+OUTPUT NeedsSupport</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 3 · Reverse a Boolean value</h3>
+  <p>Input a Boolean variable called <code class="inline">IsClosed</code>. Store the opposite value in <code class="inline">IsOpen</code>. Display <code class="inline">IsOpen</code>.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Reverse Boolean pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Reverse the closed status
+DECLARE IsClosed : BOOLEAN
+DECLARE IsOpen : BOOLEAN
+
+INPUT IsClosed
+IsOpen ← NOT IsClosed
+
+OUTPUT IsOpen</code></pre></details>
+ </div>
+ <p class="small">Teacher note: Keep this lesson focused on logical expressions. Do not require students to write IF statements yet; those belong in the selection sequence.</p>
+</section>
+
+<section id="assessment">
+ <div class="kicker">Activity 5</div><span class="time">10 minutes · Assessment and feedback</span>
+ <h2>Check your understanding</h2>
+ <p>Answer all six questions. Submit to receive your score and explanations.</p>
+ <div id="assessmentQuiz"></div>
+ <button onclick="markAssessment()">Submit assessment</button> <button class="secondary" onclick="resetAssessment()">Reset</button>
+ <div id="assessmentResult" class="success" aria-live="polite">Your result will appear here.</div>
+</section>
+
+<section>
+ <h2>Lesson reflection</h2>
+ <ol>
+  <li>When does an AND expression produce TRUE?</li>
+  <li>When does an OR expression produce FALSE?</li>
+  <li>What does NOT do to a Boolean value?</li>
+  <li>Why should parentheses be used in complex expressions?</li>
+ </ol>
+ <div class="success"><strong>Key message:</strong> Logical operators work with Boolean values. AND requires both operands to be TRUE, OR requires at least one TRUE, and NOT reverses a Boolean value.</div>
+ <p class="small">Next lesson: selection statements – using conditions with IF...THEN and IF...THEN...ELSE.</p>
+ <div class="no-print"><button onclick="window.print()">Print lesson / Save as PDF</button></div>
+</section>
+</main>
+<footer><strong>Ravi Raju’s Programming Lab</strong><br>Modern English School Cairo · Care · Challenge · Inspire<br><span class="small" style="color:#e6e4cc">Year 10 · Cambridge IGCSE Computer Science 0984</span></footer>
+<script>
+let remaining=50*60,timer=null;
+function showTime(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(timer!==null)return;timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else pauseTimer()},1000)}
+function pauseTimer(){if(timer!==null){clearInterval(timer);timer=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTime()}showTime();
+function checkRecall(){let keys={r1:'b',r2:'b'},s=0;Object.keys(keys).forEach((k,i)=>{let x=document.querySelector('input[name="'+k+'"]:checked'),ok=x&&x.value===keys[k];if(ok)s++;let f=document.getElementById('rf'+(i+1));f.textContent=ok?'Correct!':'Review Boolean values and the comparison result.';f.style.color=ok?'#365d20':'#8b3030'});alert('Recall score: '+s+'/2')}
+const truthItems=[
+ {q:'TRUE AND TRUE',a:'TRUE',why:'AND is TRUE only when both inputs are TRUE.'},
+ {q:'TRUE AND FALSE',a:'FALSE',why:'One operand is FALSE, so AND is FALSE.'},
+ {q:'FALSE OR TRUE',a:'TRUE',why:'OR is TRUE when at least one input is TRUE.'},
+ {q:'FALSE OR FALSE',a:'FALSE',why:'Both inputs are FALSE, so OR is FALSE.'},
+ {q:'NOT TRUE',a:'FALSE',why:'NOT reverses TRUE to FALSE.'},
+ {q:'NOT FALSE',a:'TRUE',why:'NOT reverses FALSE to TRUE.'},
+ {q:'(TRUE AND FALSE) OR TRUE',a:'TRUE',why:'First TRUE AND FALSE gives FALSE; then FALSE OR TRUE gives TRUE.'},
+ {q:'NOT (TRUE OR FALSE)',a:'FALSE',why:'TRUE OR FALSE is TRUE; NOT TRUE is FALSE.'}
+];
+function buildTruth(){let root=document.getElementById('truthQuiz');root.innerHTML='';truthItems.forEach((it,i)=>{let d=document.createElement('div');d.className='quiz-item';d.innerHTML='<p><strong>'+(i+1)+'.</strong> <code>'+it.q+'</code></p><label><input type="radio" name="t'+i+'" value="TRUE"> TRUE</label><label><input type="radio" name="t'+i+'" value="FALSE"> FALSE</label><div class="feedback" id="tf'+i+'"></div>';root.appendChild(d)})}
+function markTruth(){let score=0;truthItems.forEach((it,i)=>{let x=document.querySelector('input[name="t'+i+'"]:checked'),ok=x&&x.value===it.a;if(ok)score++;let f=document.getElementById('tf'+i);f.textContent=(ok?'Correct. ':'Correct answer: '+it.a+'. ')+it.why;f.style.color=ok?'#365d20':'#8b3030'});document.getElementById('truthResult').textContent='Your score: '+score+'/'+truthItems.length+'. '+(score>=7?'Excellent – you understand the truth tables.':score>=5?'Good effort. Review the explanations and retry.':'Review the three truth tables, then try again.')}
+function resetTruth(){buildTruth();document.getElementById('truthResult').textContent='Your score will appear here.'}
+buildTruth();
+const assessItems=[
+ {q:'When is A AND B TRUE?',o:['When both A and B are TRUE','When at least one is TRUE','Only when both are FALSE'],a:0,e:'AND is TRUE only when both Boolean operands are TRUE.'},
+ {q:'When is A OR B FALSE?',o:['When either operand is TRUE','Only when both operands are FALSE','When both operands are TRUE'],a:1,e:'OR is FALSE only when both operands are FALSE.'},
+ {q:'What is NOT FALSE?',o:['FALSE','TRUE','0'],a:1,e:'NOT reverses a Boolean value.'},
+ {q:'What data type must the operands of logical operations have?',o:['INTEGER','REAL','BOOLEAN'],a:2,e:'Cambridge specifies that logical operands and results are BOOLEAN.'},
+ {q:'Which is the Python form of Cambridge A AND B?',o:['A AND B','A and B','A && B'],a:1,e:'Python uses the lowercase keyword and.'},
+ {q:'If A is TRUE and B is FALSE, what is NOT A OR B?',o:['TRUE','FALSE','Cannot be determined'],a:1,e:'NOT A is FALSE; FALSE OR FALSE is FALSE.'}
+];
+function buildAssessment(){let root=document.getElementById('assessmentQuiz');root.innerHTML='';assessItems.forEach((it,i)=>{let d=document.createElement('div');d.className='quiz-item';d.innerHTML='<p><strong>'+(i+1)+'. '+it.q+'</strong></p>'+it.o.map((op,j)=>'<label><input type="radio" name="a'+i+'" value="'+j+'"> '+op+'</label>').join('')+'<div class="feedback" id="af'+i+'"></div>';root.appendChild(d)})}
+function markAssessment(){let score=0;assessItems.forEach((it,i)=>{let x=document.querySelector('input[name="a'+i+'"]:checked'),ok=x&&Number(x.value)===it.a;if(ok)score++;let f=document.getElementById('af'+i);f.textContent=(ok?'Correct. ':'Review: ')+it.e;f.style.color=ok?'#365d20':'#8b3030'});document.getElementById('assessmentResult').textContent='Your score: '+score+'/'+assessItems.length+'. '+(score>=5?'Excellent – you are ready to apply logical conditions in selection statements.':score>=4?'Good progress. Review the missed explanations.':'Revisit the truth tables and examples, then try again.')}
+function resetAssessment(){buildAssessment();document.getElementById('assessmentResult').textContent='Your result will appear here.'}
+buildAssessment();
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 7 – Nested Selection</title>
+<style>
+:root{--gold:#f4c542;--pale:#fff4c2;--olive:#556b2f;--dark:#35451d;--ink:#202817;--paper:#fffdf3;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff1b5,#f7f3d9 50%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--pale);font-weight:bold}.school{font-size:.85rem;margin-top:5px}h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.1)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--dark);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}.card h2{color:var(--dark);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--pale);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+label{display:block;margin:8px 0}input[type=text],input[type=number]{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}input[type=radio]{margin-right:7px}
+.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-left:8px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #aaa;font-family:Consolas,monospace}.hidden{display:none}.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}.small{font-size:.9rem;color:#5d624d}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222}.code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+<div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+<h1>Lesson 7: Nested Selection</h1>
+<p>Cambridge IGCSE Computer Science 0984 · Making a decision inside another decision</p>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<button onclick="startTimer()">Start / Resume 50-minute lesson</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><button class="gold" onclick="window.print()">Print / Save as PDF</button>
+<span id="clock">50:00</span><div class="progress"><span id="bar"></span></div>
+</div>
+
+<section class="card">
+<span class="tag">50 minutes</span><span class="tag">Nested IF</span><span class="tag">Pseudocode first</span>
+<h2>Learning outcomes</h2>
+<ul>
+<li>Explain what nested selection means.</li>
+<li>Identify an inner IF statement placed inside an outer IF branch.</li>
+<li>Trace nested IF statements using different input values.</li>
+<li>Write a nested selection algorithm with correct indentation and ENDIF placement.</li>
+<li>Recognise when a nested decision is more suitable than one combined condition.</li>
+</ul>
+<div class="note"><b>Prerequisite:</b> You should already be confident with IF…THEN…ENDIF and IF…THEN…ELSE…ENDIF. A nested IF is simply a selection statement placed inside another selection statement.</div>
+</section>
+
+<section class="card">
+<h2>1. Recall – 5 minutes</h2>
+<p>Choose the correct answer for each question.</p>
+<div id="recall">
+<div class="question"><b>1.</b> What value does a relational expression produce?
+<label><input type="radio" name="r1" value="a"> INTEGER</label><label><input type="radio" name="r1" value="b"> BOOLEAN</label><label><input type="radio" name="r1" value="c"> STRING</label></div>
+<div class="question"><b>2.</b> Which keyword begins the TRUE branch in Cambridge Pseudocode?
+<label><input type="radio" name="r2" value="a"> THEN</label><label><input type="radio" name="r2" value="b"> ELSE</label><label><input type="radio" name="r2" value="c"> NEXT</label></div>
+<div class="question"><b>3.</b> Which keyword closes an IF statement?
+<label><input type="radio" name="r3" value="a"> ENDWHILE</label><label><input type="radio" name="r3" value="b"> ENDCASE</label><label><input type="radio" name="r3" value="c"> ENDIF</label></div>
+</div><button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+</section>
+
+<section class="card">
+<h2>2. Teacher demonstration – 10 minutes</h2>
+<h3>What is nested selection?</h3>
+<p>Nested selection occurs when an IF statement is placed inside the THEN or ELSE part of another IF statement. The inner decision is reached only when the program follows the branch containing it.</p>
+<div class="code">IF &lt;outer condition&gt;
+THEN
+  IF &lt;inner condition&gt;
+  THEN
+    &lt;statements&gt;
+  ELSE
+    &lt;statements&gt;
+  ENDIF
+ELSE
+  &lt;statements&gt;
+ENDIF</div>
+<h3>Worked example: Check eligibility</h3>
+<p>A student is eligible for a certificate if their mark is at least 50. Among students who pass, those with a mark of 80 or more receive a distinction.</p>
+<div class="code">INPUT Mark
+IF Mark &gt;= 50
+THEN
+  IF Mark &gt;= 80
+  THEN
+    OUTPUT "Pass with distinction"
+  ELSE
+    OUTPUT "Pass"
+  ENDIF
+ELSE
+  OUTPUT "Not passed"
+ENDIF</div>
+<div class="note"><b>Read the logic carefully:</b> First the algorithm checks whether the student has passed. Only if that condition is TRUE does it check whether the mark is high enough for distinction.</div>
+<h3>Trace the example</h3>
+<table><thead><tr><th>Mark</th><th>Outer condition Mark &gt;= 50</th><th>Inner condition Mark &gt;= 80</th><th>Output</th></tr></thead>
+<tbody><tr><td>42</td><td>FALSE</td><td>Not evaluated</td><td>Not passed</td></tr><tr><td>65</td><td>TRUE</td><td>FALSE</td><td>Pass</td></tr><tr><td>88</td><td>TRUE</td><td>TRUE</td><td>Pass with distinction</td></tr></tbody></table>
+<p class="small">When the outer condition is FALSE, the inner IF is skipped. It is therefore correct to mark its condition “not evaluated” in the trace table.</p>
+<h3>Python equivalent</h3>
+<div class="code">mark = int(input("Enter mark: "))
+if mark >= 50:
+    if mark >= 80:
+        print("Pass with distinction")
+    else:
+        print("Pass")
+else:
+    print("Not passed")</div>
+<p class="small">In Python, indentation identifies which IF a statement belongs to. In Cambridge Pseudocode, use indentation consistently and close each IF with its own ENDIF.</p>
+</section>
+
+<section class="card">
+<h2>3. Interactive exploration – 10 minutes</h2>
+<h3>Test the nested decision</h3>
+<label for="score">Enter a mark from 0 to 100: <input id="score" type="number" min="0" max="100" value="76"></label>
+<button onclick="traceNested()">Trace algorithm</button>
+<div class="box" id="traceResult" aria-live="polite">Your trace will appear here.</div>
+<h3>Understand the decision path</h3>
+<div class="grid">
+<div class="box"><b>Step 1 – Outer IF</b><p>Is Mark at least 50?</p><p>If FALSE, output “Not passed”. The inner IF is skipped.</p></div>
+<div class="box"><b>Step 2 – Inner IF</b><p>This step is reached only if the outer condition is TRUE.</p><p>Is Mark at least 80?</p></div>
+<div class="box"><b>Step 3 – Final output</b><p>TRUE gives “Pass with distinction”. FALSE gives “Pass”.</p></div>
+</div>
+<div class="note"><b>Important distinction:</b> Nested selection is not the same as using AND. The inner condition is evaluated only after the outer condition has been satisfied. This can make the decision sequence clearer when the second test depends on the first.</div>
+</section>
+
+<section class="card">
+<h2>4. Formal practice – 15 minutes</h2>
+<p>Write each solution in Cambridge Pseudocode. Pay attention to indentation and the number and position of ENDIF statements.</p>
+<div class="box">
+<h3>Task 1 – Access check</h3>
+<p>Input a person's age. If the age is at least 13, check whether it is at least 16. Output <code>"Senior access"</code> if it is at least 16; otherwise output <code>"Junior access"</code>. If the age is below 13, output <code>"Access not permitted"</code>.</p>
+<textarea id="work1" rows="8" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('solution1')">Show suggested answer</button>
+<div id="solution1" class="code hidden">INPUT Age
+IF Age &gt;= 13
+THEN
+  IF Age &gt;= 16
+  THEN
+    OUTPUT "Senior access"
+  ELSE
+    OUTPUT "Junior access"
+  ENDIF
+ELSE
+  OUTPUT "Access not permitted"
+ENDIF</div>
+</div>
+<div class="box">
+<h3>Task 2 – Delivery charge</h3>
+<p>Input an order total. If the total is at least 100, check whether it is at least 200. Output <code>"Free delivery"</code> for totals of 200 or more, and <code>"Discounted delivery"</code> for totals from 100 to below 200. If the total is below 100, output <code>"Standard delivery charge"</code>.</p>
+<textarea id="work2" rows="9" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('solution2')">Show suggested answer</button>
+<div id="solution2" class="code hidden">INPUT OrderTotal
+IF OrderTotal &gt;= 100
+THEN
+  IF OrderTotal &gt;= 200
+  THEN
+    OUTPUT "Free delivery"
+  ELSE
+    OUTPUT "Discounted delivery"
+  ENDIF
+ELSE
+  OUTPUT "Standard delivery charge"
+ENDIF</div>
+</div>
+<div class="box">
+<h3>Task 3 – Password and account status</h3>
+<p>Input whether the password is correct as a BOOLEAN value, then input whether the account is active as a BOOLEAN value. If the password is correct, check whether the account is active. Output <code>"Login successful"</code> if both checks pass, or <code>"Account inactive"</code> if the account is not active. If the password is incorrect, output <code>"Incorrect password"</code>.</p>
+<textarea id="work3" rows="9" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('solution3')">Show suggested answer</button>
+<div id="solution3" class="code hidden">DECLARE PasswordCorrect : BOOLEAN
+DECLARE AccountActive : BOOLEAN
+INPUT PasswordCorrect
+INPUT AccountActive
+IF PasswordCorrect = TRUE
+THEN
+  IF AccountActive = TRUE
+  THEN
+    OUTPUT "Login successful"
+  ELSE
+    OUTPUT "Account inactive"
+  ENDIF
+ELSE
+  OUTPUT "Incorrect password"
+ENDIF</div>
+</div>
+<p class="small">Attempt each task before revealing the suggested answer. Equivalent correct algorithms are acceptable.</p>
+</section>
+
+<section class="card">
+<h2>5. Assessment and feedback – 10 minutes</h2>
+<p>Enter your full name and answer all six questions.</p>
+<label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+<form id="quiz">
+<div class="question"><b>1.</b> What does nested selection mean?
+<label><input type="radio" name="q1" value="a"> An IF statement placed inside another IF statement</label>
+<label><input type="radio" name="q1" value="b"> An IF statement placed inside a loop only</label>
+<label><input type="radio" name="q1" value="c"> Repeating an instruction a fixed number of times</label></div>
+<div class="question"><b>2.</b> In the worked example, Mark = 45. Is the inner condition evaluated?
+<label><input type="radio" name="q2" value="a"> Yes, always</label>
+<label><input type="radio" name="q2" value="b"> No, because the outer condition is FALSE</label>
+<label><input type="radio" name="q2" value="c"> Only after ENDIF</label></div>
+<div class="question"><b>3.</b> How many IF statements are in the worked example?
+<label><input type="radio" name="q3" value="a"> One</label>
+<label><input type="radio" name="q3" value="b"> Two</label>
+<label><input type="radio" name="q3" value="c"> Three</label></div>
+<div class="question"><b>4.</b> How many ENDIF statements are needed to close two nested IF statements?
+<label><input type="radio" name="q4" value="a"> One</label>
+<label><input type="radio" name="q4" value="b"> Two</label>
+<label><input type="radio" name="q4" value="c"> Three</label></div>
+<div class="question"><b>5.</b> What is output when Mark = 79 in the worked example?
+<label><input type="radio" name="q5" value="a"> Not passed</label>
+<label><input type="radio" name="q5" value="b"> Pass</label>
+<label><input type="radio" name="q5" value="c"> Pass with distinction</label></div>
+<div class="question"><b>6.</b> Which statement about nested IF is correct?
+<label><input type="radio" name="q6" value="a"> The inner IF is always executed</label>
+<label><input type="radio" name="q6" value="b"> The inner IF is reached only when execution enters the branch containing it</label>
+<label><input type="radio" name="q6" value="c"> Every IF must contain an ELSE</label></div>
+</form>
+<button class="gold" onclick="submitQuiz()">Submit assessment</button>
+<div id="result" class="card hidden" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Teacher checkpoint</h2>
+<ul>
+<li>Can students identify outer and inner IF statements?</li>
+<li>Can they trace whether an inner condition is evaluated?</li>
+<li>Do they use one ENDIF for each IF statement?</li>
+<li>Is indentation clear enough to show the structure?</li>
+<li>Can they test boundary values around each condition?</li>
+</ul>
+<div class="note"><b>Next step:</b> Consolidate nested selection with further tracing and practice, then introduce CASE selection as a separate construct.</div>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=3000,timer=null;
+function draw(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%'}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;draw()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;draw()}draw();
+function checkRecall(){let k=['b','a','c'],n=0;k.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)n++});document.getElementById('recallFeedback').textContent=' '+n+'/3 correct.'}
+function traceNested(){let v=Number(document.getElementById('score').value),out=document.getElementById('traceResult');if(!Number.isInteger(v)||v<0||v>100){out.textContent='Enter a whole-number mark from 0 to 100.';return}let outer=v>=50,inner=outer?(v>=80):null,result=!outer?'Not passed':(inner?'Pass with distinction':'Pass');out.innerHTML='<b>Input:</b> Mark = '+v+'<br><b>Outer condition (Mark &gt;= 50):</b> '+(outer?'TRUE':'FALSE')+'<br><b>Inner condition (Mark &gt;= 80):</b> '+(outer?(inner?'TRUE':'FALSE'):'Not evaluated')+'<br><b>Output:</b> '+result}
+function toggle(id){document.getElementById(id).classList.toggle('hidden')}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name.');document.getElementById('studentName').focus();return}let key={q1:'a',q2:'b',q3:'b',q4:'b',q5:'b',q6:'b'},score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let p=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+esc(name)+'</p><p><b>Score:</b> '+score+'/6 ('+p+'%)</p><p class="'+(p>=70?'good':'bad')+'">'+(p>=70?'Well done! You have achieved 70% or above.':'Please review the worked example and practise tracing nested decisions.')+'</p><p class="small">Result is displayed on this device. Use Print / Save as PDF to save the page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>

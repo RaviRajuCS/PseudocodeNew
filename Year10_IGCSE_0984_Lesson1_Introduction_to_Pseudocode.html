@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 | Introduction to Cambridge Pseudocode</title>
+<style>
+:root{
+  --gold:#f4c542; --gold-light:#fff2b8; --olive:#465b25; --olive-dark:#263817;
+  --cream:#fffbea; --ink:#20251b; --muted:#59634d; --white:#fff;
+  --line:#d8d9bd; --green:#dcecc8; --red:#8b3030;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--olive-dark),var(--olive));color:white;padding:28px 5vw 24px;border-bottom:8px solid var(--gold)}
+.header-inner{max-width:1150px;margin:auto}
+.brand{font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;color:#f8df7d;font-weight:bold}
+h1{font-size:clamp(2rem,4vw,3.1rem);line-height:1.1;margin:10px 0}
+.subtitle{font-size:1.08rem;color:#f4f0d9;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.meta span{background:#ffffff18;border:1px solid #ffffff55;padding:7px 12px;border-radius:20px;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;background:#fffdf1;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #26381712}
+.nav-inner{max-width:1150px;margin:auto;display:flex;gap:6px;overflow-x:auto;padding:9px 12px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--olive-dark);font-weight:bold;font-size:.9rem;padding:8px 11px;border-radius:20px}
+nav a:hover{background:var(--gold-light)}
+main{max-width:1100px;margin:28px auto;padding:0 18px 60px}
+section,.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:23px;margin:20px 0;box-shadow:0 5px 18px #2638170b}
+h2{color:var(--olive-dark);margin:0 0 12px;font-size:1.55rem}
+h3{color:var(--olive);margin:18px 0 8px}
+.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#8a6b00;font-weight:bold}
+.lead{font-size:1.08rem}
+.callout{background:var(--gold-light);border-left:5px solid #d6a900;padding:13px 16px;border-radius:8px;margin:14px 0}
+.success{background:#edf6e4;border-left:5px solid var(--olive);padding:13px 16px;border-radius:8px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:15px;background:#fffef8}
+.card strong{color:var(--olive-dark)}
+.time{display:inline-block;background:var(--olive);color:white;padding:4px 10px;border-radius:15px;font-size:.82rem;font-weight:bold;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:#eef0dc;color:var(--olive-dark)}
+pre{background:#182318;color:#f5f3d7;padding:17px;border-radius:12px;overflow-x:auto;font-size:.96rem;line-height:1.55;border:1px solid #31452a}
+code{font-family:Consolas,Monaco,monospace}
+.inline-code{background:#f0f1e5;padding:2px 5px;border-radius:4px;font-family:Consolas,monospace}
+button,.button{border:0;background:var(--olive);color:white;padding:10px 15px;border-radius:8px;font-weight:bold;cursor:pointer}
+button:hover,.button:hover{background:var(--olive-dark)}
+button.secondary{background:#e8edda;color:var(--olive-dark);border:1px solid var(--line)}
+details{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fffef8}
+summary{cursor:pointer;color:var(--olive-dark);font-weight:bold}
+.task{margin:12px 0;padding:15px;border:1px solid var(--line);border-radius:12px}
+textarea,input[type=text]{width:100%;padding:10px;border:1px solid #aeb59a;border-radius:8px;font:inherit;margin:7px 0}
+textarea{min-height:90px;resize:vertical}
+.checklist label{display:block;margin:8px 0}
+.timerbox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f4f5e8;padding:14px;border-radius:12px}
+#clock{font-size:1.7rem;font-weight:bold;color:var(--olive-dark);font-variant-numeric:tabular-nums;min-width:100px}
+.small{font-size:.9rem;color:var(--muted)}
+footer{text-align:center;background:var(--olive-dark);color:#f7f0cf;padding:22px}
+footer strong{color:var(--gold)}
+@media print{
+ nav,.no-print,button{display:none!important}
+ body{background:white;font-size:11pt}
+ header{background:white!important;color:black;border-bottom:3px solid #777;padding:15px}
+ .brand,.subtitle{color:#333}
+ section,.panel{box-shadow:none;break-inside:avoid}
+ pre{background:#eee;color:#111;white-space:pre-wrap}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="header-inner">
+  <div class="brand">Modern English School Cairo · Care · Challenge · Inspire</div>
+  <h1>Introduction to Pseudocode</h1>
+  <p class="subtitle">Year 10 · Cambridge IGCSE Computer Science 0984 · Lesson 1</p>
+  <div class="meta">
+   <span>50-minute lesson</span><span>Sequential structure</span><span>Learn by doing</span>
+   <span>Ravi Raju’s Programming Lab</span>
+  </div>
+ </div>
+</header>
+<nav><div class="nav-inner">
+ <a href="#challenge">Starter</a><a href="#discover">Discover</a><a href="#demo">Demonstration</a>
+ <a href="#trace">Dry run</a><a href="#debug">Debug</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+</div></nav>
+<main>
+<section>
+ <div class="kicker">Today's learning goals</div>
+ <h2>By the end of this lesson, you should be able to…</h2>
+ <div class="grid">
+  <div class="card">Explain why algorithms need <strong>clear, unambiguous instructions</strong>.</div>
+  <div class="card">Recognise <strong>COMMENT, DECLARE, INPUT, assignment and OUTPUT</strong>.</div>
+  <div class="card">Recognise common data types used in simple algorithms.</div>
+  <div class="card">Write and manually trace a short <strong>sequential algorithm</strong>.</div>
+ </div>
+ <div class="callout"><strong>Today's boundary:</strong> We are learning sequential algorithms only. Selection (IF) and iteration (loops) will be introduced in later lessons.</div>
+ <div class="timerbox no-print">
+  <strong>Lesson timer</strong><span id="clock">50:00</span>
+  <button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button>
+  <span class="small">Use this as a guide; adjust the pace to your class.</span>
+ </div>
+</section>
+
+<section id="challenge">
+ <div class="kicker">Activity 1 · 5 minutes</div><span class="time">5 min</span>
+ <h2>Can you give instructions to a robot?</h2>
+ <p class="lead">Imagine that I am a robot. Your task is to explain how to make a cup of tea. Give me instructions one step at a time.</p>
+ <div class="grid">
+  <div class="card"><strong>Think</strong><p>What must happen first? What equipment or ingredients are needed?</p></div>
+  <div class="card"><strong>Suggest</strong><p>Give precise instructions. Avoid vague words such as “some”, “a little” or “do it”.</p></div>
+  <div class="card"><strong>Improve</strong><p>If the robot misunderstands, make the instruction more exact.</p></div>
+ </div>
+ <div class="callout"><strong>Ask the class:</strong> What could go wrong if an instruction is unclear? Why can't a computer simply guess what we mean?</div>
+ <p><strong>Key idea:</strong> An algorithm is a sequence of clear, logical steps used to solve a problem. Pseudocode is one way to represent those steps.</p>
+</section>
+
+<section id="discover">
+ <div class="kicker">Activity 2 · 8 minutes</div><span class="time">8 min</span>
+ <h2>Discover the building blocks</h2>
+ <p>Introduce each item through the example. Students do not need to memorise a long list of rules today.</p>
+ <table>
+  <thead><tr><th>Statement / concept</th><th>Purpose</th><th>Example</th></tr></thead>
+  <tbody>
+   <tr><td><strong>COMMENT</strong></td><td>Adds an explanatory note. It is not executed.</td><td><code>// Calculate the total</code></td></tr>
+   <tr><td><strong>DECLARE</strong></td><td>Declares a variable and its data type.</td><td><code>DECLARE Total : INTEGER</code></td></tr>
+   <tr><td><strong>INPUT</strong></td><td>Accepts data from the user.</td><td><code>INPUT Number1</code></td></tr>
+   <tr><td><strong>Assignment</strong></td><td>Stores a value in a variable.</td><td><code>Total ← Number1 + Number2</code></td></tr>
+   <tr><td><strong>OUTPUT</strong></td><td>Displays information.</td><td><code>OUTPUT Total</code></td></tr>
+   <tr><td><strong>Data type</strong></td><td>Describes the kind of data stored.</td><td><code>INTEGER</code>, <code>REAL</code>, <code>CHAR</code>, <code>STRING</code>, <code>BOOLEAN</code></td></tr>
+  </tbody>
+ </table>
+ <div class="success"><strong>Remember:</strong> Pseudocode is not Python and is not a programming language that a computer executes directly. It describes an algorithm in a structured, language-independent form.</div>
+ <p><strong>Quick oral check:</strong> Which statement receives data? Which stores a calculated value? Which displays the result? Which lines are comments?</p>
+</section>
+
+<section id="demo">
+ <div class="kicker">Activity 3 · 8 minutes</div><span class="time">8 min</span>
+ <h2>Teacher demonstration: Add two numbers</h2>
+ <p><strong>Problem:</strong> Ask the user for two whole numbers, calculate their sum and display the answer.</p>
+ <pre><code>// Program to calculate the sum of two numbers
+
+DECLARE Number1 : INTEGER
+DECLARE Number2 : INTEGER
+DECLARE Total : INTEGER
+
+// Accept two numbers
+INPUT Number1
+INPUT Number2
+
+// Calculate their sum
+Total ← Number1 + Number2
+
+// Display the result
+OUTPUT Total</code></pre>
+ <div class="grid">
+  <div class="card"><strong>Point to the comments</strong><p>They explain the purpose of sections of the algorithm. They do not change the result.</p></div>
+  <div class="card"><strong>Point to the arrow</strong><p><code class="inline-code">←</code> means “assign the value on the right to the variable on the left”.</p></div>
+  <div class="card"><strong>Point to the order</strong><p>The instructions run from top to bottom, one after another.</p></div>
+ </div>
+ <details><summary>Teacher prompt: What if we remove all the comments?</summary>
+  <p>The algorithm still performs the same operations and produces the same result. Comments help people understand the algorithm; they are not instructions executed by the computer.</p>
+ </details>
+</section>
+
+<section id="trace">
+ <div class="kicker">Activity 4 · 8 minutes</div><span class="time">8 min</span>
+ <h2>Become the computer: dry run</h2>
+ <p>Read each instruction in order. Let students predict the values before revealing the completed trace.</p>
+ <pre><code>DECLARE A : INTEGER
+DECLARE B : INTEGER
+DECLARE C : INTEGER
+
+A ← 12
+B ← 8
+C ← A + B
+
+OUTPUT C</code></pre>
+ <table>
+  <thead><tr><th>Instruction completed</th><th>A</th><th>B</th><th>C</th></tr></thead>
+  <tbody>
+   <tr><td><code>A ← 12</code></td><td>12</td><td>—</td><td>—</td></tr>
+   <tr><td><code>B ← 8</code></td><td>12</td><td>8</td><td>—</td></tr>
+   <tr><td><code>C ← A + B</code></td><td>12</td><td>8</td><td>20</td></tr>
+  </tbody>
+ </table>
+ <p><strong>Ask:</strong> What will <code>OUTPUT C</code> display? <strong>Answer:</strong> 20.</p>
+ <div class="callout"><strong>New term:</strong> A dry run (or trace) means following an algorithm manually and recording the values of variables as each instruction is carried out.</div>
+</section>
+
+<section id="debug">
+ <div class="kicker">Activity 5 · 5 minutes</div><span class="time">5 min</span>
+ <h2>Spot and correct the errors</h2>
+ <p>Work with a partner. Find the two syntax/convention errors in this example and correct them.</p>
+ <pre><code>DECLARE FirstNumber : INTEGER
+DECLARE SecondNumber : INTEGER
+DECLARE Answer : INTEGER
+
+INPUT FirstNumber
+INPUT SecondNumber
+
+Answer = FirstNumber + SecondNumber
+
+PRINT Answer</code></pre>
+ <details><summary>Reveal the corrected version</summary>
+  <pre><code>DECLARE FirstNumber : INTEGER
+DECLARE SecondNumber : INTEGER
+DECLARE Answer : INTEGER
+
+INPUT FirstNumber
+INPUT SecondNumber
+
+Answer ← FirstNumber + SecondNumber
+
+OUTPUT Answer</code></pre>
+  <p>Corrections: use the assignment arrow <code>←</code>, and use <code>OUTPUT</code> rather than <code>PRINT</code> in Cambridge Pseudocode.</p>
+ </details>
+</section>
+
+<section id="practice">
+ <div class="kicker">Activity 6 · 11 minutes</div><span class="time">11 min</span>
+ <h2>Independent practice: write your own algorithms</h2>
+ <p>Write each solution in Cambridge Pseudocode. Use meaningful variable names and include at least two useful comments in each algorithm.</p>
+ <div class="task">
+  <h3>Question 1 · Getting started</h3>
+  <p>Write an algorithm that inputs a student's age and then displays it.</p>
+  <textarea aria-label="Answer to question 1" placeholder="Write your Pseudocode here…"></textarea>
+  <details><summary>Check your answer</summary>
+   <pre><code>// Input and display a student's age
+DECLARE Age : INTEGER
+
+INPUT Age
+OUTPUT Age</code></pre>
+  </details>
+ </div>
+ <div class="task">
+  <h3>Question 2 · Rectangle area</h3>
+  <p>Input the length and width of a rectangle. Calculate and display its area.</p>
+  <textarea aria-label="Answer to question 2" placeholder="Write your Pseudocode here…"></textarea>
+  <details><summary>Check your answer</summary>
+   <pre><code>// Calculate the area of a rectangle
+DECLARE Length : REAL
+DECLARE Width : REAL
+DECLARE Area : REAL
+
+INPUT Length
+INPUT Width
+Area ← Length * Width
+OUTPUT Area</code></pre>
+  </details>
+ </div>
+ <div class="task">
+  <h3>Question 3 · Examination marks</h3>
+  <p>Input three examination marks. Calculate and display their total and average.</p>
+  <textarea aria-label="Answer to question 3" placeholder="Write your Pseudocode here…"></textarea>
+  <details><summary>Check your answer</summary>
+   <pre><code>// Calculate the total and average of three marks
+DECLARE Mark1 : REAL
+DECLARE Mark2 : REAL
+DECLARE Mark3 : REAL
+DECLARE Total : REAL
+DECLARE Average : REAL
+
+INPUT Mark1
+INPUT Mark2
+INPUT Mark3
+
+Total ← Mark1 + Mark2 + Mark3
+Average ← Total / 3
+
+OUTPUT Total
+OUTPUT Average</code></pre>
+  </details>
+ </div>
+ <p class="small">Teacher note: The model answers are illustrative. Accept other logically correct solutions that follow the required Cambridge Pseudocode conventions.</p>
+</section>
+
+<section id="assessment">
+ <div class="kicker">Activity 7 · 5 minutes</div><span class="time">5 min</span>
+ <h2>Final challenge: five identical items</h2>
+ <p>Write an algorithm that inputs the price of one item, calculates the total price of five identical items and displays the total.</p>
+ <textarea aria-label="Final challenge answer" placeholder="Write your final algorithm here…"></textarea>
+ <details><summary>Model answer</summary>
+  <pre><code>// Calculate the total cost of five identical items
+DECLARE ItemPrice : REAL
+DECLARE TotalPrice : REAL
+
+// Input the price of one item
+INPUT ItemPrice
+
+// Calculate the total cost
+TotalPrice ← ItemPrice * 5
+
+// Display the total cost
+OUTPUT TotalPrice</code></pre>
+ </details>
+ <h3>Self-check: 5 marks</h3>
+ <div class="checklist">
+  <label><input type="checkbox"> 1 mark – Appropriate variable declarations</label>
+  <label><input type="checkbox"> 1 mark – Correct INPUT statement</label>
+  <label><input type="checkbox"> 1 mark – Correct assignment operator</label>
+  <label><input type="checkbox"> 1 mark – Correct calculation</label>
+  <label><input type="checkbox"> 1 mark – Correct OUTPUT statement</label>
+ </div>
+ <div class="callout"><strong>Progress guide:</strong> 4–5 marks: ready for the next challenge. 0–3 marks: revisit the worked example and complete another guided sequential exercise.</div>
+</section>
+
+<section>
+ <h2>Before you leave</h2>
+ <p>Be ready to explain these three ideas in your own words:</p>
+ <ol>
+  <li>What is the purpose of Pseudocode?</li>
+  <li>What is the difference between a comment and an executable instruction?</li>
+  <li>What does the assignment arrow <code class="inline-code">←</code> mean?</li>
+ </ol>
+ <div class="success"><strong>Remember:</strong> A good programmer does not just write instructions. A good programmer writes instructions that are clear, logical and easy for another person to understand.</div>
+ <p class="small">Next lesson: build confidence with variables, data types, input, output and arithmetic calculations in sequential algorithms.</p>
+ <div class="no-print"><button onclick="window.print()">Print lesson / Save as PDF</button></div>
+</section>
+</main>
+<footer>
+ <strong>Ravi Raju’s Programming Lab</strong><br>
+ Modern English School Cairo · Care · Challenge · Inspire<br>
+ <span class="small" style="color:#e6e4cc">Year 10 · Cambridge IGCSE Computer Science 0984</span>
+</footer>
+<script>
+let remaining=50*60, interval=null;
+function renderTimer(){
+ const m=String(Math.floor(remaining/60)).padStart(2,'0');
+ const s=String(remaining%60).padStart(2,'0');
+ document.getElementById('clock').textContent=m+':'+s;
+}
+function startTimer(){
+ if(interval!==null)return;
+ interval=setInterval(()=>{
+  if(remaining>0){remaining--;renderTimer();}
+  else{clearInterval(interval);interval=null;document.getElementById('clock').textContent='00:00';}
+ },1000);
+}
+function pauseTimer(){if(interval!==null){clearInterval(interval);interval=null;}}
+function resetTimer(){pauseTimer();remaining=50*60;renderTimer();}
+renderTimer();
+</script>
+</body>
+</html>

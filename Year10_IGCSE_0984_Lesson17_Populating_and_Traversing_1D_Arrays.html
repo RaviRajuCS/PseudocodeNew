@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 17 – Populating and Traversing 1D Arrays</title>
+<style>
+:root{--gold:#f2c94c;--gold2:#ffe99a;--olive:#596b22;--olive2:#354515;--ink:#202414;--paper:#fffdf2;--line:#d8cf9c;--red:#8b2e20}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f7dc75,#fff3bd);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:var(--olive2);color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold);text-align:center}
+header h1{margin:4px 0;font-size:clamp(1.5rem,4vw,2.5rem)}header p{margin:4px}.brand{font-weight:bold;color:var(--gold2);letter-spacing:.5px}
+.wrap{max-width:1120px;margin:22px auto;padding:0 16px}.card{background:var(--paper);border:2px solid var(--olive);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 5px 14px #6b5b2030}
+h2{color:var(--olive2);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:7px}h3{color:var(--olive)}
+.badge{display:inline-block;background:var(--gold);color:#302900;border-radius:20px;padding:4px 11px;font-weight:bold;font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid var(--line);border-radius:12px;padding:13px}
+pre{background:#202719;color:#f8f2cf;padding:16px;border-radius:10px;overflow-x:auto;font-size:1rem;line-height:1.5}code{font-family:Consolas,monospace}
+button{background:var(--olive);color:white;border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;margin:5px}button:hover{background:var(--olive2)}button.secondary{background:#8a741b}
+input[type=text],input[type=number]{padding:10px;border:2px solid var(--olive);border-radius:8px;font-size:1rem;max-width:100%}
+label{font-weight:bold;display:block;margin:8px 0 4px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}
+th,td{border:1px solid #b7b18c;padding:9px;text-align:left;vertical-align:top}th{background:#e9edcf}
+.note{border-left:6px solid var(--gold);background:#fff6cf;padding:12px;border-radius:8px}.good{color:#315a18;font-weight:bold}.warn{color:var(--red);font-weight:bold}
+.timer{font-size:1.7rem;font-weight:bold;color:var(--olive2)}.question{padding:12px;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:#fff}
+.options label{font-weight:normal;display:block;margin:7px 0}footer{text-align:center;padding:20px;color:#354515;font-weight:bold}.small{font-size:.92rem;color:#4d4d36}
+details{background:#fff9df;padding:12px;border-radius:9px;margin:10px 0}
+.array-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:12px 0}
+.cell{background:#e9edcf;border:2px solid var(--olive);border-radius:8px;text-align:center;padding:9px 3px}
+.cell strong{display:block;font-size:.85rem;color:#4d5d1e}.cell span{display:block;font-size:1.15rem;font-weight:bold;margin-top:4px}
+@media print{body{background:white}.card{box-shadow:none;break-inside:avoid}button,.no-print,#timerControls{display:none!important}header{background:#fff;color:#111;border:2px solid #333}.brand{color:#333}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">MODERN ENGLISH SCHOOL CAIRO · CARE · CHALLENGE · INSPIRE</div>
+ <h1>IGCSE Computer Science (0984)</h1>
+ <p><strong>Year 10 · Lesson 17</strong></p>
+ <h2 style="color:#ffe99a;border:0;margin:8px 0">Populating and Traversing One-Dimensional Arrays</h2>
+ <p>Ravi Raju’s Programming Lab</p>
+</header>
+<main class="wrap">
+<section class="card">
+ <span class="badge">50-minute lesson</span> <span class="badge">Cambridge pseudocode</span>
+ <h2>Learning objectives</h2>
+ <p>By the end of this lesson, you should be able to:</p>
+ <ul>
+  <li>Use a FOR…NEXT loop to access every element in a one-dimensional array.</li>
+  <li>Input data into all elements of an array.</li>
+  <li>Output the contents of an array.</li>
+  <li>Use an array element in calculations, including a running total.</li>
+  <li>Trace the index variable and array contents accurately.</li>
+ </ul>
+ <div class="note"><strong>Key idea:</strong> Traversing an array means visiting its elements one by one. A FOR…NEXT loop is commonly used when the array bounds are known.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson timer and learning route</h2>
+ <div class="grid">
+  <div class="box"><strong>Recall</strong><br>5 minutes<br>Revise array declaration and indexes.</div>
+  <div class="box"><strong>Teacher demonstration</strong><br>10 minutes<br>Populate and traverse an array.</div>
+  <div class="box"><strong>Interactive exploration</strong><br>10 minutes<br>Run the array traversal simulator.</div>
+  <div class="box"><strong>Formal practice</strong><br>15 minutes<br>Write input, output and processing algorithms.</div>
+  <div class="box"><strong>Assessment and feedback</strong><br>10 minutes<br>Complete the six-question check.</div>
+ </div>
+ <div class="timer" id="timer">50:00</div>
+ <div id="timerControls" class="no-print"><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button></div>
+</section>
+
+<section class="card">
+ <h2>1. Recall — Declaring a one-dimensional array</h2>
+ <p>In Lesson 16, we declared an array using its identifier, index range and data type.</p>
+ <pre><code>DECLARE Scores : ARRAY[1:5] OF INTEGER</code></pre>
+ <p>This declaration reserves five INTEGER elements. Their indexes are 1, 2, 3, 4 and 5.</p>
+ <div class="array-strip">
+  <div class="cell"><strong>Scores[1]</strong><span>?</span></div><div class="cell"><strong>Scores[2]</strong><span>?</span></div>
+  <div class="cell"><strong>Scores[3]</strong><span>?</span></div><div class="cell"><strong>Scores[4]</strong><span>?</span></div><div class="cell"><strong>Scores[5]</strong><span>?</span></div>
+ </div>
+ <p>The question marks represent elements whose values have not yet been entered in our example.</p>
+</section>
+
+<section class="card">
+ <h2>2. Teacher demonstration — Populating an array</h2>
+ <p><strong>Populating</strong> an array means entering or assigning data to its elements.</p>
+ <h3>Method A: Assigning values individually</h3>
+ <pre><code>Scores[1] ← 72
+Scores[2] ← 85
+Scores[3] ← 64
+Scores[4] ← 91
+Scores[5] ← 78</code></pre>
+ <p>This works for a small array, but it is repetitive. A loop allows the same input operation to be carried out for every index.</p>
+ <h3>Method B: Using FOR…NEXT to input all elements</h3>
+ <pre><code>DECLARE Scores : ARRAY[1:5] OF INTEGER
+DECLARE Index : INTEGER
+
+FOR Index ← 1 TO 5
+    INPUT Scores[Index]
+NEXT Index</code></pre>
+ <p>What happens?</p>
+ <ol>
+  <li>Index starts at 1.</li>
+  <li>The program inputs a value into <code>Scores[1]</code>.</li>
+  <li>Index increases to 2 and the program inputs <code>Scores[2]</code>.</li>
+  <li>The same process continues until <code>Scores[5]</code> has received a value.</li>
+  <li>The FOR loop finishes after the final index has been processed.</li>
+ </ol>
+ <h3>Method C: Output every element</h3>
+ <pre><code>FOR Index ← 1 TO 5
+    OUTPUT Scores[Index]
+NEXT Index</code></pre>
+ <p>This visits each array element in index order and displays its stored value.</p>
+ <div class="note"><strong>Important:</strong> <code>Scores[Index]</code> means the element at the current index. As Index changes, the element being accessed changes.</div>
+</section>
+
+<section class="card">
+ <h2>3. Teacher demonstration — Traversing and processing</h2>
+ <p>Traversing means visiting each element. While visiting the elements, the program can perform a calculation.</p>
+ <h3>Worked example — Calculate the total of five scores</h3>
+ <pre><code>DECLARE Scores : ARRAY[1:5] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+
+Total ← 0
+
+FOR Index ← 1 TO 5
+    INPUT Scores[Index]
+    Total ← Total + Scores[Index]
+NEXT Index
+
+OUTPUT Total</code></pre>
+ <p>The total is initialised to 0 before the loop. Each newly entered array element is added to the running total.</p>
+ <h3>Trace table</h3>
+ <p>Assume the values entered are 72, 85, 64, 91 and 78.</p>
+ <table>
+  <tr><th>Index</th><th>Value entered into Scores[Index]</th><th>Total before addition</th><th>Total after addition</th></tr>
+  <tr><td>1</td><td>72</td><td>0</td><td>72</td></tr>
+  <tr><td>2</td><td>85</td><td>72</td><td>157</td></tr>
+  <tr><td>3</td><td>64</td><td>157</td><td>221</td></tr>
+  <tr><td>4</td><td>91</td><td>221</td><td>312</td></tr>
+  <tr><td>5</td><td>78</td><td>312</td><td>390</td></tr>
+ </table>
+ <p><strong>Final output:</strong> 390.</p>
+ <h3>Worked example — Calculate the average</h3>
+ <pre><code>DECLARE Scores : ARRAY[1:5] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+DECLARE Average : REAL
+
+Total ← 0
+
+FOR Index ← 1 TO 5
+    INPUT Scores[Index]
+    Total ← Total + Scores[Index]
+NEXT Index
+
+Average ← Total / 5
+OUTPUT Average</code></pre>
+ <p>For the same five values, the average is 78.</p>
+</section>
+
+<section class="card">
+ <h2>4. Interactive exploration — Array input and traversal simulator</h2>
+ <p>Enter five integer values. The simulator will display the array and show how a FOR…NEXT loop visits each element and calculates a total and average.</p>
+ <div class="grid">
+  <div><label for="n1">Element at index 1</label><input id="n1" type="number" value="72"></div>
+  <div><label for="n2">Element at index 2</label><input id="n2" type="number" value="85"></div>
+  <div><label for="n3">Element at index 3</label><input id="n3" type="number" value="64"></div>
+  <div><label for="n4">Element at index 4</label><input id="n4" type="number" value="91"></div>
+  <div><label for="n5">Element at index 5</label><input id="n5" type="number" value="78"></div>
+ </div>
+ <button onclick="processArray()">Traverse array</button><button class="secondary" onclick="resetInputs()">Reset values</button>
+ <div id="arrayResult" class="box" aria-live="polite">The array and traversal trace will appear here.</div>
+</section>
+
+<section class="card">
+ <h2>5. Common errors to avoid</h2>
+ <div class="grid">
+  <div class="box"><span class="warn">Wrong index range</span><br>If the array is declared ARRAY[1:5], the traversal should normally use indexes 1 to 5.</div>
+  <div class="box"><span class="warn">Wrong element reference</span><br>Use <code>Scores[Index]</code>, not simply <code>Scores</code>, when referring to one element.</div>
+  <div class="box"><span class="warn">Total not initialised</span><br>Set <code>Total ← 0</code> before adding the values.</div>
+  <div class="box"><span class="warn">Off-by-one error</span><br>Check the first and last index. Do not accidentally omit an element or access beyond the array bounds.</div>
+ </div>
+ <h3>Compare these two statements</h3>
+ <pre><code>OUTPUT Scores[Index]</code></pre>
+ <p>Outputs the value stored at the current array index.</p>
+ <pre><code>OUTPUT Index</code></pre>
+ <p>Outputs the index number itself, not the stored array value.</p>
+</section>
+
+<section class="card">
+ <h2>6. Formal practice — Programming with 1D arrays</h2>
+ <p>Write complete Cambridge pseudocode solutions. Use a FOR…NEXT loop to process the declared index range.</p>
+ <ol>
+  <li>Declare an array named <code>Temperatures</code> to store 7 INTEGER values. Write pseudocode to input a value into every element, then output every element.</li>
+  <li>Declare an array named <code>Marks</code> to store 10 INTEGER values. Input all marks and calculate the total.</li>
+  <li>Extend Question 2 to calculate and output the average mark. Declare the average using an appropriate data type.</li>
+  <li>Declare an array named <code>Prices</code> to store 6 REAL values. Input all prices and output each price multiplied by 1.05. Do not change the original array values.</li>
+  <li>An array <code>Numbers</code> stores 8 INTEGER values. Input all values and then output the values in reverse index order, from index 8 down to index 1.</li>
+ </ol>
+ <details><summary><strong>Show sample solutions</strong></summary>
+  <h3>Question 1</h3>
+  <pre><code>DECLARE Temperatures : ARRAY[1:7] OF INTEGER
+DECLARE Index : INTEGER
+
+FOR Index ← 1 TO 7
+    INPUT Temperatures[Index]
+NEXT Index
+
+FOR Index ← 1 TO 7
+    OUTPUT Temperatures[Index]
+NEXT Index</code></pre>
+  <h3>Question 2</h3>
+  <pre><code>DECLARE Marks : ARRAY[1:10] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+
+Total ← 0
+FOR Index ← 1 TO 10
+    INPUT Marks[Index]
+    Total ← Total + Marks[Index]
+NEXT Index
+
+OUTPUT Total</code></pre>
+  <h3>Question 3</h3>
+  <pre><code>DECLARE Marks : ARRAY[1:10] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+DECLARE Average : REAL
+
+Total ← 0
+FOR Index ← 1 TO 10
+    INPUT Marks[Index]
+    Total ← Total + Marks[Index]
+NEXT Index
+
+Average ← Total / 10
+OUTPUT Average</code></pre>
+  <h3>Question 4</h3>
+  <pre><code>DECLARE Prices : ARRAY[1:6] OF REAL
+DECLARE Index : INTEGER
+
+FOR Index ← 1 TO 6
+    INPUT Prices[Index]
+NEXT Index
+
+FOR Index ← 1 TO 6
+    OUTPUT Prices[Index] * 1.05
+NEXT Index</code></pre>
+  <h3>Question 5</h3>
+  <pre><code>DECLARE Numbers : ARRAY[1:8] OF INTEGER
+DECLARE Index : INTEGER
+
+FOR Index ← 1 TO 8
+    INPUT Numbers[Index]
+NEXT Index
+
+FOR Index ← 8 TO 1 STEP -1
+    OUTPUT Numbers[Index]
+NEXT Index</code></pre>
+ </details>
+</section>
+
+<section class="card" id="assessment">
+ <h2>7. Formal assessment — 6 questions</h2>
+ <p>Enter your full name before beginning. Each question is worth 1 mark. A score of 70% or above unlocks the achievement message.</p>
+ <label for="studentName">Student full name (required)</label>
+ <input id="studentName" type="text" style="width:min(100%,480px)" placeholder="Enter your full name">
+ <form id="quiz">
+  <div class="question"><p><strong>1.</strong> What does it mean to populate an array?</p><div class="options">
+   <label><input type="radio" name="q1" value="a"> To enter or assign data to its elements</label>
+   <label><input type="radio" name="q1" value="b"> To delete the array declaration</label>
+   <label><input type="radio" name="q1" value="c"> To change every element into a different data type</label>
+  </div></div>
+  <div class="question"><p><strong>2.</strong> Which statement inputs a value into the array element at the current index?</p><div class="options">
+   <label><input type="radio" name="q2" value="a"> <code>INPUT Scores</code></label>
+   <label><input type="radio" name="q2" value="b"> <code>INPUT Scores[Index]</code></label>
+   <label><input type="radio" name="q2" value="c"> <code>INPUT Index[Scores]</code></label>
+  </div></div>
+  <div class="question"><p><strong>3.</strong> What is the purpose of the FOR…NEXT loop in array traversal?</p><div class="options">
+   <label><input type="radio" name="q3" value="a"> To visit each required array index</label>
+   <label><input type="radio" name="q3" value="b"> To change the data type of the array</label>
+   <label><input type="radio" name="q3" value="c"> To remove all array elements</label>
+  </div></div>
+  <div class="question"><p><strong>4.</strong> Why is <code>Total ← 0</code> placed before a loop that calculates a total?</p><div class="options">
+   <label><input type="radio" name="q4" value="a"> To set a known starting value for the accumulator</label>
+   <label><input type="radio" name="q4" value="b"> To make the array contain five elements</label>
+   <label><input type="radio" name="q4" value="c"> To stop the FOR loop</label>
+  </div></div>
+  <div class="question"><p><strong>5.</strong> An array is declared as <code>ARRAY[1:7] OF INTEGER</code>. Which loop visits every element?</p><div class="options">
+   <label><input type="radio" name="q5" value="a"> <code>FOR Index ← 1 TO 7</code></label>
+   <label><input type="radio" name="q5" value="b"> <code>FOR Index ← 1 TO 6</code></label>
+   <label><input type="radio" name="q5" value="c"> <code>FOR Index ← 0 TO 7</code></label>
+  </div></div>
+  <div class="question"><p><strong>6.</strong> What does <code>OUTPUT Marks[Index]</code> display?</p><div class="options">
+   <label><input type="radio" name="q6" value="a"> The current index number only</label>
+   <label><input type="radio" name="q6" value="b"> The value stored in the element at the current index</label>
+   <label><input type="radio" name="q6" value="c"> The number of elements in the array</label>
+  </div></div>
+  <button type="button" onclick="markQuiz()">Submit assessment</button><button type="button" class="secondary" onclick="resetQuiz()">Reset answers</button>
+ </form>
+ <div id="result" class="box" aria-live="polite">Your result will appear here after submission.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson summary</h2>
+ <ul>
+  <li>Populating means entering or assigning values to array elements.</li>
+  <li>Traversing means visiting elements one by one.</li>
+  <li>Use a FOR…NEXT loop to process the known array index range.</li>
+  <li>Use <code>ArrayName[Index]</code> to access the current element.</li>
+  <li>Initialise accumulators before the loop.</li>
+  <li>Check that the loop bounds match the declared array bounds.</li>
+ </ul>
+ <p class="note"><strong>Next lesson:</strong> Searching a one-dimensional array — linear search, tracing comparisons and reporting whether a value is found.</p>
+ <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care Challenge Inspire</footer>
+<script>
+let remaining=3000,timerHandle=null;
+function showTimer(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function startTimer(){if(timerHandle!==null)return;timerHandle=setInterval(()=>{if(remaining>0){remaining--;showTimer()}else{pauseTimer();alert('Lesson time is complete.')}},1000)}
+function pauseTimer(){if(timerHandle!==null){clearInterval(timerHandle);timerHandle=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTimer()}
+function processArray(){
+ const vals=[];for(let i=1;i<=5;i++){const raw=document.getElementById('n'+i).value;if(raw.trim()===''||!Number.isInteger(Number(raw))){document.getElementById('arrayResult').innerHTML='<span class="warn">Please enter an integer for every array element.</span>';return}vals.push(Number(raw))}
+ let total=0,lines=[];
+ vals.forEach((v,i)=>{const before=total;total+=v;lines.push('Index '+(i+1)+': '+v+'; total changes from '+before+' to '+total+'.')});
+ const average=total/vals.length;
+ document.getElementById('arrayResult').innerHTML='<strong>Array contents:</strong> ['+vals.join(', ')+']<br><strong>Traversal trace:</strong><br>'+lines.map(escapeHtml).join('<br>')+'<br><strong>Total:</strong> '+total+'<br><strong>Average:</strong> '+average;
+}
+function resetInputs(){[72,85,64,91,78].forEach((v,i)=>document.getElementById('n'+(i+1)).value=v);document.getElementById('arrayResult').textContent='The array and traversal trace will appear here.'}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const answers={q1:'a',q2:'b',q3:'a',q4:'a',q5:'a',q6:'b'};
+function markQuiz(){const name=document.getElementById('studentName').value.trim(),result=document.getElementById('result');if(!name){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}let score=0,unanswered=[];for(let i=1;i<=6;i++){const chosen=document.querySelector('input[name="q'+i+'"]:checked');if(!chosen)unanswered.push(i);else if(chosen.value===answers['q'+i])score++}if(unanswered.length){result.textContent='Please answer all questions. Still unanswered: '+unanswered.join(', ')+'.';return}const percent=Math.round(score/6*100);result.innerHTML='<strong>'+escapeHtml(name)+'</strong><br>Score: <strong>'+score+'/6 ('+percent+'%)</strong><br>'+(percent>=70?'<span class="good">Well done! You have achieved 70% or above. You may proceed to the extension challenge set by your teacher.</span>':'<span class="warn">Keep practising. Review the traversal examples and trace table, then discuss any misunderstandings with your teacher.</span>')}
+function resetQuiz(){document.getElementById('quiz').reset();document.getElementById('result').textContent='Your result will appear here after submission.'}
+showTimer();
+</script>
+</body>
+</html>

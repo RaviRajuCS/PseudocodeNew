@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 9 – Selection Consolidation</title>
+<style>
+:root{--gold:#f4c542;--pale:#fff4c2;--olive:#556b2f;--dark:#35451d;--ink:#202817;--paper:#fffdf3;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff1b5,#f7f3d9 50%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--pale);font-weight:bold}.school{font-size:.85rem;margin-top:5px}h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.1)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--dark);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}.card h2{color:var(--dark);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--pale);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+label{display:block;margin:8px 0}input[type=text],input[type=number],select{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}input[type=radio]{margin-right:7px}
+.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-left:8px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #aaa;font-family:Consolas,monospace}.hidden{display:none}.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}.small{font-size:.9rem;color:#5d624d}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222}.code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+<div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+<h1>Lesson 9: Selection Statements – Consolidation</h1>
+<p>Cambridge IGCSE Computer Science 0984 · Choosing and applying the appropriate selection structure</p>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<button onclick="startTimer()">Start / Resume 50-minute lesson</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><button class="gold" onclick="window.print()">Print / Save as PDF</button>
+<span id="clock">50:00</span><div class="progress"><span id="bar"></span></div>
+</div>
+
+<section class="card">
+<span class="tag">50 minutes</span><span class="tag">Revision and application</span><span class="tag">Pseudocode</span>
+<h2>Learning outcomes</h2>
+<ul>
+<li>Distinguish between simple IF, IF…ELSE, nested IF and CASE.</li>
+<li>Select an appropriate structure for a stated problem.</li>
+<li>Trace selection algorithms, including boundary values.</li>
+<li>Identify and correct common selection errors.</li>
+<li>Write complete Cambridge Pseudocode solutions.</li>
+</ul>
+<div class="note"><b>Today's focus:</b> This is a consolidation lesson. No new selection construct is introduced. Concentrate on choosing the right structure and using it accurately.</div>
+</section>
+
+<section class="card">
+<h2>1. Recall – 5 minutes</h2>
+<p>Match each situation to the most suitable structure.</p>
+<div class="question"><b>1.</b> Display “Adult” only when Age is at least 18; otherwise do nothing.
+<label><input type="radio" name="r1" value="a"> Simple IF</label><label><input type="radio" name="r1" value="b"> IF…ELSE</label><label><input type="radio" name="r1" value="c"> CASE</label></div>
+<div class="question"><b>2.</b> Display “Pass” or “Fail” depending on whether Mark is at least 50.
+<label><input type="radio" name="r2" value="a"> Simple IF</label><label><input type="radio" name="r2" value="b"> IF…ELSE</label><label><input type="radio" name="r2" value="c"> CASE</label></div>
+<div class="question"><b>3.</b> Select one of five menu actions based on a menu number.
+<label><input type="radio" name="r3" value="a"> Simple IF</label><label><input type="radio" name="r3" value="b"> Nested IF only</label><label><input type="radio" name="r3" value="c"> CASE</label></div>
+<button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+</section>
+
+<section class="card">
+<h2>2. Teacher demonstration – 10 minutes</h2>
+<h3>Compare the four selection patterns</h3>
+<div class="grid">
+<div class="box"><b>1. Simple IF</b><p>Use when an action is needed only if a condition is TRUE.</p><div class="code">IF Age &gt;= 18
+THEN
+  OUTPUT "Adult"
+ENDIF</div></div>
+<div class="box"><b>2. IF…ELSE</b><p>Use when one of two alternative actions must be selected.</p><div class="code">IF Mark &gt;= 50
+THEN
+  OUTPUT "Pass"
+ELSE
+  OUTPUT "Fail"
+ENDIF</div></div>
+<div class="box"><b>3. Nested IF</b><p>Use when a second decision is made within a branch of a first decision.</p><div class="code">IF Mark &gt;= 50
+THEN
+  IF Mark &gt;= 80
+  THEN
+    OUTPUT "Distinction"
+  ELSE
+    OUTPUT "Pass"
+  ENDIF
+ELSE
+  OUTPUT "Fail"
+ENDIF</div></div>
+<div class="box"><b>4. CASE</b><p>Use when selecting from several alternatives based on the value of one identifier.</p><div class="code">CASE OF Choice
+  1 : OUTPUT "Add"
+  2 : OUTPUT "Display"
+  3 : OUTPUT "Search"
+  OTHERWISE : OUTPUT "Invalid"
+ENDCASE</div></div>
+</div>
+<h3>Decision guide</h3>
+<table><thead><tr><th>Question to ask</th><th>Suitable structure</th></tr></thead>
+<tbody>
+<tr><td>Is an action required only when one condition is TRUE?</td><td>Simple IF</td></tr>
+<tr><td>Must the algorithm choose between two outcomes?</td><td>IF…ELSE</td></tr>
+<tr><td>Does a second decision depend on the result of a first decision?</td><td>Nested IF</td></tr>
+<tr><td>Must one of several listed values be selected?</td><td>CASE</td></tr>
+</tbody></table>
+<div class="note"><b>Exam tip:</b> Do not choose a structure simply because it looks shorter. Choose one that represents the conditions in the question clearly and produces every required outcome.</div>
+</section>
+
+<section class="card">
+<h2>3. Interactive exploration – 10 minutes</h2>
+<h3>Choose the best selection structure</h3>
+<p>Read each problem and choose the structure you would use. Then check your reasoning.</p>
+<div class="box">
+<p><b>Scenario A:</b> If a temperature is above 35, display “Heat warning”. No message is needed otherwise.</p>
+<select id="sA"><option value="">Choose a structure</option><option>Simple IF</option><option>IF…ELSE</option><option>Nested IF</option><option>CASE</option></select>
+<p><b>Scenario B:</b> A program must display “Positive” or “Not positive” depending on a number.</p>
+<select id="sB"><option value="">Choose a structure</option><option>Simple IF</option><option>IF…ELSE</option><option>Nested IF</option><option>CASE</option></select>
+<p><b>Scenario C:</b> A customer first qualifies for a discount if their purchase is at least 100. If qualified, check whether the purchase is at least 250 to decide the discount level.</p>
+<select id="sC"><option value="">Choose a structure</option><option>Simple IF</option><option>IF…ELSE</option><option>Nested IF</option><option>CASE</option></select>
+<p><b>Scenario D:</b> A user enters a code from 1 to 4 to select one of four report types.</p>
+<select id="sD"><option value="">Choose a structure</option><option>Simple IF</option><option>IF…ELSE</option><option>Nested IF</option><option>CASE</option></select>
+<button onclick="checkStructures()">Check my choices</button><div id="structureFeedback" class="box" aria-live="polite"></div>
+</div>
+<h3>Trace the boundary values</h3>
+<p>For the algorithm below, test marks of 49, 50 and 80.</p>
+<div class="code">IF Mark &gt;= 50
+THEN
+  IF Mark &gt;= 80
+  THEN
+    OUTPUT "Distinction"
+  ELSE
+    OUTPUT "Pass"
+  ENDIF
+ELSE
+  OUTPUT "Fail"
+ENDIF</div>
+<table><thead><tr><th>Mark</th><th>Outer condition</th><th>Inner condition</th><th>Output</th></tr></thead>
+<tbody><tr><td>49</td><td>FALSE</td><td>Not evaluated</td><td>Fail</td></tr><tr><td>50</td><td>TRUE</td><td>FALSE</td><td>Pass</td></tr><tr><td>80</td><td>TRUE</td><td>TRUE</td><td>Distinction</td></tr></tbody></table>
+</section>
+
+<section class="card">
+<h2>4. Formal practice – 15 minutes</h2>
+<p>Write the most appropriate Cambridge Pseudocode solution for each task. State the selection structure you chose.</p>
+<div class="box">
+<h3>Task 1 – Simple IF</h3>
+<p>Input the number of books borrowed. If the number is greater than 5, output <code>"Please return a book"</code>. If it is 5 or fewer, no message is required.</p>
+<label>Structure chosen:</label><input type="text" placeholder="Enter structure">
+<textarea rows="6" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('a1')">Show suggested answer</button>
+<div id="a1" class="code hidden">INPUT BooksBorrowed
+IF BooksBorrowed &gt; 5
+THEN
+  OUTPUT "Please return a book"
+ENDIF</div>
+</div>
+<div class="box">
+<h3>Task 2 – IF…ELSE</h3>
+<p>Input a whole number. Output <code>"Multiple of 5"</code> if the number is divisible by 5; otherwise output <code>"Not a multiple of 5"</code>. Use MOD.</p>
+<label>Structure chosen:</label><input type="text" placeholder="Enter structure">
+<textarea rows="7" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('a2')">Show suggested answer</button>
+<div id="a2" class="code hidden">INPUT Number
+IF MOD(Number, 5) = 0
+THEN
+  OUTPUT "Multiple of 5"
+ELSE
+  OUTPUT "Not a multiple of 5"
+ENDIF</div>
+</div>
+<div class="box">
+<h3>Task 3 – Nested IF</h3>
+<p>Input a student's attendance percentage. If attendance is at least 75, check whether it is at least 90. Output <code>"Excellent attendance"</code> for 90 or above, or <code>"Attendance accepted"</code> for 75 to below 90. Otherwise output <code>"Attendance below requirement"</code>.</p>
+<label>Structure chosen:</label><input type="text" placeholder="Enter structure">
+<textarea rows="9" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('a3')">Show suggested answer</button>
+<div id="a3" class="code hidden">INPUT Attendance
+IF Attendance &gt;= 75
+THEN
+  IF Attendance &gt;= 90
+  THEN
+    OUTPUT "Excellent attendance"
+  ELSE
+    OUTPUT "Attendance accepted"
+  ENDIF
+ELSE
+  OUTPUT "Attendance below requirement"
+ENDIF</div>
+</div>
+<div class="box">
+<h3>Task 4 – CASE</h3>
+<p>Input a transport code. Use CASE to output <code>"Bus"</code> for 1, <code>"Train"</code> for 2, <code>"Metro"</code> for 3 and <code>"Taxi"</code> for 4. For any other value, output <code>"Unknown transport"</code>.</p>
+<label>Structure chosen:</label><input type="text" placeholder="Enter structure">
+<textarea rows="9" placeholder="Write your pseudocode here..."></textarea>
+<button class="secondary" onclick="toggle('a4')">Show suggested answer</button>
+<div id="a4" class="code hidden">INPUT TransportCode
+CASE OF TransportCode
+  1 : OUTPUT "Bus"
+  2 : OUTPUT "Train"
+  3 : OUTPUT "Metro"
+  4 : OUTPUT "Taxi"
+  OTHERWISE : OUTPUT "Unknown transport"
+ENDCASE</div>
+</div>
+<p class="small">Attempt each problem independently before revealing the suggested answer. Other correct algorithms may also be accepted.</p>
+</section>
+
+<section class="card">
+<h2>5. Assessment and feedback – 10 minutes</h2>
+<p>Enter your full name and answer all six questions.</p>
+<label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+<form id="quiz">
+<div class="question"><b>1.</b> Which structure is suitable when an action is required only if a condition is TRUE?
+<label><input type="radio" name="q1" value="a"> Simple IF</label><label><input type="radio" name="q1" value="b"> CASE</label><label><input type="radio" name="q1" value="c"> Nested IF in every situation</label></div>
+<div class="question"><b>2.</b> Which structure provides two alternative branches?
+<label><input type="radio" name="q2" value="a"> Simple IF</label><label><input type="radio" name="q2" value="b"> IF…ELSE</label><label><input type="radio" name="q2" value="c"> CASE without OTHERWISE</label></div>
+<div class="question"><b>3.</b> In nested selection, when is the inner IF reached?
+<label><input type="radio" name="q3" value="a"> Only when execution enters the branch containing it</label><label><input type="radio" name="q3" value="b"> Every time the program runs</label><label><input type="radio" name="q3" value="c"> Only after ENDIF</label></div>
+<div class="question"><b>4.</b> Which structure is designed for selecting between several listed values of one identifier?
+<label><input type="radio" name="q4" value="a"> Simple IF</label><label><input type="radio" name="q4" value="b"> IF…ELSE</label><label><input type="radio" name="q4" value="c"> CASE</label></div>
+<div class="question"><b>5.</b> What is output when Mark = 80 in the nested example in this lesson?
+<label><input type="radio" name="q5" value="a"> Fail</label><label><input type="radio" name="q5" value="b"> Pass</label><label><input type="radio" name="q5" value="c"> Distinction</label></div>
+<div class="question"><b>6.</b> What is the purpose of OTHERWISE in CASE?
+<label><input type="radio" name="q6" value="a"> It handles values not matched by a listed case</label><label><input type="radio" name="q6" value="b"> It repeats the CASE statement</label><label><input type="radio" name="q6" value="c"> It closes the CASE statement</label></div>
+</form>
+<button class="gold" onclick="submitQuiz()">Submit assessment</button>
+<div id="result" class="card hidden" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Teacher checkpoint</h2>
+<ul>
+<li>Students can justify their choice of selection structure.</li>
+<li>Students correctly use THEN, ELSE, ENDIF, CASE OF, OTHERWISE and ENDCASE.</li>
+<li>Students trace both TRUE and FALSE paths.</li>
+<li>Students test boundary values, not just typical values.</li>
+<li>Students produce complete algorithms with correct indentation.</li>
+</ul>
+<div class="note"><b>Next lesson:</b> Begin the next programming concept only after students can confidently select, write and trace the four selection patterns practised here.</div>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=3000,timer=null;
+function draw(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%'}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;draw()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;draw()}draw();
+function checkRecall(){let k=['a','b','c'],n=0;k.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)n++});document.getElementById('recallFeedback').textContent=' '+n+'/3 correct.'}
+function checkStructures(){let k={sA:'Simple IF',sB:'IF…ELSE',sC:'Nested IF',sD:'CASE'},n=0,lines=[];for(let id in k){let v=document.getElementById(id).value,ok=v===k[id];if(ok)n++;lines.push(id.slice(1)+': '+(ok?'Correct':('Review this one — suggested structure: '+k[id])))}document.getElementById('structureFeedback').innerHTML='<b>'+n+'/4 correct</b><br>'+lines.join('<br>')}
+function toggle(id){document.getElementById(id).classList.toggle('hidden')}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name.');document.getElementById('studentName').focus();return}let key={q1:'a',q2:'b',q3:'a',q4:'c',q5:'c',q6:'a'},score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let p=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+esc(name)+'</p><p><b>Score:</b> '+score+'/6 ('+p+'%)</p><p class="'+(p>=70?'good':'bad')+'">'+(p>=70?'Well done! You have achieved 70% or above.':'Review the comparison table and practise selecting the correct structure.')+'</p><p class="small">The result is displayed on this device. Use Print / Save as PDF to save the page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>

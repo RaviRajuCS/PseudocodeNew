@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 6 – Selection Statements</title>
+<style>
+:root{--gold:#f4c542;--gold2:#ffe89a;--olive:#556b2f;--olive2:#35451d;--ink:#202817;--paper:#fffdf3;--white:#fff;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff2b8,#f7f3d9 48%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--olive2),var(--olive));color:white;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--gold2);font-weight:bold}.school{font-size:.85rem;margin-top:5px}
+h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.12)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--olive2);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive);transition:width .3s}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}
+.card h2{color:var(--olive2);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--gold2);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}
+label{display:block;margin:8px 0}input[type=text],select{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}
+input[type=radio]{margin-right:7px}.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-top:8px}
+table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+.small{font-size:.9rem;color:#5d624d}.hidden{display:none}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222} .code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+  <div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+  <h1>Lesson 6: Selection Statements</h1>
+  <p>Cambridge IGCSE Computer Science 0984 · Sequential logic to decision-making</p>
+</header>
+<main class="wrap">
+  <div class="toolbar">
+    <button onclick="startTimer()">Start / Resume 50-minute lesson</button>
+    <button class="secondary" onclick="pauseTimer()">Pause</button>
+    <button class="secondary" onclick="resetTimer()">Reset</button>
+    <button class="gold" onclick="window.print()">Print / Save as PDF</button>
+    <span id="clock">50:00</span>
+    <div class="progress"><span id="bar"></span></div>
+  </div>
+
+  <section class="card">
+    <span class="tag">50 minutes</span><span class="tag">Pseudocode first</span><span class="tag">Python comparison</span>
+    <h2>Learning outcomes</h2>
+    <p>By the end of this lesson, you should be able to:</p>
+    <ul>
+      <li>Explain why an algorithm sometimes needs to make a decision.</li>
+      <li>Use <b>IF…THEN…ENDIF</b> for a one-way decision.</li>
+      <li>Use <b>IF…THEN…ELSE…ENDIF</b> for a two-way decision.</li>
+      <li>Use a Boolean condition based on relational and logical operators.</li>
+      <li>Trace the statements that execute for different input values.</li>
+    </ul>
+    <div class="note"><b>Lesson boundary:</b> Today we learn simple IF and IF…ELSE selection. Nested selection and CASE are deliberately left for later lessons.</div>
+  </section>
+
+  <section class="card">
+    <h2>1. Recall – 5 minutes</h2>
+    <p>Before learning selection, recall the tools you already know.</p>
+    <div class="grid">
+      <div class="box"><b>Relational operators</b><p><code>= &nbsp; &lt; &nbsp; &lt;= &nbsp; &gt; &nbsp; &gt;= &nbsp; &lt;&gt;</code></p><p>They compare values and produce TRUE or FALSE.</p></div>
+      <div class="box"><b>Logical operators</b><p><code>AND &nbsp; OR &nbsp; NOT</code></p><p>They combine or reverse Boolean values.</p></div>
+    </div>
+    <p><b>Quick recall:</b> What is the result of each expression?</p>
+    <div id="recall">
+      <div class="question">1. <code>12 &gt; 8</code><br><label><input type="radio" name="r1" value="T"> TRUE</label><label><input type="radio" name="r1" value="F"> FALSE</label></div>
+      <div class="question">2. <code>5 = 7</code><br><label><input type="radio" name="r2" value="T"> TRUE</label><label><input type="radio" name="r2" value="F"> FALSE</label></div>
+      <div class="question">3. <code>TRUE AND FALSE</code><br><label><input type="radio" name="r3" value="T"> TRUE</label><label><input type="radio" name="r3" value="F"> FALSE</label></div>
+    </div>
+    <button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+  </section>
+
+  <section class="card">
+    <h2>2. Teacher demonstration – 10 minutes</h2>
+    <h3>Why do we need selection?</h3>
+    <p>A sequential algorithm executes instructions in order. A selection statement allows the algorithm to choose which instruction or group of instructions to execute, depending on whether a condition is TRUE or FALSE.</p>
+    <h3>A. One-way selection: IF…THEN…ENDIF</h3>
+    <div class="code">IF &lt;condition&gt;
+THEN
+  &lt;statements&gt;
+ENDIF</div>
+    <p><b>Example:</b> Display a message only when the temperature is above 30.</p>
+    <div class="code">INPUT Temperature
+IF Temperature &gt; 30
+THEN
+  OUTPUT "It is a hot day"
+ENDIF
+OUTPUT "Program finished"</div>
+    <p>If Temperature is 35, the message “It is a hot day” is displayed. If Temperature is 25, the condition is FALSE, so the statement inside the IF is skipped. The program continues after ENDIF.</p>
+    <h3>B. Two-way selection: IF…THEN…ELSE…ENDIF</h3>
+    <div class="code">IF &lt;condition&gt;
+THEN
+  &lt;statements if TRUE&gt;
+ELSE
+  &lt;statements if FALSE&gt;
+ENDIF</div>
+    <p><b>Example:</b> Decide whether a student has reached the pass mark.</p>
+    <div class="code">INPUT Mark
+IF Mark &gt;= 50
+THEN
+  OUTPUT "Pass"
+ELSE
+  OUTPUT "Not yet passed"
+ENDIF</div>
+    <div class="note"><b>Remember:</b> Exactly one branch of an IF…ELSE statement is executed. If the condition is TRUE, the THEN branch runs. Otherwise, the ELSE branch runs. Execution then continues after ENDIF.</div>
+    <h3>Python equivalent (comparison)</h3>
+    <div class="code">mark = int(input("Enter mark: "))
+if mark >= 50:
+    print("Pass")
+else:
+    print("Not yet passed")</div>
+    <p class="small">Python uses lowercase <code>if</code> and <code>else</code>, a colon, and indentation. Cambridge Pseudocode uses THEN, ELSE and ENDIF.</p>
+  </section>
+
+  <section class="card">
+    <h2>3. Interactive exploration – 10 minutes</h2>
+    <h3>Explore how the condition changes the path</h3>
+    <p>Enter a mark and run the algorithm. Try values below, equal to and above 50.</p>
+    <label for="markInput">Student mark (0–100): <input id="markInput" type="number" min="0" max="100" value="65"></label>
+    <button onclick="runDecision()">Run algorithm</button>
+    <div id="decisionOutput" class="box" aria-live="polite">The result will appear here.</div>
+    <h3>Trace table</h3>
+    <p>For each mark, decide which branch executes.</p>
+    <table><thead><tr><th>Mark</th><th>Condition: Mark &gt;= 50</th><th>Output</th></tr></thead>
+    <tbody><tr><td>35</td><td>FALSE</td><td>Not yet passed</td></tr><tr><td>50</td><td>TRUE</td><td>Pass</td></tr><tr><td>82</td><td>TRUE</td><td>Pass</td></tr></tbody></table>
+    <div class="note">A condition is an expression that evaluates to a Boolean value: TRUE or FALSE. A condition can include relational operators and, where needed, logical operators.</div>
+    <h3>Try a combined condition</h3>
+    <div class="code">IF Mark &gt;= 50 AND Attendance &gt;= 80
+THEN
+  OUTPUT "Eligible"
+ELSE
+  OUTPUT "Not eligible"
+ENDIF</div>
+    <p>Both requirements must be TRUE for the student to be eligible.</p>
+  </section>
+
+  <section class="card">
+    <h2>4. Formal practice – 15 minutes</h2>
+    <p>Complete the three tasks. Write Cambridge Pseudocode using the correct structure and indentation.</p>
+    <div class="box">
+      <h3>Task 1 – One-way decision</h3>
+      <p>Input a person's age. If the age is 18 or above, output <code>"Adult"</code>. If the condition is FALSE, do not display an age-category message.</p>
+      <label>Your pseudocode:</label><textarea id="task1" rows="5" style="width:100%;padding:10px;border-radius:8px;border:1px solid #aaa" placeholder="Write your answer here..."></textarea>
+      <button class="secondary" onclick="toggleAnswer('ans1')">Show suggested answer</button>
+      <div id="ans1" class="code hidden">INPUT Age
+IF Age &gt;= 18
+THEN
+  OUTPUT "Adult"
+ENDIF</div>
+    </div>
+    <div class="box">
+      <h3>Task 2 – Two-way decision</h3>
+      <p>Input an integer. Use IF…ELSE to output <code>"Even"</code> if the number is divisible by 2; otherwise output <code>"Odd"</code>. Use MOD.</p>
+      <label>Your pseudocode:</label><textarea id="task2" rows="6" style="width:100%;padding:10px;border-radius:8px;border:1px solid #aaa" placeholder="Write your answer here..."></textarea>
+      <button class="secondary" onclick="toggleAnswer('ans2')">Show suggested answer</button>
+      <div id="ans2" class="code hidden">INPUT Number
+IF MOD(Number, 2) = 0
+THEN
+  OUTPUT "Even"
+ELSE
+  OUTPUT "Odd"
+ENDIF</div>
+    </div>
+    <div class="box">
+      <h3>Task 3 – Combined condition</h3>
+      <p>Input a test mark and attendance percentage. Output <code>"Award eligible"</code> only if the mark is at least 70 AND attendance is at least 90. Otherwise output <code>"Not eligible"</code>.</p>
+      <label>Your pseudocode:</label><textarea id="task3" rows="7" style="width:100%;padding:10px;border-radius:8px;border:1px solid #aaa" placeholder="Write your answer here..."></textarea>
+      <button class="secondary" onclick="toggleAnswer('ans3')">Show suggested answer</button>
+      <div id="ans3" class="code hidden">INPUT Mark
+INPUT Attendance
+IF Mark &gt;= 70 AND Attendance &gt;= 90
+THEN
+  OUTPUT "Award eligible"
+ELSE
+  OUTPUT "Not eligible"
+ENDIF</div>
+    </div>
+    <p class="small">Suggested answers are for checking after you have attempted each task. Equivalent correct solutions are acceptable.</p>
+  </section>
+
+  <section class="card">
+    <h2>5. Assessment and feedback – 10 minutes</h2>
+    <p><b>Complete all six questions.</b> Your score is calculated automatically when you submit.</p>
+    <label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+    <form id="quiz">
+      <div class="question"><b>1.</b> What is the purpose of selection in an algorithm?
+        <label><input type="radio" name="q1" value="a"> To repeat instructions</label>
+        <label><input type="radio" name="q1" value="b"> To choose which statements execute based on a condition</label>
+        <label><input type="radio" name="q1" value="c"> To declare variables</label></div>
+      <div class="question"><b>2.</b> What must a selection condition evaluate to?
+        <label><input type="radio" name="q2" value="a"> STRING</label>
+        <label><input type="radio" name="q2" value="b"> REAL</label>
+        <label><input type="radio" name="q2" value="c"> BOOLEAN</label></div>
+      <div class="question"><b>3.</b> Which statement closes a Cambridge IF structure?
+        <label><input type="radio" name="q3" value="a"> ENDIF</label>
+        <label><input type="radio" name="q3" value="b"> ENDWHILE</label>
+        <label><input type="radio" name="q3" value="c"> NEXT</label></div>
+      <div class="question"><b>4.</b> In an IF…ELSE statement, what happens when the condition is FALSE?
+        <label><input type="radio" name="q4" value="a"> Both branches execute</label>
+        <label><input type="radio" name="q4" value="b"> The ELSE branch executes</label>
+        <label><input type="radio" name="q4" value="c"> The program must stop</label></div>
+      <div class="question"><b>5.</b> What is output when Mark = 49?
+        <div class="code">IF Mark &gt;= 50
+THEN
+  OUTPUT "Pass"
+ELSE
+  OUTPUT "Fail"
+ENDIF</div>
+        <label><input type="radio" name="q5" value="a"> Pass</label>
+        <label><input type="radio" name="q5" value="b"> Fail</label>
+        <label><input type="radio" name="q5" value="c"> No output</label></div>
+      <div class="question"><b>6.</b> Which condition checks that Score is from 0 to 100 inclusive?
+        <label><input type="radio" name="q6" value="a"> Score &gt; 0 OR Score &lt; 100</label>
+        <label><input type="radio" name="q6" value="b"> Score &gt;= 0 AND Score &lt;= 100</label>
+        <label><input type="radio" name="q6" value="c"> Score = 0 AND Score = 100</label></div>
+    </form>
+    <button class="gold" onclick="submitQuiz()">Submit assessment</button>
+    <div id="result" class="card hidden" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <h2>Teacher checkpoint</h2>
+    <ul>
+      <li>Students can explain TRUE and FALSE outcomes.</li>
+      <li>Students distinguish one-way IF from two-way IF…ELSE.</li>
+      <li>Students use THEN, ELSE and ENDIF in the correct places.</li>
+      <li>Students trace boundary values such as 49, 50 and 51.</li>
+      <li>Students use AND only when both conditions must be satisfied.</li>
+    </ul>
+    <div class="note"><b>Next lesson:</b> Further selection practice and tracing. Nested IF and CASE should be introduced as separate concepts, after students are confident with today's structures.</div>
+  </section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=50*60, timer=null;
+function renderClock(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%';}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;renderClock()}else{clearInterval(timer);timer=null;alert('The 50-minute lesson time is complete.')}} ,1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;renderClock()}
+renderClock();
+function checkRecall(){const a=['T','F','F'];let score=0;a.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)score++});document.getElementById('recallFeedback').textContent='  '+score+'/3 correct.'}
+function runDecision(){let v=Number(document.getElementById('markInput').value),o=document.getElementById('decisionOutput');if(!Number.isInteger(v)||v<0||v>100){o.textContent='Please enter a whole-number mark from 0 to 100.';return}o.innerHTML='Input Mark = <b>'+v+'</b><br>Condition Mark &gt;= 50 is <b>'+(v>=50?'TRUE':'FALSE')+'</b><br>Executed branch: <b>'+(v>=50?'THEN':'ELSE')+'</b><br>Output: <b>'+(v>=50?'Pass':'Not yet passed')+'</b>'}
+function toggleAnswer(id){document.getElementById(id).classList.toggle('hidden')}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}const key={q1:'b',q2:'c',q3:'a',q4:'b',q5:'b',q6:'b'};let score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let pct=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+escapeHTML(name)+'</p><p><b>Score:</b> '+score+' / 6 ('+pct+'%)</p><p class="'+(pct>=70?'good':'bad')+'">'+(pct>=70?'Well done. You have achieved 70% or above.':'Keep practising. Review the examples and ask your teacher for support.')+'</p><p class="small">This result is displayed on this device. Use Print / Save as PDF to save the completed lesson page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script>
+</body>
+</html>

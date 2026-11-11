@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 18 – Linear Search</title>
+<style>
+:root{--gold:#f2c94c;--gold2:#ffe99a;--olive:#596b22;--olive2:#354515;--ink:#202414;--paper:#fffdf2;--line:#d8cf9c;--red:#8b2e20}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f7dc75,#fff3bd);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:var(--olive2);color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold);text-align:center}
+header h1{margin:4px 0;font-size:clamp(1.5rem,4vw,2.5rem)}header p{margin:4px}.brand{font-weight:bold;color:var(--gold2);letter-spacing:.5px}
+.wrap{max-width:1120px;margin:22px auto;padding:0 16px}.card{background:var(--paper);border:2px solid var(--olive);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 5px 14px #6b5b2030}
+h2{color:var(--olive2);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:7px}h3{color:var(--olive)}
+.badge{display:inline-block;background:var(--gold);color:#302900;border-radius:20px;padding:4px 11px;font-weight:bold;font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid var(--line);border-radius:12px;padding:13px}
+pre{background:#202719;color:#f8f2cf;padding:16px;border-radius:10px;overflow-x:auto;font-size:1rem;line-height:1.5}code{font-family:Consolas,monospace}
+button{background:var(--olive);color:white;border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;margin:5px}button:hover{background:var(--olive2)}button.secondary{background:#8a741b}
+input[type=text],input[type=number]{padding:10px;border:2px solid var(--olive);border-radius:8px;font-size:1rem;max-width:100%}
+label{font-weight:bold;display:block;margin:8px 0 4px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}
+th,td{border:1px solid #b7b18c;padding:9px;text-align:left;vertical-align:top}th{background:#e9edcf}
+.note{border-left:6px solid var(--gold);background:#fff6cf;padding:12px;border-radius:8px}.good{color:#315a18;font-weight:bold}.warn{color:var(--red);font-weight:bold}
+.timer{font-size:1.7rem;font-weight:bold;color:var(--olive2)}.question{padding:12px;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:#fff}
+.options label{font-weight:normal;display:block;margin:7px 0}footer{text-align:center;padding:20px;color:#354515;font-weight:bold}.small{font-size:.92rem;color:#4d4d36}
+details{background:#fff9df;padding:12px;border-radius:9px;margin:10px 0}
+.array-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin:12px 0}
+.cell{background:#e9edcf;border:2px solid var(--olive);border-radius:8px;text-align:center;padding:9px 3px}
+.cell strong{display:block;font-size:.85rem;color:#4d5d1e}.cell span{display:block;font-size:1.15rem;font-weight:bold;margin-top:4px}
+@media(max-width:600px){.array-strip{grid-template-columns:repeat(3,1fr)}}
+@media print{body{background:white}.card{box-shadow:none;break-inside:avoid}button,.no-print,#timerControls{display:none!important}header{background:#fff;color:#111;border:2px solid #333}.brand{color:#333}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">MODERN ENGLISH SCHOOL CAIRO · CARE · CHALLENGE · INSPIRE</div>
+ <h1>IGCSE Computer Science (0984)</h1>
+ <p><strong>Year 10 · Lesson 18</strong></p>
+ <h2 style="color:#ffe99a;border:0;margin:8px 0">Searching One-Dimensional Arrays — Linear Search</h2>
+ <p>Ravi Raju’s Programming Lab</p>
+</header>
+<main class="wrap">
+<section class="card">
+ <span class="badge">50-minute lesson</span> <span class="badge">Cambridge 2026–2028 · Standard method: linear search</span>
+ <h2>Learning objectives</h2>
+ <p>By the end of this lesson, you should be able to:</p>
+ <ul>
+  <li>Explain the purpose of a linear search.</li>
+  <li>Describe how a linear search checks array elements one by one.</li>
+  <li>Write Cambridge pseudocode to search a one-dimensional array.</li>
+  <li>Use a Boolean flag and an index variable to control a search.</li>
+  <li>Trace a search when the item is present, absent or appears more than once.</li>
+ </ul>
+ <div class="note"><strong>Key idea:</strong> A linear search starts at one end of a collection and checks each element in sequence until the target is found or there are no more elements to check.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson timer and learning route</h2>
+ <div class="grid">
+  <div class="box"><strong>Recall</strong><br>5 minutes<br>Revise array indexing and traversal.</div>
+  <div class="box"><strong>Teacher demonstration</strong><br>10 minutes<br>Understand the linear search algorithm.</div>
+  <div class="box"><strong>Interactive exploration</strong><br>10 minutes<br>Search an array step by step.</div>
+  <div class="box"><strong>Formal practice</strong><br>15 minutes<br>Write and trace search algorithms.</div>
+  <div class="box"><strong>Assessment and feedback</strong><br>10 minutes<br>Complete the six-question check.</div>
+ </div>
+ <div class="timer" id="timer">50:00</div>
+ <div id="timerControls" class="no-print"><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button></div>
+</section>
+
+<section class="card">
+ <h2>1. Recall — Array traversal</h2>
+ <p>In the previous lesson, we used a FOR…NEXT loop to visit every element of an array.</p>
+ <pre><code>FOR Index ← 1 TO 6
+    OUTPUT Values[Index]
+NEXT Index</code></pre>
+ <p>In a search, instead of simply outputting every element, we compare each element with a value we are looking for. That value is called the <strong>search item</strong> or <strong>target</strong>.</p>
+</section>
+
+<section class="card">
+ <h2>2. Teacher demonstration — How linear search works</h2>
+ <p>Suppose the array contains these six values and we want to find the number 27.</p>
+ <div class="array-strip">
+  <div class="cell"><strong>Index 1</strong><span>14</span></div><div class="cell"><strong>Index 2</strong><span>27</span></div>
+  <div class="cell"><strong>Index 3</strong><span>9</span></div><div class="cell"><strong>Index 4</strong><span>42</span></div>
+  <div class="cell"><strong>Index 5</strong><span>27</span></div><div class="cell"><strong>Index 6</strong><span>18</span></div>
+ </div>
+ <ol>
+  <li>Start at index 1.</li>
+  <li>Compare the current element with the target.</li>
+  <li>If they are not equal, move to the next index.</li>
+  <li>If they are equal, the target has been found.</li>
+  <li>Stop when the target is found or the end of the array is reached.</li>
+ </ol>
+ <p>Here, the first 27 is found at index 2. The search can stop there if the task asks for the first occurrence.</p>
+ <h3>Important terms</h3>
+ <div class="grid">
+  <div class="box"><strong>Target / search item</strong><br>The value being searched for.</div>
+  <div class="box"><strong>Index</strong><br>The position currently being checked.</div>
+  <div class="box"><strong>Found flag</strong><br>A BOOLEAN variable indicating whether the target has been found.</div>
+  <div class="box"><strong>Position</strong><br>The index where the target is found.</div>
+ </div>
+</section>
+
+<section class="card">
+ <h2>3. Worked example — Linear search using WHILE…DO</h2>
+ <p>The following algorithm searches an array of six INTEGER values. It records the position of the <strong>first occurrence</strong> of the target.</p>
+ <pre><code>DECLARE Values : ARRAY[1:6] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Target : INTEGER
+DECLARE Found : BOOLEAN
+DECLARE Position : INTEGER
+
+Found ← FALSE
+Position ← 0
+Index ← 1
+
+INPUT Target
+
+WHILE Index &lt;= 6 AND Found = FALSE DO
+    IF Values[Index] = Target THEN
+        Found ← TRUE
+        Position ← Index
+    ENDIF
+    Index ← Index + 1
+ENDWHILE
+
+IF Found = TRUE THEN
+    OUTPUT "Found at position ", Position
+ELSE
+    OUTPUT "Not found"
+ENDIF</code></pre>
+ <p class="note">For this worked example, assume the array has already been populated. The search begins at index 1. The variables <code>Found</code> and <code>Position</code> are initialised before the loop.</p>
+ <h3>Understanding the control variables</h3>
+ <table>
+  <tr><th>Variable</th><th>Purpose</th><th>Initial value</th></tr>
+  <tr><td><code>Index</code></td><td>Tracks the array element currently being checked.</td><td>1</td></tr>
+  <tr><td><code>Found</code></td><td>Records whether the target has been located.</td><td>FALSE</td></tr>
+  <tr><td><code>Position</code></td><td>Stores the index where the first match occurs.</td><td>0 (means no position recorded yet)</td></tr>
+  <tr><td><code>Target</code></td><td>Stores the value entered by the user.</td><td>Input by user</td></tr>
+ </table>
+ <h3>Trace table — Search for 27</h3>
+ <p>Array: [14, 27, 9, 42, 27, 18]. Target: 27.</p>
+ <table>
+  <tr><th>Index</th><th>Values[Index]</th><th>Comparison with 27</th><th>Found</th><th>Position</th><th>Action</th></tr>
+  <tr><td>1</td><td>14</td><td>14 = 27? FALSE</td><td>FALSE</td><td>0</td><td>Move to index 2</td></tr>
+  <tr><td>2</td><td>27</td><td>27 = 27? TRUE</td><td>TRUE</td><td>2</td><td>Match recorded; loop ends</td></tr>
+ </table>
+ <p><strong>Output:</strong> Found at position 2.</p>
+ <div class="note"><strong>Why stop at the first match?</strong> This algorithm is designed to report the first occurrence. If the target appears again later, those later positions are not checked after Found becomes TRUE.</div>
+</section>
+
+<section class="card">
+ <h2>4. What if the target is not present?</h2>
+ <p>If the search reaches the last element without finding the target, Index becomes 7. The condition <code>Index &lt;= 6</code> is FALSE, so the loop ends. Found remains FALSE and the algorithm outputs “Not found”.</p>
+ <pre><code>IF Found = TRUE THEN
+    OUTPUT "Found at position ", Position
+ELSE
+    OUTPUT "Not found"
+ENDIF</code></pre>
+ <p>Initialising <code>Found ← FALSE</code> is essential. Otherwise, the algorithm may use an undefined or incorrect flag value.</p>
+</section>
+
+<section class="card">
+ <h2>5. Interactive exploration — Linear search simulator</h2>
+ <p>Change the array values and target. The simulator checks elements from index 1 onwards and stops at the first match.</p>
+ <div class="grid">
+  <div><label for="a1">Value at index 1</label><input id="a1" type="number" value="14"></div>
+  <div><label for="a2">Value at index 2</label><input id="a2" type="number" value="27"></div>
+  <div><label for="a3">Value at index 3</label><input id="a3" type="number" value="9"></div>
+  <div><label for="a4">Value at index 4</label><input id="a4" type="number" value="42"></div>
+  <div><label for="a5">Value at index 5</label><input id="a5" type="number" value="27"></div>
+  <div><label for="a6">Value at index 6</label><input id="a6" type="number" value="18"></div>
+ </div>
+ <label for="target">Target value</label><input id="target" type="number" value="27">
+ <br><button onclick="runSearch()">Search array</button><button class="secondary" onclick="resetSearch()">Reset example</button>
+ <div id="searchResult" class="box" aria-live="polite">The comparisons will appear here.</div>
+</section>
+
+<section class="card">
+ <h2>6. Common errors to avoid</h2>
+ <div class="grid">
+  <div class="box"><span class="warn">Not initialising Found</span><br>Set <code>Found ← FALSE</code> before starting the search.</div>
+  <div class="box"><span class="warn">Wrong loop bounds</span><br>For ARRAY[1:6], check indexes 1 to 6, not 0 to 6.</div>
+  <div class="box"><span class="warn">Not moving to the next index</span><br>Increment Index when the current element has been checked.</div>
+  <div class="box"><span class="warn">Confusing index and value</span><br>Position is the index; Values[Index] is the stored value.</div>
+ </div>
+ <p><strong>Efficiency idea:</strong> A linear search may need to check every element if the target is at the end or is not present. For an array of six elements, it checks at most six elements.</p>
+</section>
+
+<section class="card">
+ <h2>7. Formal practice — Write and trace linear searches</h2>
+ <ol>
+  <li>An array <code>StudentIDs</code> contains 20 INTEGER values. Write pseudocode to input a search ID and report whether it is present. If found, output its first position.</li>
+  <li>An array <code>Names</code> contains 10 STRING values and has already been populated. Write pseudocode to search for a name entered by the user. Output the position if found; otherwise output “Name not found”.</li>
+  <li>Trace a linear search for 16 in the array [8, 12, 16, 20, 16, 24]. State the position reported by the first-occurrence algorithm and the number of comparisons.</li>
+  <li>Trace a search for 99 in the array [8, 12, 16, 20, 16, 24]. State the final value of Found and the number of comparisons.</li>
+  <li>Explain why a linear search is suitable for searching an array that is not arranged in ascending or descending order.</li>
+ </ol>
+ <details><summary><strong>Show sample solutions and guidance</strong></summary>
+  <h3>Question 1 — Search an array of 20 IDs</h3>
+  <pre><code>DECLARE StudentIDs : ARRAY[1:20] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE SearchID : INTEGER
+DECLARE Found : BOOLEAN
+DECLARE Position : INTEGER
+
+FOR Index ← 1 TO 20
+    INPUT StudentIDs[Index]
+NEXT Index
+
+INPUT SearchID
+Found ← FALSE
+Position ← 0
+Index ← 1
+
+WHILE Index &lt;= 20 AND Found = FALSE DO
+    IF StudentIDs[Index] = SearchID THEN
+        Found ← TRUE
+        Position ← Index
+    ENDIF
+    Index ← Index + 1
+ENDWHILE
+
+IF Found = TRUE THEN
+    OUTPUT Position
+ELSE
+    OUTPUT "ID not found"
+ENDIF</code></pre>
+  <h3>Question 2 — Search names</h3>
+  <pre><code>DECLARE Names : ARRAY[1:10] OF STRING
+DECLARE Index : INTEGER
+DECLARE SearchName : STRING
+DECLARE Found : BOOLEAN
+DECLARE Position : INTEGER
+
+INPUT SearchName
+Found ← FALSE
+Position ← 0
+Index ← 1
+
+WHILE Index &lt;= 10 AND Found = FALSE DO
+    IF Names[Index] = SearchName THEN
+        Found ← TRUE
+        Position ← Index
+    ENDIF
+    Index ← Index + 1
+ENDWHILE
+
+IF Found = TRUE THEN
+    OUTPUT Position
+ELSE
+    OUTPUT "Name not found"
+ENDIF</code></pre>
+  <h3>Question 3</h3>
+  <p>16 is first found at index 3. The algorithm makes 3 comparisons.</p>
+  <h3>Question 4</h3>
+  <p>99 is not present. The algorithm checks all 6 elements. Found remains FALSE.</p>
+  <h3>Question 5</h3>
+  <p>A linear search checks elements one by one and does not rely on the array being sorted. It can therefore be used on an array in any order.</p>
+ </details>
+</section>
+
+<section class="card" id="assessment">
+ <h2>8. Formal assessment — 6 questions</h2>
+ <p>Enter your full name before beginning. Each question is worth 1 mark. A score of 70% or above unlocks the achievement message.</p>
+ <label for="studentName">Student full name (required)</label>
+ <input id="studentName" type="text" style="width:min(100%,480px)" placeholder="Enter your full name">
+ <form id="quiz">
+  <div class="question"><p><strong>1.</strong> What is the purpose of a linear search?</p><div class="options">
+   <label><input type="radio" name="q1" value="a"> To arrange values in ascending order</label>
+   <label><input type="radio" name="q1" value="b"> To find a target by checking elements one by one</label>
+   <label><input type="radio" name="q1" value="c"> To calculate the average of an array</label>
+  </div></div>
+  <div class="question"><p><strong>2.</strong> Which value should Found have before the search begins?</p><div class="options">
+   <label><input type="radio" name="q2" value="a"> TRUE</label>
+   <label><input type="radio" name="q2" value="b"> FALSE</label>
+   <label><input type="radio" name="q2" value="c"> The target value</label>
+  </div></div>
+  <div class="question"><p><strong>3.</strong> An array has indexes 1 to 8. What is the maximum number of comparisons in a linear search?</p><div class="options">
+   <label><input type="radio" name="q3" value="a"> 1</label>
+   <label><input type="radio" name="q3" value="b"> 7</label>
+   <label><input type="radio" name="q3" value="c"> 8</label>
+  </div></div>
+  <div class="question"><p><strong>4.</strong> The target first appears at index 4. What position should a first-occurrence search report?</p><div class="options">
+   <label><input type="radio" name="q4" value="a"> 4</label>
+   <label><input type="radio" name="q4" value="b"> The target value</label>
+   <label><input type="radio" name="q4" value="c"> 0</label>
+  </div></div>
+  <div class="question"><p><strong>5.</strong> What happens if the target is not in the array?</p><div class="options">
+   <label><input type="radio" name="q5" value="a"> The search must continue forever</label>
+   <label><input type="radio" name="q5" value="b"> The search ends after the final element and Found remains FALSE</label>
+   <label><input type="radio" name="q5" value="c"> The array is automatically sorted</label>
+  </div></div>
+  <div class="question"><p><strong>6.</strong> Must an array be sorted before a linear search can be used?</p><div class="options">
+   <label><input type="radio" name="q6" value="a"> Yes, it must be ascending</label>
+   <label><input type="radio" name="q6" value="b"> Yes, it must be descending</label>
+   <label><input type="radio" name="q6" value="c"> No, linear search works through the elements in their current order</label>
+  </div></div>
+  <button type="button" onclick="markQuiz()">Submit assessment</button><button type="button" class="secondary" onclick="resetQuiz()">Reset answers</button>
+ </form>
+ <div id="result" class="box" aria-live="polite">Your result will appear here after submission.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson summary</h2>
+ <ul>
+  <li>Linear search checks array elements one by one.</li>
+  <li>The target is compared with the current element.</li>
+  <li>A Boolean Found flag records whether a match has been found.</li>
+  <li>An index variable tracks the current position.</li>
+  <li>The search ends when the target is found or the end of the array is reached.</li>
+  <li>This method works whether or not the array is sorted.</li>
+ </ul>
+ <p class="note"><strong>Next lesson:</strong> Finding maximum and minimum values in a one-dimensional array, using traversal and suitable initial values.</p>
+ <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care Challenge Inspire</footer>
+<script>
+let remaining=3000,timerHandle=null;
+function showTimer(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function startTimer(){if(timerHandle!==null)return;timerHandle=setInterval(()=>{if(remaining>0){remaining--;showTimer()}else{pauseTimer();alert('Lesson time is complete.')}},1000)}
+function pauseTimer(){if(timerHandle!==null){clearInterval(timerHandle);timerHandle=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTimer()}
+function runSearch(){
+ const arr=[];for(let i=1;i<=6;i++){const raw=document.getElementById('a'+i).value;if(raw.trim()===''||!Number.isInteger(Number(raw))){document.getElementById('searchResult').innerHTML='<span class="warn">Enter an integer in every array position.</span>';return}arr.push(Number(raw))}
+ const rawTarget=document.getElementById('target').value;if(rawTarget.trim()===''||!Number.isInteger(Number(rawTarget))){document.getElementById('searchResult').innerHTML='<span class="warn">Enter an integer search target.</span>';return}
+ const target=Number(rawTarget);let lines=[],found=false,position=0,comparisons=0;
+ for(let i=0;i<arr.length;i++){comparisons++;lines.push('Compare index '+(i+1)+': '+arr[i]+' = '+target+'? '+(arr[i]===target?'TRUE':'FALSE'));if(arr[i]===target){found=true;position=i+1;break}}
+ const message=found?'<strong class="good">Found at position '+position+'.</strong>':'<strong class="warn">Not found.</strong>';
+ document.getElementById('searchResult').innerHTML='<strong>Array:</strong> ['+arr.join(', ')+']<br><strong>Target:</strong> '+target+'<br><strong>Trace:</strong><br>'+lines.map(escapeHtml).join('<br>')+'<br>'+message+'<br><strong>Comparisons:</strong> '+comparisons;
+}
+function resetSearch(){[14,27,9,42,27,18].forEach((v,i)=>document.getElementById('a'+(i+1)).value=v);document.getElementById('target').value=27;document.getElementById('searchResult').textContent='The comparisons will appear here.'}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const answers={q1:'b',q2:'b',q3:'c',q4:'a',q5:'b',q6:'c'};
+function markQuiz(){const name=document.getElementById('studentName').value.trim(),result=document.getElementById('result');if(!name){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}let score=0,unanswered=[];for(let i=1;i<=6;i++){const chosen=document.querySelector('input[name="q'+i+'"]:checked');if(!chosen)unanswered.push(i);else if(chosen.value===answers['q'+i])score++}if(unanswered.length){result.textContent='Please answer all questions. Still unanswered: '+unanswered.join(', ')+'.';return}const percent=Math.round(score/6*100);result.innerHTML='<strong>'+escapeHtml(name)+'</strong><br>Score: <strong>'+score+'/6 ('+percent+'%)</strong><br>'+(percent>=70?'<span class="good">Well done! You have achieved 70% or above. You may proceed to the extension challenge set by your teacher.</span>':'<span class="warn">Keep practising. Review the search trace and control variables, then discuss any misunderstandings with your teacher.</span>')}
+function resetQuiz(){document.getElementById('quiz').reset();document.getElementById('result').textContent='Your result will appear here after submission.'}
+showTimer();
+</script>
+</body>
+</html>

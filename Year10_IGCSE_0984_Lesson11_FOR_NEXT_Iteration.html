@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 11 – FOR…NEXT Iteration</title>
+<style>
+:root{--gold:#f4c542;--pale:#fff4c2;--olive:#556b2f;--dark:#35451d;--ink:#202817;--paper:#fffdf3;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff1b5,#f7f3d9 50%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--pale);font-weight:bold}.school{font-size:.85rem;margin-top:5px}h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.1)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--dark);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}.card h2{color:var(--dark);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--pale);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+label{display:block;margin:8px 0}input[type=text],input[type=number],select{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}input[type=radio]{margin-right:7px}
+.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-left:8px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #aaa;font-family:Consolas,monospace}.hidden{display:none}.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}.small{font-size:.9rem;color:#5d624d}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222}.code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+<div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+<h1>Lesson 11: FOR…NEXT – Count-Controlled Iteration</h1>
+<p>Cambridge IGCSE Computer Science 0984 · Repeating instructions a specified number of times</p>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<button onclick="startTimer()">Start / Resume 50-minute lesson</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><button class="gold" onclick="window.print()">Print / Save as PDF</button>
+<span id="clock">50:00</span><div class="progress"><span id="bar"></span></div>
+</div>
+
+<section class="card">
+<span class="tag">50 minutes</span><span class="tag">Count-controlled loop</span><span class="tag">Cambridge Pseudocode</span>
+<h2>Learning outcomes</h2>
+<ul>
+<li>Explain when a count-controlled loop is appropriate.</li>
+<li>Write the Cambridge <code>FOR…TO…NEXT</code> structure correctly.</li>
+<li>Use a loop control variable of type INTEGER.</li>
+<li>Trace the values taken by the loop control variable.</li>
+<li>Use <code>STEP</code> for increments, including negative increments.</li>
+<li>Compare Cambridge Pseudocode with Python's <code>for</code> and <code>range()</code>.</li>
+</ul>
+<div class="note"><b>Today's focus:</b> FOR…NEXT is suitable when the number of repetitions is known or controlled by a start and end value. We will not introduce WHILE or REPEAT in this lesson.</div>
+</section>
+
+<section class="card">
+<h2>1. Recall – 5 minutes</h2>
+<div class="question"><b>1.</b> What is iteration?
+<label><input type="radio" name="r1" value="a"> Repeating a set of instructions</label><label><input type="radio" name="r1" value="b"> Comparing two values</label><label><input type="radio" name="r1" value="c"> Declaring a constant</label></div>
+<div class="question"><b>2.</b> Which situation is best suited to a count-controlled loop?
+<label><input type="radio" name="r2" value="a"> Ask for a password until it is correct</label><label><input type="radio" name="r2" value="b"> Process exactly 20 student records</label><label><input type="radio" name="r2" value="c"> Continue until the user decides to stop</label></div>
+<div class="question"><b>3.</b> Which data type must the FOR loop control variable use in Cambridge Pseudocode?
+<label><input type="radio" name="r3" value="a"> STRING</label><label><input type="radio" name="r3" value="b"> REAL</label><label><input type="radio" name="r3" value="c"> INTEGER</label></div>
+<button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+</section>
+
+<section class="card">
+<h2>2. Teacher demonstration – 10 minutes</h2>
+<h3>Cambridge FOR…NEXT syntax</h3>
+<div class="code">FOR &lt;identifier&gt; ← &lt;value1&gt; TO &lt;value2&gt;
+  &lt;statements&gt;
+NEXT &lt;identifier&gt;</div>
+<p>The loop control variable is assigned each integer value from <code>value1</code> to <code>value2</code>, <b>inclusive</b>. The statements inside the loop execute after each assignment.</p>
+<h3>Worked example 1 – Display 1 to 5</h3>
+<div class="code">FOR Count ← 1 TO 5
+  OUTPUT Count
+NEXT Count</div>
+<table><thead><tr><th>Pass</th><th>Count</th><th>Output</th></tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>2</td><td>2</td></tr><tr><td>3</td><td>3</td><td>3</td></tr><tr><td>4</td><td>4</td><td>4</td></tr><tr><td>5</td><td>5</td><td>5</td></tr>
+</tbody></table>
+<h3>Worked example 2 – Add the first five positive integers</h3>
+<div class="code">Total ← 0
+FOR Number ← 1 TO 5
+  Total ← Total + Number
+NEXT Number
+OUTPUT Total</div>
+<p>Dry run:</p>
+<table><thead><tr><th>Number</th><th>Total before addition</th><th>Total after addition</th></tr></thead><tbody>
+<tr><td>1</td><td>0</td><td>1</td></tr><tr><td>2</td><td>1</td><td>3</td></tr><tr><td>3</td><td>3</td><td>6</td></tr><tr><td>4</td><td>6</td><td>10</td></tr><tr><td>5</td><td>10</td><td>15</td></tr>
+</tbody></table>
+<div class="note"><b>Important Cambridge rules:</b>
+<ul>
+<li>The loop control identifier must be an INTEGER variable.</li>
+<li>The start and end values must be expressions that evaluate to integers.</li>
+<li>The start and end values are both included.</li>
+<li>If start = end, the statements execute once.</li>
+<li>If start &gt; end, the statements do not execute.</li>
+</ul></div>
+<h3>Using STEP</h3>
+<div class="code">FOR Number ← 2 TO 10 STEP 2
+  OUTPUT Number
+NEXT Number</div>
+<p>Output: 2, 4, 6, 8, 10. The increment is 2.</p>
+<p>A negative increment can count down:</p>
+<div class="code">FOR Number ← 5 TO 1 STEP -1
+  OUTPUT Number
+NEXT Number</div>
+<p>Output: 5, 4, 3, 2, 1. The loop stops when the next value would go past the end value.</p>
+<h3>Python comparison</h3>
+<div class="code"># Cambridge: FOR Count ← 1 TO 5
+for count in range(1, 6):
+    print(count)
+
+# Cambridge: FOR Number ← 5 TO 1 STEP -1
+for number in range(5, 0, -1):
+    print(number)</div>
+<div class="note"><b>Python difference:</b> The final value in <code>range()</code> is excluded. Therefore, to include 5 in Python's <code>range(1, 6)</code>, the stop value is 6. Cambridge FOR…TO includes its end value when the loop reaches it.</div>
+</section>
+
+<section class="card">
+<h2>3. Interactive exploration – 10 minutes</h2>
+<h3>FOR loop simulator</h3>
+<div class="grid">
+<div class="box"><label>Start value <input id="start" type="number" value="1"></label><label>End value <input id="end" type="number" value="5"></label><label>STEP increment <input id="step" type="number" value="1"></label><button onclick="simulateFor()">Run FOR loop</button></div>
+<div class="box" id="simResult" aria-live="polite">Set the values and run the simulator. Use integer values.</div>
+</div>
+<p>Try these tests:</p>
+<ul><li>Start 1, end 5, step 1.</li><li>Start 2, end 10, step 2.</li><li>Start 5, end 1, step -1.</li><li>Start 4, end 4, step 1.</li><li>Start 7, end 3, step 1.</li></ul>
+<div class="note">The increment must move the loop control variable towards the end value. If it moves away from the end value, the loop may not terminate. The simulator limits the number of generated values to protect the browser.</div>
+<h3>Predict before you run</h3>
+<div class="question"><b>What values are assigned to I?</b><div class="code">FOR I ← 3 TO 9 STEP 3
+  OUTPUT I
+NEXT I</div>
+<label><input type="radio" name="predict" value="a"> 3, 6, 9</label><label><input type="radio" name="predict" value="b"> 3, 6</label><label><input type="radio" name="predict" value="c"> 3, 4, 5, 6, 7, 8, 9</label>
+<button onclick="checkPredict()">Check prediction</button><span id="predictFeedback" class="feedback"></span></div>
+</section>
+
+<section class="card">
+<h2>4. Formal practice – 15 minutes</h2>
+<p>Write each solution using Cambridge Pseudocode. Remember the assignment arrow, inclusive end value and matching loop identifier after NEXT.</p>
+<div class="box"><h3>Task 1 – Display even numbers</h3><p>Use a FOR loop to display the even numbers from 2 to 20.</p><textarea rows="5" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('sol1')">Show suggested answer</button><div id="sol1" class="code hidden">FOR Number ← 2 TO 20 STEP 2
+  OUTPUT Number
+NEXT Number</div></div>
+<div class="box"><h3>Task 2 – Calculate a total</h3><p>Use a FOR loop to calculate and display the total of the integers from 1 to 10.</p><textarea rows="7" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('sol2')">Show suggested answer</button><div id="sol2" class="code hidden">Total ← 0
+FOR Number ← 1 TO 10
+  Total ← Total + Number
+NEXT Number
+OUTPUT Total</div></div>
+<div class="box"><h3>Task 3 – Input five temperatures</h3><p>Input five temperature readings. Calculate and display their total. Do not calculate the average yet.</p><textarea rows="8" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('sol3')">Show suggested answer</button><div id="sol3" class="code hidden">Total ← 0
+FOR Count ← 1 TO 5
+  INPUT Temperature
+  Total ← Total + Temperature
+NEXT Count
+OUTPUT Total</div></div>
+<div class="box"><h3>Task 4 – Countdown</h3><p>Use a FOR loop to display the integers from 10 down to 1.</p><textarea rows="5" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('sol4')">Show suggested answer</button><div id="sol4" class="code hidden">FOR Number ← 10 TO 1 STEP -1
+  OUTPUT Number
+NEXT Number</div></div>
+<p class="small">Attempt each task before revealing the suggested answer. The simulator and answers are practice aids; write your final algorithms independently.</p>
+</section>
+
+<section class="card">
+<h2>5. Assessment and feedback – 10 minutes</h2>
+<p>Enter your full name and answer all six questions.</p>
+<label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+<form id="quiz">
+<div class="question"><b>1.</b> What data type must the FOR loop control variable have in Cambridge Pseudocode?
+<label><input type="radio" name="q1" value="a"> INTEGER</label><label><input type="radio" name="q1" value="b"> STRING</label><label><input type="radio" name="q1" value="c"> BOOLEAN</label></div>
+<div class="question"><b>2.</b> What values does <code>FOR I ← 1 TO 4</code> assign to I?
+<label><input type="radio" name="q2" value="a"> 1, 2, 3</label><label><input type="radio" name="q2" value="b"> 1, 2, 3, 4</label><label><input type="radio" name="q2" value="c"> 0, 1, 2, 3, 4</label></div>
+<div class="question"><b>3.</b> How many times do the statements execute when start value equals end value?
+<label><input type="radio" name="q3" value="a"> Zero</label><label><input type="radio" name="q3" value="b"> Once</label><label><input type="radio" name="q3" value="c"> Twice</label></div>
+<div class="question"><b>4.</b> What happens when the start value is greater than the end value in a FOR loop with no negative STEP?
+<label><input type="radio" name="q4" value="a"> The loop statements do not execute</label><label><input type="radio" name="q4" value="b"> The loop runs once</label><label><input type="radio" name="q4" value="c"> The loop counts down automatically</label></div>
+<div class="question"><b>5.</b> What does STEP specify?
+<label><input type="radio" name="q5" value="a"> The output format</label><label><input type="radio" name="q5" value="b"> The change in the loop control variable between repetitions</label><label><input type="radio" name="q5" value="c"> The number of variables declared</label></div>
+<div class="question"><b>6.</b> What is output by this loop?
+<div class="code">FOR N ← 6 TO 2 STEP -2
+  OUTPUT N
+NEXT N</div>
+<label><input type="radio" name="q6" value="a"> 6, 4, 2</label><label><input type="radio" name="q6" value="b"> 6, 4</label><label><input type="radio" name="q6" value="c"> 2, 4, 6</label></div>
+</form>
+<button class="gold" onclick="submitQuiz()">Submit assessment</button>
+<div id="result" class="card hidden" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Teacher checkpoint</h2>
+<ul>
+<li>Students know the control variable must be INTEGER.</li>
+<li>Students understand that the start and end values are inclusive.</li>
+<li>Students can dry-run the loop and record each value of the control variable.</li>
+<li>Students use STEP correctly for increasing and decreasing sequences.</li>
+<li>Students understand the difference between Cambridge's inclusive end value and Python's exclusive range stop value.</li>
+</ul>
+<div class="note"><b>Next lesson:</b> FOR loops in problem-solving: counters, accumulators, averages and input processing. We will deepen tracing before moving to condition-controlled loops.</div>
+<div class="note"><b>Syllabus alignment note:</b> This Cambridge Pseudocode lesson follows the 0984 syllabus for examinations in 2026–2028, section 8.1.4(c). Cambridge's 2029–2031 0984 syllabus removes Pseudocode and uses Python 3 as the programming language for teaching and assessment. Confirm the examination year for this class before using the Pseudocode sequence as its exam-preparation pathway.</div>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=3000,timer=null;
+function draw(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%'}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;draw()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;draw()}draw();
+function checkRecall(){let k=['a','b','c'],n=0;k.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)n++});document.getElementById('recallFeedback').textContent=' '+n+'/3 correct.'}
+function simulateFor(){let a=Number(document.getElementById('start').value),b=Number(document.getElementById('end').value),s=Number(document.getElementById('step').value),o=document.getElementById('simResult');if(!Number.isInteger(a)||!Number.isInteger(b)||!Number.isInteger(s)||s===0){o.textContent='Start, end and STEP must be integers, and STEP cannot be zero.';return}if((a<b&&s<0)||(a>b&&s>0)){o.textContent='This increment moves away from the end value. The loop will not reach the end in this direction; choose a suitable STEP.';return}let vals=[],v=a;while((s>0?v<=b:v>=b)&&vals.length<100){vals.push(v);v+=s}if(vals.length===100&&(s>0?v<=b:v>=b)){o.textContent='The sequence exceeds the simulator limit of 100 values. Choose a smaller range.';return}o.innerHTML='<b>Values assigned to the control variable:</b><br>'+ (vals.length?vals.join(', '):'No values — loop statements do not execute.')+'<br><b>Number of executions:</b> '+vals.length}
+function checkPredict(){let x=document.querySelector('input[name="predict"]:checked');document.getElementById('predictFeedback').textContent=x?(x.value==='a'?' Correct!':' Not quite. The increment is 3 and the end value 9 is included.'):' Choose an answer first.'}
+function toggle(id){document.getElementById(id).classList.toggle('hidden')}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name.');document.getElementById('studentName').focus();return}let key={q1:'a',q2:'b',q3:'b',q4:'a',q5:'b',q6:'a'},score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let p=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+esc(name)+'</p><p><b>Score:</b> '+score+'/6 ('+p+'%)</p><p class="'+(p>=70?'good':'bad')+'">'+(p>=70?'Well done! You have achieved 70% or above.':'Review the worked examples and practise tracing the control variable.')+'</p><p class="small">The result is displayed on this device. Use Print / Save as PDF to save the page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>

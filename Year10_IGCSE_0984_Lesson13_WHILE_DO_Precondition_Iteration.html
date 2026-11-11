@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 13 – WHILE…DO</title>
+<style>
+:root{--gold:#f2c94c;--gold2:#ffe99a;--olive:#596b22;--olive2:#354515;--ink:#202414;--paper:#fffdf2;--line:#d8cf9c;--green:#e9f0d5;--red:#8b2e20}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f7dc75,#fff3bd);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:var(--olive2);color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold);text-align:center}
+header h1{margin:4px 0;font-size:clamp(1.5rem,4vw,2.5rem)}header p{margin:4px}
+.brand{font-weight:bold;color:var(--gold2);letter-spacing:.5px}
+.wrap{max-width:1120px;margin:22px auto;padding:0 16px}
+.card{background:var(--paper);border:2px solid var(--olive);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 5px 14px #6b5b2030}
+h2{color:var(--olive2);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:7px}
+h3{color:var(--olive)}
+.badge{display:inline-block;background:var(--gold);color:#302900;border-radius:20px;padding:4px 11px;font-weight:bold;font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.box{background:#fff8d9;border:1px solid var(--line);border-radius:12px;padding:13px}
+pre{background:#202719;color:#f8f2cf;padding:16px;border-radius:10px;overflow-x:auto;font-size:1rem;line-height:1.5}
+code{font-family:Consolas,monospace}
+button{background:var(--olive);color:white;border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;margin:5px}
+button:hover{background:var(--olive2)}button.secondary{background:#8a741b}
+input[type=text],input[type=number]{padding:10px;border:2px solid var(--olive);border-radius:8px;font-size:1rem;max-width:100%}
+label{font-weight:bold;display:block;margin:8px 0 4px}
+table{border-collapse:collapse;width:100%;margin:10px 0;background:white}
+th,td{border:1px solid #b7b18c;padding:9px;text-align:left}th{background:#e9edcf}
+.note{border-left:6px solid var(--gold);background:#fff6cf;padding:12px;border-radius:8px}
+.good{color:#315a18;font-weight:bold}.warn{color:var(--red);font-weight:bold}
+.timer{font-size:1.7rem;font-weight:bold;color:var(--olive2)}
+.question{padding:12px;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:#fff}
+.options label{font-weight:normal;display:block;margin:7px 0}
+footer{text-align:center;padding:20px;color:#354515;font-weight:bold}
+.small{font-size:.92rem;color:#4d4d36}
+@media print{body{background:white}.card{box-shadow:none;break-inside:avoid}button,.no-print,#timerControls{display:none!important}header{background:#fff;color:#111;border:2px solid #333}.brand{color:#333}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">MODERN ENGLISH SCHOOL CAIRO · CARE · CHALLENGE · INSPIRE</div>
+ <h1>IGCSE Computer Science (0984)</h1>
+ <p><strong>Year 10 · Lesson 13</strong></p>
+ <h2 style="color:#ffe99a;border:0;margin:8px 0">WHILE…DO — Pre-condition Iteration</h2>
+ <p>Ravi Raju’s Programming Lab</p>
+</header>
+<main class="wrap">
+<section class="card">
+ <span class="badge">50-minute lesson</span> <span class="badge">Cambridge 2026–2028 syllabus</span>
+ <h2>Learning objectives</h2>
+ <p>By the end of this lesson, you should be able to:</p>
+ <ul>
+  <li>Explain how a <strong>WHILE…DO</strong> loop works.</li>
+  <li>Write a WHILE loop using Cambridge pseudocode syntax.</li>
+  <li>Explain why the condition is tested before the loop body.</li>
+  <li>Trace a WHILE loop and identify when it terminates.</li>
+  <li>Recognise and prevent an infinite loop by ensuring that the loop makes progress.</li>
+ </ul>
+ <div class="note"><strong>Key idea:</strong> WHILE is a pre-condition loop. The condition is checked <em>before</em> the statements execute. Therefore, the loop can execute zero times.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson timer and learning route</h2>
+ <div class="grid">
+  <div class="box"><strong>Recall</strong><br>5 minutes<br>Review repetition and loop conditions.</div>
+  <div class="box"><strong>Teacher demonstration</strong><br>10 minutes<br>Understand syntax and tracing.</div>
+  <div class="box"><strong>Interactive exploration</strong><br>10 minutes<br>Run the loop simulator.</div>
+  <div class="box"><strong>Formal practice</strong><br>15 minutes<br>Write and trace pseudocode.</div>
+  <div class="box"><strong>Assessment and feedback</strong><br>10 minutes<br>Complete the six-question check.</div>
+ </div>
+ <div class="timer" id="timer">50:00</div>
+ <div id="timerControls" class="no-print">
+  <button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button>
+ </div>
+</section>
+
+<section class="card">
+ <h2>1. Recall — What do we already know?</h2>
+ <ol>
+  <li>Iteration means repeating a set of statements.</li>
+  <li>A FOR…NEXT loop is useful when the number of repetitions is known or controlled by a counter.</li>
+  <li>A loop needs a clear stopping point.</li>
+ </ol>
+ <p><strong>Think:</strong> What if we do not know in advance how many repetitions are needed, but we know the condition that should keep the repetition going?</p>
+ <p>That is one situation in which a WHILE loop is useful.</p>
+</section>
+
+<section class="card">
+ <h2>2. Teacher demonstration — Cambridge WHILE…DO syntax</h2>
+ <pre><code>WHILE &lt;condition&gt; DO
+    &lt;statements&gt;
+ENDWHILE</code></pre>
+ <div class="grid">
+  <div class="box"><strong>WHILE</strong><br>Begins the loop and introduces the condition.</div>
+  <div class="box"><strong>Condition</strong><br>Must evaluate to a BOOLEAN value: TRUE or FALSE.</div>
+  <div class="box"><strong>DO</strong><br>Marks the beginning of the statements to be repeated.</div>
+  <div class="box"><strong>ENDWHILE</strong><br>Marks the end of the loop body. The condition is checked again.</div>
+ </div>
+ <h3>How the loop executes</h3>
+ <ol>
+  <li>Evaluate the condition.</li>
+  <li>If it is FALSE, leave the loop. The body is not executed.</li>
+  <li>If it is TRUE, execute the statements in the loop body.</li>
+  <li>Return to the condition and test it again.</li>
+  <li>Continue until the condition becomes FALSE.</li>
+ </ol>
+ <h3>Worked example 1 — Display numbers from 1 to 5</h3>
+ <pre><code>DECLARE Count : INTEGER
+Count ← 1
+
+WHILE Count &lt;= 5 DO
+    OUTPUT Count
+    Count ← Count + 1
+ENDWHILE</code></pre>
+ <p>The loop body displays the current value and then increases Count by 1. Eventually Count becomes 6, so the condition <code>Count &lt;= 5</code> is FALSE and the loop stops.</p>
+ <h3>Trace table</h3>
+ <table>
+  <tr><th>Test</th><th>Count at condition test</th><th>Condition Count &lt;= 5</th><th>Output</th><th>Count after body</th></tr>
+  <tr><td>1</td><td>1</td><td>TRUE</td><td>1</td><td>2</td></tr>
+  <tr><td>2</td><td>2</td><td>TRUE</td><td>2</td><td>3</td></tr>
+  <tr><td>3</td><td>3</td><td>TRUE</td><td>3</td><td>4</td></tr>
+  <tr><td>4</td><td>4</td><td>TRUE</td><td>4</td><td>5</td></tr>
+  <tr><td>5</td><td>5</td><td>TRUE</td><td>5</td><td>6</td></tr>
+  <tr><td>6</td><td>6</td><td>FALSE</td><td>—</td><td>Loop ends</td></tr>
+ </table>
+ <h3>Worked example 2 — Repeated subtraction</h3>
+ <p>This follows the style of the Cambridge syllabus example. Keep subtracting 9 while the number is greater than 9.</p>
+ <pre><code>DECLARE Number : INTEGER
+Number ← 50
+
+WHILE Number &gt; 9 DO
+    Number ← Number - 9
+ENDWHILE
+
+OUTPUT Number</code></pre>
+ <p>Values after each pass: 41, 32, 23, 14, 5. The next condition test is <code>5 &gt; 9</code>, which is FALSE. The output is 5.</p>
+ <div class="note"><strong>Important:</strong> The condition is checked before each pass. If it is FALSE at the first test, the loop body runs zero times.</div>
+</section>
+
+<section class="card">
+ <h2>3. Python equivalent</h2>
+ <p>Python uses <code>while</code> followed by a Boolean condition and a colon. The loop body is indented.</p>
+ <pre><code>count = 1
+
+while count &lt;= 5:
+    print(count)
+    count = count + 1</code></pre>
+ <table>
+  <tr><th>Cambridge pseudocode</th><th>Python</th></tr>
+  <tr><td><code>WHILE condition DO</code></td><td><code>while condition:</code></td></tr>
+  <tr><td><code>ENDWHILE</code></td><td>End of indented block</td></tr>
+  <tr><td><code>OUTPUT Count</code></td><td><code>print(count)</code></td></tr>
+  <tr><td><code>Count ← Count + 1</code></td><td><code>count = count + 1</code></td></tr>
+ </table>
+ <p class="note">For this course, learn and write the Cambridge pseudocode form first. Python is shown as an equivalent implementation.</p>
+</section>
+
+<section class="card">
+ <h2>4. Interactive exploration — WHILE loop simulator</h2>
+ <p>Change the starting value and the limit. The simulator tests the condition before each pass and shows the trace.</p>
+ <div class="grid">
+  <div><label for="startVal">Starting value</label><input id="startVal" type="number" value="1"></div>
+  <div><label for="limitVal">Continue while value is less than or equal to</label><input id="limitVal" type="number" value="5"></div>
+  <div><label for="stepVal">Increase after each pass</label><input id="stepVal" type="number" value="1"></div>
+ </div>
+ <button onclick="runSimulator()">Run simulation</button><button class="secondary" onclick="clearSimulator()">Clear</button>
+ <div id="simOutput" class="box" aria-live="polite">Your trace will appear here.</div>
+ <p class="small">Try a starting value greater than the limit. Notice that the loop executes zero times.</p>
+</section>
+
+<section class="card">
+ <h2>5. Common errors to avoid</h2>
+ <div class="grid">
+  <div class="box"><span class="warn">Error: No update</span><br>If the condition remains TRUE and nothing changes it, the loop may never end.</div>
+  <div class="box"><span class="warn">Error: Wrong condition</span><br>Check whether the loop should continue while a condition is TRUE or stop when it becomes FALSE.</div>
+  <div class="box"><span class="warn">Error: Wrong initial value</span><br>Set the starting value before the WHILE statement.</div>
+  <div class="box"><span class="warn">Error: Assuming one pass</span><br>The condition is tested first, so the loop might run zero times.</div>
+ </div>
+ <h3>Infinite loop example</h3>
+ <pre><code>Count ← 1
+WHILE Count &lt;= 5 DO
+    OUTPUT Count
+    // Count is never increased
+ENDWHILE</code></pre>
+ <p>This condition remains TRUE because Count stays at 1. Always check that the loop body changes something that can eventually make the condition FALSE.</p>
+</section>
+
+<section class="card">
+ <h2>6. Formal practice — Write the pseudocode</h2>
+ <p>Write your answers in your notebook using Cambridge pseudocode. Remember to declare variables and initialise them before the loop where required.</p>
+ <ol>
+  <li>Write a WHILE loop to output the integers from 1 to 10.</li>
+  <li>Write a WHILE loop to output the integers from 10 down to 1.</li>
+  <li>A variable <code>Number</code> contains 85. Repeatedly subtract 10 while Number is greater than 10. Output the final value.</li>
+  <li>Write an algorithm that inputs a number and continues to input another number while the latest number is not 0. Count how many non-zero numbers were entered, then output the count. (The first input must take place before the WHILE statement.)</li>
+ </ol>
+ <details><summary><strong>Show hints</strong></summary>
+  <ul>
+   <li>For Question 1, initialise the counter to 1 and continue while it is less than or equal to 10.</li>
+   <li>For Question 2, initialise to 10 and decrease the counter each pass.</li>
+   <li>For Question 3, the condition is Number &gt; 10.</li>
+   <li>For Question 4, initialise the count to 0; input once before WHILE; inside the loop increase the count and input the next value.</li>
+  </ul>
+ </details>
+ <details><summary><strong>Show sample solutions</strong></summary>
+ <h3>Question 1</h3>
+ <pre><code>DECLARE Count : INTEGER
+Count ← 1
+WHILE Count &lt;= 10 DO
+    OUTPUT Count
+    Count ← Count + 1
+ENDWHILE</code></pre>
+ <h3>Question 2</h3>
+ <pre><code>DECLARE Count : INTEGER
+Count ← 10
+WHILE Count &gt;= 1 DO
+    OUTPUT Count
+    Count ← Count - 1
+ENDWHILE</code></pre>
+ <h3>Question 3</h3>
+ <pre><code>DECLARE Number : INTEGER
+Number ← 85
+WHILE Number &gt; 10 DO
+    Number ← Number - 10
+ENDWHILE
+OUTPUT Number</code></pre>
+ <h3>Question 4</h3>
+ <pre><code>DECLARE Number : INTEGER
+DECLARE Count : INTEGER
+Count ← 0
+INPUT Number
+WHILE Number &lt;&gt; 0 DO
+    Count ← Count + 1
+    INPUT Number
+ENDWHILE
+OUTPUT Count</code></pre>
+ </details>
+</section>
+
+<section class="card" id="assessment">
+ <h2>7. Formal assessment — 6 questions</h2>
+ <p>Enter your full name before beginning. Each question is worth 1 mark. A score of 70% or above unlocks the achievement message.</p>
+ <label for="studentName">Student full name (required)</label>
+ <input id="studentName" type="text" style="width:min(100%,480px)" placeholder="Enter your full name">
+ <form id="quiz">
+  <div class="question"><p><strong>1.</strong> When is the condition of a WHILE loop tested?</p><div class="options">
+   <label><input type="radio" name="q1" value="a"> After the loop body</label>
+   <label><input type="radio" name="q1" value="b"> Before the loop body</label>
+   <label><input type="radio" name="q1" value="c"> Only when the program ends</label>
+  </div></div>
+  <div class="question"><p><strong>2.</strong> What type of value must the WHILE condition evaluate to?</p><div class="options">
+   <label><input type="radio" name="q2" value="a"> STRING</label>
+   <label><input type="radio" name="q2" value="b"> REAL</label>
+   <label><input type="radio" name="q2" value="c"> BOOLEAN</label>
+  </div></div>
+  <div class="question"><p><strong>3.</strong> If the condition is FALSE at the first test, how many times does the loop body execute?</p><div class="options">
+   <label><input type="radio" name="q3" value="a"> Zero times</label>
+   <label><input type="radio" name="q3" value="b"> Once</label>
+   <label><input type="radio" name="q3" value="c"> Twice</label>
+  </div></div>
+  <div class="question"><p><strong>4.</strong> What is the output?
+   <pre><code>Value ← 2
+WHILE Value &lt; 5 DO
+    OUTPUT Value
+    Value ← Value + 1
+ENDWHILE</code></pre></p><div class="options">
+   <label><input type="radio" name="q4" value="a"> 2, 3, 4</label>
+   <label><input type="radio" name="q4" value="b"> 2, 3, 4, 5</label>
+   <label><input type="radio" name="q4" value="c"> 3, 4, 5</label>
+  </div></div>
+  <div class="question"><p><strong>5.</strong> What is the main risk if a loop variable is never updated and the condition remains TRUE?</p><div class="options">
+   <label><input type="radio" name="q5" value="a"> Syntax highlighting</label>
+   <label><input type="radio" name="q5" value="b"> Infinite loop</label>
+   <label><input type="radio" name="q5" value="c"> Automatic termination</label>
+  </div></div>
+  <div class="question"><p><strong>6.</strong> Which line marks the end of a Cambridge WHILE loop?</p><div class="options">
+   <label><input type="radio" name="q6" value="a"> NEXT</label>
+   <label><input type="radio" name="q6" value="b"> UNTIL</label>
+   <label><input type="radio" name="q6" value="c"> ENDWHILE</label>
+  </div></div>
+  <button type="button" onclick="markQuiz()">Submit assessment</button>
+  <button type="button" class="secondary" onclick="resetQuiz()">Reset answers</button>
+ </form>
+ <div id="result" class="box" aria-live="polite">Your result will appear here after submission.</div>
+</section>
+
+<section class="card">
+ <h2>Lesson summary</h2>
+ <ul>
+  <li>WHILE…DO is a pre-condition iteration structure.</li>
+  <li>The condition must evaluate to TRUE or FALSE.</li>
+  <li>The condition is tested before the body executes.</li>
+  <li>The body repeats while the condition is TRUE.</li>
+  <li>The body may execute zero times.</li>
+  <li>Make sure that the loop can eventually reach a FALSE condition.</li>
+ </ul>
+ <p class="note"><strong>Next lesson:</strong> REPEAT…UNTIL — post-condition iteration. We will compare it with WHILE and examine why its loop body always executes at least once.</p>
+ <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care Challenge Inspire</footer>
+<script>
+let remaining=3000, timerHandle=null;
+function showTimer(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function startTimer(){if(timerHandle!==null)return;timerHandle=setInterval(()=>{if(remaining>0){remaining--;showTimer()}else{pauseTimer();alert('Lesson time is complete.')}} ,1000)}
+function pauseTimer(){if(timerHandle!==null){clearInterval(timerHandle);timerHandle=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTimer()}
+function runSimulator(){
+ const start=Number(document.getElementById('startVal').value), limit=Number(document.getElementById('limitVal').value), step=Number(document.getElementById('stepVal').value);
+ const out=document.getElementById('simOutput');
+ if(!Number.isFinite(start)||!Number.isFinite(limit)||!Number.isFinite(step)||step===0){out.textContent='Please enter valid numbers. The step must not be zero.';return}
+ let value=start, rows=[], passes=0;
+ while(value<=limit && passes<100){rows.push('Test '+(passes+1)+': '+value+' <= '+limit+' is TRUE → output '+value);value+=step;passes++}
+ if(passes===0)rows.push('First test: '+value+' <= '+limit+' is FALSE → zero iterations.');
+ else if(value<=limit)rows.push('Simulation stopped after 100 passes to prevent a runaway demonstration.');
+ else rows.push('Next test: '+value+' <= '+limit+' is FALSE → loop ends.');
+ out.innerHTML='<strong>Trace:</strong><br>'+rows.map(x=>escapeHtml(x)).join('<br>')+'<br><strong>Final value:</strong> '+value;
+}
+function clearSimulator(){document.getElementById('simOutput').textContent='Your trace will appear here.'}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const answers={q1:'b',q2:'c',q3:'a',q4:'a',q5:'b',q6:'c'};
+function markQuiz(){
+ const name=document.getElementById('studentName').value.trim(),result=document.getElementById('result');
+ if(!name){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}
+ let score=0,unanswered=[];
+ for(let i=1;i<=6;i++){let chosen=document.querySelector('input[name="q'+i+'"]:checked');if(!chosen)unanswered.push(i);else if(chosen.value===answers['q'+i])score++}
+ if(unanswered.length){result.innerHTML='Please answer all questions. Still unanswered: '+unanswered.join(', ')+'.';return}
+ const percent=Math.round(score/6*100);
+ result.innerHTML='<strong>'+escapeHtml(name)+'</strong><br>Score: <strong>'+score+'/6 ('+percent+'%)</strong><br>'+(percent>=70?'<span class="good">Well done! You have achieved 70% or above. You may proceed to the extension challenge set by your teacher.</span>':'<span class="warn">Keep practising. Review the worked examples and correct your misunderstandings with your teacher.</span>');
+}
+function resetQuiz(){document.getElementById('quiz').reset();document.getElementById('result').textContent='Your result will appear here after submission.'}
+showTimer();
+</script>
+</body>
+</html>

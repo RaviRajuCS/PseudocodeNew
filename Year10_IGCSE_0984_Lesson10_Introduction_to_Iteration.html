@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 10 – Introduction to Iteration</title>
+<style>
+:root{--gold:#f4c542;--pale:#fff4c2;--olive:#556b2f;--dark:#35451d;--ink:#202817;--paper:#fffdf3;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff1b5,#f7f3d9 50%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--pale);font-weight:bold}.school{font-size:.85rem;margin-top:5px}h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.1)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--dark);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}.card h2{color:var(--dark);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--pale);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+label{display:block;margin:8px 0}input[type=text],input[type=number],select{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}input[type=radio]{margin-right:7px}
+.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-left:8px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #aaa;font-family:Consolas,monospace}.hidden{display:none}.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}.small{font-size:.9rem;color:#5d624d}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222}.code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+<div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+<h1>Lesson 10: Introduction to Iteration</h1>
+<p>Cambridge IGCSE Computer Science 0984 · Understanding repetition in algorithms</p>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<button onclick="startTimer()">Start / Resume 50-minute lesson</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><button class="gold" onclick="window.print()">Print / Save as PDF</button>
+<span id="clock">50:00</span><div class="progress"><span id="bar"></span></div>
+</div>
+
+<section class="card">
+<span class="tag">50 minutes</span><span class="tag">New concept</span><span class="tag">No loop syntax yet</span>
+<h2>Learning outcomes</h2>
+<ul>
+<li>Explain what iteration means in an algorithm.</li>
+<li>Recognise situations where instructions need to be repeated.</li>
+<li>Explain why repetition is more efficient than writing the same instructions many times.</li>
+<li>Identify the statements or actions that belong to a repeated sequence.</li>
+<li>Distinguish repetition for a known number of times from repetition that depends on a condition.</li>
+</ul>
+<div class="note"><b>Our approach:</b> Today is an introduction to the idea of iteration. We will understand the problem and the logic first. We will learn the actual Cambridge loop structures in the following lessons.</div>
+</section>
+
+<section class="card">
+<h2>1. Recall – 5 minutes</h2>
+<p>Think about the programming structures you already know.</p>
+<div class="question"><b>1.</b> What is the main characteristic of a sequential algorithm?
+<label><input type="radio" name="r1" value="a"> Instructions are normally executed in order</label><label><input type="radio" name="r1" value="b"> Instructions are repeated automatically</label><label><input type="radio" name="r1" value="c"> It always makes a decision</label></div>
+<div class="question"><b>2.</b> What does selection allow an algorithm to do?
+<label><input type="radio" name="r2" value="a"> Store many values</label><label><input type="radio" name="r2" value="b"> Choose a path based on a condition</label><label><input type="radio" name="r2" value="c"> Repeat instructions</label></div>
+<div class="question"><b>3.</b> Which data type represents TRUE or FALSE?
+<label><input type="radio" name="r3" value="a"> INTEGER</label><label><input type="radio" name="r3" value="b"> STRING</label><label><input type="radio" name="r3" value="c"> BOOLEAN</label></div>
+<button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+</section>
+
+<section class="card">
+<h2>2. Teacher demonstration – 10 minutes</h2>
+<h3>What is iteration?</h3>
+<p><b>Iteration</b> means repeating a set of instructions in an algorithm. It is useful when an action or group of actions must be carried out more than once.</p>
+<div class="grid">
+<div class="box"><b>Everyday example 1: Attendance</b><p>A teacher checks each student's name on a class register. The same checking action is performed for each student.</p></div>
+<div class="box"><b>Everyday example 2: Quiz</b><p>A quiz program asks a question, receives an answer and checks it. This process may happen for several questions.</p></div>
+<div class="box"><b>Everyday example 3: Shopping</b><p>A cashier enters the price of each item in a basket. The same input-and-add process is performed for every item.</p></div>
+</div>
+<h3>Why not write the same instructions repeatedly?</h3>
+<p>Imagine displaying the numbers 1 to 5 using only sequential instructions:</p>
+<div class="code">OUTPUT 1
+OUTPUT 2
+OUTPUT 3
+OUTPUT 4
+OUTPUT 5</div>
+<p>This works for five numbers, but what if we need to display 100 numbers? Writing 100 separate OUTPUT statements would be lengthy and difficult to maintain.</p>
+<p>An algorithm can instead describe the repeated action once and specify how the repetition is controlled. We will learn the exact Pseudocode syntax for this in the next lessons.</p>
+<h3>Two common reasons for repeating instructions</h3>
+<div class="grid">
+<div class="box"><b>Known number of repetitions</b><p>The number of repetitions is decided in advance. Example: display a message exactly 10 times.</p></div>
+<div class="box"><b>Condition-controlled repetition</b><p>Repetition continues until a condition changes or is satisfied. Example: keep asking for a password until the correct one is entered.</p></div>
+</div>
+<div class="note"><b>Key idea:</b> Repetition needs a control mechanism. The algorithm must have a clear way to determine how many times to repeat or when repetition should stop. We will examine these mechanisms separately.</div>
+</section>
+
+<section class="card">
+<h2>3. Interactive exploration – 10 minutes</h2>
+<h3>Activity A: How many repetitions?</h3>
+<p>Choose the most suitable description for each situation.</p>
+<div class="box">
+<p><b>1.</b> Print “Welcome” exactly 8 times.</p>
+<select id="a1"><option value="">Choose one</option><option value="known">Known number of repetitions</option><option value="condition">Condition-controlled repetition</option></select>
+<p><b>2.</b> Ask a user to enter a password again until it is correct.</p>
+<select id="a2"><option value="">Choose one</option><option value="known">Known number of repetitions</option><option value="condition">Condition-controlled repetition</option></select>
+<p><b>3.</b> Process every student in a class list containing 25 students.</p>
+<select id="a3"><option value="">Choose one</option><option value="known">Known number of repetitions</option><option value="condition">Condition-controlled repetition</option></select>
+<p><b>4.</b> Continue asking for a number until the user enters 0.</p>
+<select id="a4"><option value="">Choose one</option><option value="known">Known number of repetitions</option><option value="condition">Condition-controlled repetition</option></select>
+<button onclick="checkActivityA()">Check answers</button><div id="activityAResult" class="box" aria-live="polite"></div>
+</div>
+<h3>Activity B: Repetition simulator</h3>
+<p>Suppose we want to display a message a fixed number of times. Select a repetition count and run the simulator.</p>
+<label for="repeatCount">Number of repetitions (1–10): <input id="repeatCount" type="number" min="1" max="10" value="5"></label>
+<button onclick="simulate()">Run simulation</button>
+<div id="simulation" class="box" aria-live="polite">The repeated output will appear here.</div>
+<div class="note">The simulator demonstrates the idea of repetition. It is not asking you to write a loop yet. We will translate this logic into Cambridge Pseudocode in the next lessons.</div>
+</section>
+
+<section class="card">
+<h2>4. Formal practice – 15 minutes</h2>
+<p>Answer in your own words. Focus on explaining the algorithmic thinking rather than writing loop syntax.</p>
+<div class="box">
+<h3>Task 1 – Explain the need for iteration</h3>
+<p>A program must display the message <code>"Good morning"</code> 30 times. Explain why iteration is more suitable than writing 30 separate OUTPUT statements.</p>
+<textarea rows="4" placeholder="Write your explanation here..."></textarea>
+<button class="secondary" onclick="toggle('p1')">Show points to include</button>
+<div id="p1" class="note hidden">A repeated sequence avoids unnecessary duplicated statements, makes the algorithm shorter, easier to read and easier to modify. The message is written once in the repeated sequence rather than 30 times.</div>
+</div>
+<div class="box">
+<h3>Task 2 – Identify the repeated actions</h3>
+<p>A program processes 20 student marks. For each student, it inputs a mark and adds that mark to a running total. Identify the two actions that need to be repeated and explain when the repetition should finish.</p>
+<textarea rows="5" placeholder="Write your answer here..."></textarea>
+<button class="secondary" onclick="toggle('p2')">Show points to include</button>
+<div id="p2" class="note hidden">Repeated actions: input one student's mark; add the mark to the running total. The process finishes after all 20 student marks have been processed.</div>
+</div>
+<div class="box">
+<h3>Task 3 – Known count or condition?</h3>
+<p>For each situation, state whether the number of repetitions is known in advance or whether repetition depends on a condition.</p>
+<ol><li>Display the numbers from 1 to 12.</li><li>Keep asking for a valid age until the user enters a value from 0 to 120.</li><li>Process 15 products in a stock list.</li><li>Continue a game until the player chooses to quit.</li></ol>
+<textarea rows="5" placeholder="Write your answers here..."></textarea>
+<button class="secondary" onclick="toggle('p3')">Show suggested classification</button>
+<div id="p3" class="note hidden">1. Known count. 2. Condition-controlled. 3. Known count. 4. Condition-controlled.</div>
+</div>
+<div class="box">
+<h3>Task 4 – Plan an algorithm in plain English</h3>
+<p>Plan an algorithm that asks a student for 5 test scores, adds them together and displays the total. Do not write loop syntax. Describe the steps in plain English and identify which steps are repeated.</p>
+<textarea rows="6" placeholder="Write your plan here..."></textarea>
+<button class="secondary" onclick="toggle('p4')">Show suggested plan</button>
+<div id="p4" class="note hidden">Set a total to zero. Repeat the following actions for each of the five scores: ask for a score, receive the score and add it to the total. After all five scores have been entered, display the total.</div>
+</div>
+</section>
+
+<section class="card">
+<h2>5. Assessment and feedback – 10 minutes</h2>
+<p>Enter your full name and answer all six questions.</p>
+<label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+<form id="quiz">
+<div class="question"><b>1.</b> What is iteration?
+<label><input type="radio" name="q1" value="a"> Repeating a set of instructions</label><label><input type="radio" name="q1" value="b"> Comparing two values</label><label><input type="radio" name="q1" value="c"> Declaring a variable</label></div>
+<div class="question"><b>2.</b> Which is an example of a known number of repetitions?
+<label><input type="radio" name="q2" value="a"> Ask for a password until it is correct</label><label><input type="radio" name="q2" value="b"> Display a message exactly 10 times</label><label><input type="radio" name="q2" value="c"> Continue until the user enters 0</label></div>
+<div class="question"><b>3.</b> Which is an example of condition-controlled repetition?
+<label><input type="radio" name="q3" value="a"> Process exactly 30 records</label><label><input type="radio" name="q3" value="b"> Display five fixed messages</label><label><input type="radio" name="q3" value="c"> Keep asking until a valid value is entered</label></div>
+<div class="question"><b>4.</b> Why is iteration usually better than writing the same statements many times?
+<label><input type="radio" name="q4" value="a"> It makes the algorithm shorter and easier to maintain</label><label><input type="radio" name="q4" value="b"> It removes the need for variables</label><label><input type="radio" name="q4" value="c"> It guarantees that an algorithm has no errors</label></div>
+<div class="question"><b>5.</b> A program processes a class list with exactly 24 students. Which description best fits the number of repetitions?
+<label><input type="radio" name="q5" value="a"> It is known in advance</label><label><input type="radio" name="q5" value="b"> It depends on an unknown stopping condition</label><label><input type="radio" name="q5" value="c"> Repetition is not needed</label></div>
+<div class="question"><b>6.</b> What must an iterative algorithm make clear?
+<label><input type="radio" name="q6" value="a"> Only the name of the programmer</label><label><input type="radio" name="q6" value="b"> What is repeated and how repetition is controlled or stopped</label><label><input type="radio" name="q6" value="c"> That every instruction is an OUTPUT statement</label></div>
+</form>
+<button class="gold" onclick="submitQuiz()">Submit assessment</button>
+<div id="result" class="card hidden" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Teacher checkpoint</h2>
+<ul>
+<li>Students can explain iteration in their own words.</li>
+<li>Students can identify the repeated group of actions in a problem.</li>
+<li>Students distinguish a known repetition count from condition-controlled repetition.</li>
+<li>Students understand that an iterative algorithm needs a clear control and stopping mechanism.</li>
+<li>Students are ready to learn the first formal iteration construct.</li>
+</ul>
+<div class="note"><b>Next lesson:</b> FOR…NEXT – count-controlled iteration. We will introduce its Cambridge Pseudocode structure, trace it carefully and then compare it with Python.</div>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=3000,timer=null;
+function draw(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%'}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;draw()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;draw()}draw();
+function checkRecall(){let k=['a','b','c'],n=0;k.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)n++});document.getElementById('recallFeedback').textContent=' '+n+'/3 correct.'}
+function checkActivityA(){let k={a1:'known',a2:'condition',a3:'known',a4:'condition'},n=0,txt=[];for(let id in k){let ok=document.getElementById(id).value===k[id];if(ok)n++;txt.push(id.slice(1)+': '+(ok?'Correct':'Review your choice'))}document.getElementById('activityAResult').innerHTML='<b>'+n+'/4 correct</b><br>'+txt.join('<br>')}
+function simulate(){let n=Number(document.getElementById('repeatCount').value),o=document.getElementById('simulation');if(!Number.isInteger(n)||n<1||n>10){o.textContent='Please enter a whole number from 1 to 10.';return}let lines=[];for(let i=1;i<=n;i++)lines.push('Repetition '+i+': Good morning!');o.innerHTML='<b>Simulation output:</b><br>'+lines.join('<br>')+'<br><b>Total repetitions: '+n+'</b>'}
+function toggle(id){document.getElementById(id).classList.toggle('hidden')}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name.');document.getElementById('studentName').focus();return}let key={q1:'a',q2:'b',q3:'c',q4:'a',q5:'a',q6:'b'},score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let p=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+esc(name)+'</p><p><b>Score:</b> '+score+'/6 ('+p+'%)</p><p class="'+(p>=70?'good':'bad')+'">'+(p>=70?'Well done! You have achieved 70% or above.':'Review the examples and practise identifying repeated actions and stopping conditions.')+'</p><p class="small">The result is displayed on this device. Use Print / Save as PDF to save the page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 21 – Totalling and Counting Arrays</title>
+<style>
+:root{--gold:#f4c542;--gold2:#ffe89a;--olive:#596b22;--olive2:#354313;--cream:#fff9e8;--ink:#263016;--green:#e9f2d4;--red:#8b2e22}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff4c7,#f8e7a4);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--olive2),var(--olive));color:white;padding:25px 5%;border-bottom:7px solid var(--gold)}
+header .tag{color:var(--gold2);font-weight:bold;letter-spacing:1px;text-transform:uppercase;font-size:.85rem}
+h1{margin:8px 0;font-size:clamp(1.6rem,4vw,2.5rem)}header p{margin:5px 0}
+.wrap{max-width:1100px;margin:auto;padding:22px}
+.banner{background:var(--gold);border:2px solid var(--olive);border-radius:14px;padding:14px 18px;margin:18px 0;font-weight:bold}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+nav a,.btn{background:var(--olive);color:white;text-decoration:none;border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:bold}
+nav a:hover,.btn:hover{background:var(--olive2)}
+.card{background:var(--cream);border:1px solid #d8c77e;border-left:6px solid var(--olive);border-radius:12px;padding:20px;margin:18px 0;box-shadow:0 3px 10px #6b5b2020}
+h2{color:var(--olive2);margin-top:0}h3{color:#58651f}
+code,pre{font-family:Consolas,monospace}pre{background:#202719;color:#f7f1d8;padding:17px;border-radius:9px;overflow-x:auto;line-height:1.5}
+.note{background:#edf4dc;border-left:5px solid var(--olive);padding:12px 15px;border-radius:7px;margin:12px 0}
+.warn{background:#fff0e8;border-left:5px solid var(--red);padding:12px 15px;border-radius:7px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+label{display:block;font-weight:bold;margin:9px 0 4px}input[type=text],input[type=number]{width:100%;padding:10px;border:1px solid #a9a16d;border-radius:7px;font-size:1rem}
+table{width:100%;border-collapse:collapse;margin:12px 0;background:white}th,td{border:1px solid #c8c39e;padding:9px;text-align:center}th{background:#e6d78f}
+.small{font-size:.92rem;color:#53583b}.result{font-weight:bold;margin-top:12px;padding:12px;border-radius:8px;background:#edf4dc}
+.timer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-weight:bold}.timer strong{font-size:1.5rem;color:var(--olive2)}
+.question{padding:12px;border-bottom:1px solid #ded6aa}
+.question p{font-weight:bold}
+footer{text-align:center;background:var(--olive2);color:white;padding:18px;margin-top:35px}
+@media print{body{background:white}.no-print,nav,.timer button{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#000;border-bottom:3px solid #333}header .tag{color:#333}pre{background:#eee;color:#111}}
+</style>
+</head>
+<body>
+<header>
+ <div class="tag">Ravi Raju’s Programming Lab · Modern English School Cairo</div>
+ <h1>Lesson 21 – Totalling and Counting Array Values</h1>
+ <p>Cambridge IGCSE Computer Science 0984 · Year 10 · Topic 7: Algorithm Design and Problem-solving</p>
+ <p><strong>Care · Challenge · Inspire</strong></p>
+</header>
+<div class="wrap">
+ <div class="banner">50-minute lesson: Recall 5 min · Teacher Session 10 min · Interactive Exploration 10 min · Formal Practice 15 min · Assessment & Feedback 10 min</div>
+ <nav class="no-print"><a href="#recall">Recall</a><a href="#teach">Learn</a><a href="#explore">Explore</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a></nav>
+ <section class="card">
+  <h2>Learning objectives</h2>
+  <ul>
+   <li>Explain the difference between totalling and counting.</li>
+   <li>Use an accumulator to calculate the total of array elements.</li>
+   <li>Use a counter to count elements that meet a stated condition.</li>
+   <li>Trace both algorithms and write suitable Cambridge Pseudocode.</li>
+  </ul>
+  <div class="note"><strong>Cambridge focus:</strong> Totalling and counting are standard methods of solution named in the Cambridge IGCSE 0984 syllabus. This lesson practises these methods using one-dimensional arrays.</div>
+  <label for="studentName">Enter your full name to begin (required)</label>
+  <input id="studentName" type="text" placeholder="First name and surname">
+  <p class="small">Your name is used on the practice assessment printout.</p>
+ </section>
+ <section class="card" id="recall">
+  <h2>1. Recall – 5 minutes</h2>
+  <p>Think about the array skills from the previous lessons:</p>
+  <ul><li>Declare an array and input values into its elements.</li><li>Traverse every element using <code>FOR…NEXT</code>.</li><li>Use an <code>IF…THEN</code> statement to test a condition.</li><li>Update a variable while processing each element.</li></ul>
+  <p><strong>Quick recall:</strong> If the values are <code>[4, 7, 2, 9]</code>, what is their total? How many values are stored?</p>
+  <details><summary>Reveal the answer</summary><p>Total = 22. Number of values = 4.</p></details>
+ </section>
+ <section class="card" id="teach">
+  <h2>2. Teacher session – 10 minutes</h2>
+  <h3>A. Totalling – finding the sum</h3>
+  <p>Totalling means adding values together to calculate a sum. A variable used to keep a running total is called an <strong>accumulator</strong>.</p>
+  <div class="note"><strong>Essential rule:</strong> Initialise the accumulator to zero before adding the array elements. Otherwise, the total may include an unwanted starting value.</div>
+  <p>Example: input six test scores and calculate their total.</p>
+<pre>DECLARE Scores : ARRAY[1:6] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+
+Total ← 0
+
+FOR Index ← 1 TO 6
+    INPUT Scores[Index]
+NEXT Index
+
+FOR Index ← 1 TO 6
+    Total ← Total + Scores[Index]
+NEXT Index
+
+OUTPUT "Total score: ", Total</pre>
+  <h3>Trace the accumulator</h3>
+  <p>For the values <code>[12, 8, 15, 10]</code>:</p>
+  <table><tr><th>Index</th><th>Value</th><th>Total before</th><th>Total after</th></tr>
+   <tr><td>Initial</td><td>–</td><td>–</td><td>0</td></tr>
+   <tr><td>1</td><td>12</td><td>0</td><td>12</td></tr>
+   <tr><td>2</td><td>8</td><td>12</td><td>20</td></tr>
+   <tr><td>3</td><td>15</td><td>20</td><td>35</td></tr>
+   <tr><td>4</td><td>10</td><td>35</td><td>45</td></tr>
+  </table>
+  <p><strong>Final total = 45.</strong> Each new value is added to the running total.</p>
+  <h3>B. Counting – counting values that meet a condition</h3>
+  <p>Counting means finding how many array elements satisfy a condition. A variable used to keep the number of matching elements is called a <strong>counter</strong>.</p>
+  <div class="note"><strong>Essential rule:</strong> Initialise the counter to zero. Increase it by one only when an element meets the condition.</div>
+  <p>Example: count how many of six scores are at least 50.</p>
+<pre>DECLARE Scores : ARRAY[1:6] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Count : INTEGER
+
+FOR Index ← 1 TO 6
+    INPUT Scores[Index]
+NEXT Index
+
+Count ← 0
+
+FOR Index ← 1 TO 6
+    IF Scores[Index] >= 50 THEN
+        Count ← Count + 1
+    ENDIF
+NEXT Index
+
+OUTPUT "Number of scores at least 50: ", Count</pre>
+  <p>For <code>[42, 67, 50, 38, 81, 49]</code>, the matching values are 67, 50 and 81. Therefore, <strong>Count = 3</strong>.</p>
+  <h3>Accumulator versus counter</h3>
+  <table><tr><th>Accumulator (totalling)</th><th>Counter (counting)</th></tr>
+   <tr><td>Stores a running sum</td><td>Stores how many matches have occurred</td></tr>
+   <tr><td>Usually updated by adding the current value</td><td>Updated by adding 1 when a condition is true</td></tr>
+   <tr><td><code>Total ← Total + Array[Index]</code></td><td><code>Count ← Count + 1</code></td></tr>
+   <tr><td>Initial value: 0</td><td>Initial value: 0</td></tr>
+  </table>
+  <h3>Python comparison</h3>
+<pre># Totalling
+scores = [12, 8, 15, 10]
+total = 0
+
+for index in range(4):
+    total = total + scores[index]
+
+print("Total:", total)
+
+# Counting scores of at least 50
+scores = [42, 67, 50, 38, 81, 49]
+count = 0
+
+for index in range(6):
+    if scores[index] >= 50:
+        count = count + 1
+
+print("Count:", count)</pre>
+  <p class="small">Cambridge Pseudocode is the primary language for this lesson. Python is included as a supporting comparison.</p>
+  <div class="warn"><strong>Common errors:</strong> Do not forget to initialise Total or Count to zero. Do not add one to the counter when the condition is false. Do not confuse adding the element’s value with counting one matching element.</div>
+ </section>
+ <section class="card" id="explore">
+  <h2>3. Interactive exploration – 10 minutes</h2>
+  <p>Enter six integer values. The simulator calculates their total and counts how many are at least the threshold you choose.</p>
+  <div class="grid">
+   <div><label>Value 1</label><input class="arrVal" type="number" value="42"></div>
+   <div><label>Value 2</label><input class="arrVal" type="number" value="67"></div>
+   <div><label>Value 3</label><input class="arrVal" type="number" value="50"></div>
+   <div><label>Value 4</label><input class="arrVal" type="number" value="38"></div>
+   <div><label>Value 5</label><input class="arrVal" type="number" value="81"></div>
+   <div><label>Value 6</label><input class="arrVal" type="number" value="49"></div>
+  </div>
+  <label for="threshold">Counting threshold (count values greater than or equal to this number)</label>
+  <input id="threshold" type="number" value="50">
+  <button class="btn no-print" onclick="runArrayTasks()">Calculate total and count</button>
+  <div id="exploreResult" class="result" aria-live="polite">Run the simulator to see the results.</div>
+  <div id="exploreTrace"></div>
+ </section>
+ <section class="card" id="practice">
+  <h2>4. Formal practice – 15 minutes</h2>
+  <p>Write Cambridge Pseudocode for each task. Use a suitable accumulator or counter and show where it is initialised.</p>
+  <ol>
+   <li><strong>Totalling:</strong> Input eight integer values into an array called <code>WeeklySales</code>. Calculate and output the total sales.</li>
+   <li><strong>Counting:</strong> Input ten integer values into an array called <code>Temperatures</code>. Count and output how many temperatures are below 20.</li>
+   <li><strong>Both tasks:</strong> Input six test scores. Calculate the total score and count how many scores are 50 or above. Output both results.</li>
+   <li><strong>Trace:</strong> An array contains <code>[6, 13, 5, 10]</code>. Trace the value of Total as each element is added. Then count how many values are greater than 7.</li>
+   <li><strong>Find the error:</strong> A student writes <code>Count ← Count + Array[Index]</code> when counting values greater than 10. Explain why this is not the correct way to count matching elements and write the correction.</li>
+  </ol>
+  <details><summary>Check your approach – sample solution for Question 3</summary>
+<pre>DECLARE Scores : ARRAY[1:6] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+DECLARE Count : INTEGER
+
+FOR Index ← 1 TO 6
+    INPUT Scores[Index]
+NEXT Index
+
+Total ← 0
+Count ← 0
+
+FOR Index ← 1 TO 6
+    Total ← Total + Scores[Index]
+    IF Scores[Index] >= 50 THEN
+        Count ← Count + 1
+    ENDIF
+NEXT Index
+
+OUTPUT "Total: ", Total
+OUTPUT "Scores of 50 or above: ", Count</pre>
+  </details>
+ </section>
+ <section class="card" id="assessment">
+  <h2>5. Assessment and feedback – 10 minutes</h2>
+  <p>Answer all six questions. Each question is worth one mark. Your score is based only on this assessment.</p>
+  <form id="quiz">
+   <div class="question"><p>1. What is an accumulator used for?</p>
+    <label><input type="radio" name="q1" value="a"> Keeping a running total</label>
+    <label><input type="radio" name="q1" value="b"> Storing the largest value only</label>
+    <label><input type="radio" name="q1" value="c"> Storing an array index</label></div>
+   <div class="question"><p>2. What is the correct initial value for a total accumulator?</p>
+    <label><input type="radio" name="q2" value="a"> 1</label>
+    <label><input type="radio" name="q2" value="b"> 0</label>
+    <label><input type="radio" name="q2" value="c"> The last array element</label></div>
+   <div class="question"><p>3. What is a counter used for?</p>
+    <label><input type="radio" name="q3" value="a"> Adding all array values</label>
+    <label><input type="radio" name="q3" value="b"> Sorting the array</label>
+    <label><input type="radio" name="q3" value="c"> Counting how many elements meet a condition</label></div>
+   <div class="question"><p>4. When should a conditional counter be increased?</p>
+    <label><input type="radio" name="q4" value="a"> Every time the loop repeats</label>
+    <label><input type="radio" name="q4" value="b"> Only when the condition is true</label>
+    <label><input type="radio" name="q4" value="c"> Only when the condition is false</label></div>
+   <div class="question"><p>5. An array contains [4, 9, 6]. What is its total?</p>
+    <label><input type="radio" name="q5" value="a"> 19</label>
+    <label><input type="radio" name="q5" value="b"> 3</label>
+    <label><input type="radio" name="q5" value="c"> 9</label></div>
+   <div class="question"><p>6. For [12, 18, 7, 20], how many values are greater than 10?</p>
+    <label><input type="radio" name="q6" value="a"> 2</label>
+    <label><input type="radio" name="q6" value="b"> 3</label>
+    <label><input type="radio" name="q6" value="c"> 4</label></div>
+   <button type="button" class="btn no-print" onclick="markQuiz()">Submit assessment</button>
+  </form>
+  <div id="quizResult" class="result" aria-live="polite">Your result will appear here after submission.</div>
+  <div id="nextStep"></div>
+ </section>
+ <section class="card no-print">
+  <h2>Lesson timer</h2>
+  <div class="timer"><strong id="clock">50:00</strong><button class="btn" onclick="startTimer()">Start</button><button class="btn" onclick="pauseTimer()">Pause</button><button class="btn" onclick="resetTimer()">Reset</button></div>
+  <p class="small">The timer is a classroom guide for the 50-minute lesson.</p>
+ </section>
+ <section class="card no-print"><h2>Finish and print</h2><button class="btn" onclick="window.print()">Print / Save as PDF</button><p class="small">Use your browser’s print dialog and choose “Save as PDF”.</p></section>
+</div>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+function runArrayTasks(){
+ const inputs=[...document.querySelectorAll('.arrVal')],thresholdInput=document.getElementById('threshold');
+ if(inputs.some(x=>x.value.trim()==='')||thresholdInput.value.trim()===''){document.getElementById('exploreResult').textContent='Please enter all six values and a threshold.';return}
+ const values=inputs.map(x=>Number(x.value)),threshold=Number(thresholdInput.value);
+ if(values.some(x=>!Number.isInteger(x)||!Number.isFinite(x))||!Number.isFinite(threshold)){document.getElementById('exploreResult').textContent='Please enter valid integers.';return}
+ let total=0,count=0,rows='<table><tr><th>Index</th><th>Value</th><th>Running total</th><th>Meets threshold?</th><th>Running count</th></tr>';
+ for(let i=0;i<values.length;i++){total+=values[i];if(values[i]>=threshold)count++;rows+=`<tr><td>${i+1}</td><td>${values[i]}</td><td>${total}</td><td>${values[i]>=threshold?'Yes':'No'}</td><td>${count}</td></tr>`}
+ rows+='</table>';
+ document.getElementById('exploreResult').textContent=`Total = ${total} | Count of values ≥ ${threshold} = ${count}`;
+ document.getElementById('exploreTrace').innerHTML=rows;
+}
+const answers={q1:'a',q2:'b',q3:'c',q4:'b',q5:'a',q6:'b'};
+function markQuiz(){
+ const name=document.getElementById('studentName').value.trim();
+ if(name.length<3){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}
+ let score=0,unanswered=0;
+ for(const [q,a] of Object.entries(answers)){const chosen=document.querySelector(`input[name="${q}"]:checked`);if(!chosen)unanswered++;else if(chosen.value===a)score++}
+ if(unanswered){document.getElementById('quizResult').textContent=`Please answer all six questions. ${unanswered} question(s) remain unanswered.`;return}
+ const pct=Math.round(score/6*100);
+ document.getElementById('quizResult').innerHTML=`Student: ${escapeHTML(name)}<br>Score: ${score}/6 (${pct}%)<br>${pct>=70?'Well done! You have reached the 70% target.':'You are below 70%. Review the accumulator and counter examples, then try again.'}`;
+ document.getElementById('nextStep').innerHTML=pct>=70?'<div class="note"><strong>Challenge unlocked:</strong> Write one algorithm that inputs eight values, outputs their total, and counts how many are negative. Explain why the total and counter need separate initialisation.</div>':'<div class="warn"><strong>Remedial practice:</strong> Practise one running total and one conditional count using a four-element array. Trace each variable after every element, then repeat the assessment.</div>';
+}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+let remaining=3000,interval=null;
+function showClock(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(interval)return;interval=setInterval(()=>{if(remaining>0){remaining--;showClock()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(interval);interval=null}
+function resetTimer(){pauseTimer();remaining=3000;showClock()}
+showClock();
+</script>
+</body>
+</html>

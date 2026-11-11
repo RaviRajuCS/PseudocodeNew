@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 23 – Array Algorithms Consolidation</title>
+<style>
+:root{--gold:#f4c542;--gold2:#ffe89a;--olive:#596b22;--olive2:#354313;--cream:#fff9e8;--ink:#263016;--red:#8b2e22}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff4c7,#f8e7a4);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--olive2),var(--olive));color:white;padding:25px 5%;border-bottom:7px solid var(--gold)}
+header .tag{color:var(--gold2);font-weight:bold;letter-spacing:1px;text-transform:uppercase;font-size:.85rem}
+h1{margin:8px 0;font-size:clamp(1.6rem,4vw,2.5rem)}header p{margin:5px 0}
+.wrap{max-width:1100px;margin:auto;padding:22px}.banner{background:var(--gold);border:2px solid var(--olive);border-radius:14px;padding:14px 18px;margin:18px 0;font-weight:bold}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}nav a,.btn{background:var(--olive);color:white;text-decoration:none;border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:bold}nav a:hover,.btn:hover{background:var(--olive2)}
+.card{background:var(--cream);border:1px solid #d8c77e;border-left:6px solid var(--olive);border-radius:12px;padding:20px;margin:18px 0;box-shadow:0 3px 10px #6b5b2020}
+h2{color:var(--olive2);margin-top:0}h3{color:#58651f}code,pre{font-family:Consolas,monospace}pre{background:#202719;color:#f7f1d8;padding:17px;border-radius:9px;overflow-x:auto;line-height:1.5}
+.note{background:#edf4dc;border-left:5px solid var(--olive);padding:12px 15px;border-radius:7px;margin:12px 0}.warn{background:#fff0e8;border-left:5px solid var(--red);padding:12px 15px;border-radius:7px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}label{display:block;font-weight:bold;margin:9px 0 4px}input[type=text],input[type=number]{width:100%;padding:10px;border:1px solid #a9a16d;border-radius:7px;font-size:1rem}
+table{width:100%;border-collapse:collapse;margin:12px 0;background:white}th,td{border:1px solid #c8c39e;padding:9px;text-align:center}th{background:#e6d78f}
+.small{font-size:.92rem;color:#53583b}.result{font-weight:bold;margin-top:12px;padding:12px;border-radius:8px;background:#edf4dc}.timer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-weight:bold}.timer strong{font-size:1.5rem;color:var(--olive2)}
+.question{padding:12px;border-bottom:1px solid #ded6aa}.question p{font-weight:bold}
+details{margin:10px 0}summary{cursor:pointer;font-weight:bold;color:var(--olive2)}
+footer{text-align:center;background:var(--olive2);color:white;padding:18px;margin-top:35px}
+@media print{body{background:white}.no-print,nav,.timer button{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#000;border-bottom:3px solid #333}header .tag{color:#333}pre{background:#eee;color:#111}}
+</style>
+</head>
+<body>
+<header>
+ <div class="tag">Ravi Raju’s Programming Lab · Modern English School Cairo</div>
+ <h1>Lesson 23 – Consolidation of One-Dimensional Array Algorithms</h1>
+ <p>Cambridge IGCSE Computer Science 0984 · Year 10 · Topic 7: Algorithm Design and Problem-solving</p>
+ <p><strong>Care · Challenge · Inspire</strong></p>
+</header>
+<div class="wrap">
+ <div class="banner">50-minute lesson: Recall 5 min · Teacher Session 10 min · Interactive Exploration 10 min · Formal Practice 15 min · Assessment & Feedback 10 min</div>
+ <nav class="no-print"><a href="#recall">Recall</a><a href="#teach">Review</a><a href="#explore">Explore</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a></nav>
+ <section class="card">
+  <h2>Learning objectives</h2>
+  <ul>
+   <li>Select and apply an appropriate array algorithm to a problem.</li>
+   <li>Trace linear search, maximum/minimum, Bubble Sort, totalling, counting and averaging.</li>
+   <li>Recognise the purpose of key variables such as Index, Found, Position, Temp, Total and Count.</li>
+   <li>Write clear Cambridge Pseudocode using arrays, iteration and selection.</li>
+  </ul>
+  <div class="note"><strong>Cambridge focus:</strong> This lesson consolidates the array algorithms studied in Lessons 16–22. It is a revision and application lesson, not an introduction to additional sorting or searching methods.</div>
+  <label for="studentName">Enter your full name to begin (required)</label>
+  <input id="studentName" type="text" placeholder="First name and surname">
+  <p class="small">Your name is used on the practice assessment printout.</p>
+ </section>
+ <section class="card" id="recall">
+  <h2>1. Recall – 5 minutes</h2>
+  <p>Match each task to the algorithm or variable most closely associated with it.</p>
+  <table><tr><th>Task</th><th>Key idea</th></tr>
+   <tr><td>Find a particular value</td><td>Linear search</td></tr>
+   <tr><td>Arrange values in ascending order</td><td>Bubble Sort</td></tr>
+   <tr><td>Find the greatest or smallest value</td><td>Maximum / Minimum</td></tr>
+   <tr><td>Add all values</td><td>Accumulator / Total</td></tr>
+   <tr><td>Count values meeting a condition</td><td>Counter / Count</td></tr>
+   <tr><td>Calculate the arithmetic mean</td><td>Total ÷ number of values</td></tr>
+  </table>
+  <p><strong>Quick question:</strong> Which variable would you use to preserve an array value temporarily during a swap?</p>
+  <details><summary>Reveal the answer</summary><p><code>Temp</code> stores one value temporarily so it is not overwritten during the swap.</p></details>
+ </section>
+ <section class="card" id="teach">
+  <h2>2. Teacher review – 10 minutes</h2>
+  <h3>A. Linear search</h3>
+  <p>Checks array elements one by one until the target is found or the end of the array is reached. The example below stops at the first occurrence.</p>
+<pre>Found ← FALSE
+Index ← 1
+
+WHILE Index <= 6 AND Found = FALSE
+    IF Values[Index] = Target THEN
+        Found ← TRUE
+        Position ← Index
+    ELSE
+        Index ← Index + 1
+    ENDIF
+ENDWHILE
+
+IF Found = TRUE THEN
+    OUTPUT Position
+ELSE
+    OUTPUT "Not found"
+ENDIF</pre>
+  <h3>B. Maximum and minimum</h3>
+  <p>Initialise each result from the first element, then compare the remaining elements.</p>
+<pre>Maximum ← Values[1]
+Minimum ← Values[1]
+
+FOR Index ← 2 TO 6
+    IF Values[Index] > Maximum THEN
+        Maximum ← Values[Index]
+    ENDIF
+    IF Values[Index] < Minimum THEN
+        Minimum ← Values[Index]
+    ENDIF
+NEXT Index</pre>
+  <h3>C. Bubble Sort – ascending order</h3>
+  <p>Compare adjacent elements. Swap when the left value is greater than the right value.</p>
+<pre>FOR Pass ← 1 TO 5
+    FOR Index ← 1 TO 6 - Pass
+        IF Values[Index] > Values[Index + 1] THEN
+            Temp ← Values[Index]
+            Values[Index] ← Values[Index + 1]
+            Values[Index + 1] ← Temp
+        ENDIF
+    NEXT Index
+NEXT Pass</pre>
+  <h3>D. Totalling, counting and average</h3>
+<pre>Total ← 0
+Count ← 0
+
+FOR Index ← 1 TO 6
+    Total ← Total + Values[Index]
+    IF Values[Index] >= 50 THEN
+        Count ← Count + 1
+    ENDIF
+NEXT Index
+
+Average ← Total / 6</pre>
+  <div class="note"><strong>Variable guide:</strong>
+   <ul><li><code>Index</code> – current array position.</li><li><code>Target</code> – value being searched for.</li><li><code>Found</code> – Boolean flag indicating whether the target was found.</li><li><code>Position</code> – index where the target was found.</li><li><code>Maximum</code> / <code>Minimum</code> – current largest / smallest values.</li><li><code>Pass</code> – current Bubble Sort pass; <code>Temp</code> – temporary value for swapping.</li><li><code>Total</code> – running sum; <code>Count</code> – number of elements satisfying a condition.</li></ul>
+  </div>
+  <div class="warn"><strong>Do not mix up the tasks:</strong> A linear search locates a value; it does not sort the array. Bubble Sort changes the order of the array. Totalling adds the actual values, while counting increases by one for each matching element.</div>
+ </section>
+ <section class="card" id="explore">
+  <h2>3. Interactive exploration – 10 minutes</h2>
+  <p>Use one set of six values to explore several algorithms. Enter integers and a search target. The simulator will report search, maximum/minimum, total, count and average results. It also displays the sorted order.</p>
+  <div class="grid">
+   <div><label>Array value 1</label><input class="arrVal" type="number" value="18"></div>
+   <div><label>Array value 2</label><input class="arrVal" type="number" value="7"></div>
+   <div><label>Array value 3</label><input class="arrVal" type="number" value="25"></div>
+   <div><label>Array value 4</label><input class="arrVal" type="number" value="4"></div>
+   <div><label>Array value 5</label><input class="arrVal" type="number" value="50"></div>
+   <div><label>Array value 6</label><input class="arrVal" type="number" value="9"></div>
+  </div>
+  <div class="grid">
+   <div><label for="target">Linear search target</label><input id="target" type="number" value="25"></div>
+   <div><label for="cutoff">Count values greater than or equal to</label><input id="cutoff" type="number" value="10"></div>
+  </div>
+  <button class="btn no-print" onclick="runAll()">Run the array algorithms</button>
+  <div id="allResults" class="result" aria-live="polite">Run the algorithms to view the results.</div>
+  <div id="sortTrace"></div>
+ </section>
+ <section class="card" id="practice">
+  <h2>4. Formal practice – 15 minutes</h2>
+  <p>Attempt these integrated tasks using Cambridge Pseudocode. Show declarations, initialisation, loops, conditions and output.</p>
+  <ol>
+   <li><strong>Class results:</strong> Input the scores of eight students into <code>Scores[1:8]</code>. Output the total, average, highest score and lowest score.</li>
+   <li><strong>Pass count:</strong> Using the same array, count and output how many students achieved a score of 50 or above.</li>
+   <li><strong>Search:</strong> Input a target score and use linear search to find its first occurrence. Output its position or a suitable message if it is not present.</li>
+   <li><strong>Sort:</strong> Write the Bubble Sort section to arrange the eight scores in ascending order. Use a temporary variable to swap adjacent values.</li>
+   <li><strong>Algorithm choice:</strong> For each task, state whether you would use linear search, Bubble Sort, maximum/minimum, totalling, counting or averaging. Give one sentence explaining your choice.</li>
+  </ol>
+  <details><summary>Sample solution framework – Questions 1 and 2</summary>
+<pre>DECLARE Scores : ARRAY[1:8] OF INTEGER
+DECLARE Index : INTEGER
+DECLARE Total : INTEGER
+DECLARE Count : INTEGER
+DECLARE Average : REAL
+DECLARE Maximum : INTEGER
+DECLARE Minimum : INTEGER
+
+FOR Index ← 1 TO 8
+    INPUT Scores[Index]
+NEXT Index
+
+Total ← 0
+Count ← 0
+Maximum ← Scores[1]
+Minimum ← Scores[1]
+
+FOR Index ← 1 TO 8
+    Total ← Total + Scores[Index]
+
+    IF Scores[Index] >= 50 THEN
+        Count ← Count + 1
+    ENDIF
+
+    IF Scores[Index] > Maximum THEN
+        Maximum ← Scores[Index]
+    ENDIF
+
+    IF Scores[Index] < Minimum THEN
+        Minimum ← Scores[Index]
+    ENDIF
+NEXT Index
+
+Average ← Total / 8
+
+OUTPUT Total
+OUTPUT Average
+OUTPUT Maximum
+OUTPUT Minimum
+OUTPUT Count</pre>
+  <p class="small">This framework covers the calculations. Add the separate linear search and Bubble Sort sections when completing the other tasks.</p>
+  </details>
+ </section>
+ <section class="card" id="assessment">
+  <h2>5. Assessment and feedback – 10 minutes</h2>
+  <p>Answer all six questions. Each question is worth one mark. Your score is based only on this assessment.</p>
+  <form id="quiz">
+   <div class="question"><p>1. Which algorithm checks array elements one by one to locate a target?</p>
+    <label><input type="radio" name="q1" value="a"> Bubble Sort</label>
+    <label><input type="radio" name="q1" value="b"> Linear search</label>
+    <label><input type="radio" name="q1" value="c"> Totalling</label></div>
+   <div class="question"><p>2. In ascending Bubble Sort, when are adjacent values swapped?</p>
+    <label><input type="radio" name="q2" value="a"> When the left value is greater than the right value</label>
+    <label><input type="radio" name="q2" value="b"> When the left value is less than the right value</label>
+    <label><input type="radio" name="q2" value="c"> Every time they are compared</label></div>
+   <div class="question"><p>3. What is a suitable initial value for Maximum when the array has at least one element?</p>
+    <label><input type="radio" name="q3" value="a"> Always zero</label>
+    <label><input type="radio" name="q3" value="b"> The last possible index</label>
+    <label><input type="radio" name="q3" value="c"> The first array element</label></div>
+   <div class="question"><p>4. What does an accumulator store?</p>
+    <label><input type="radio" name="q4" value="a"> A running total</label>
+    <label><input type="radio" name="q4" value="b"> The number of matches only</label>
+    <label><input type="radio" name="q4" value="c"> The current search target</label></div>
+   <div class="question"><p>5. When counting values that meet a condition, how much is usually added to Count for each match?</p>
+    <label><input type="radio" name="q5" value="a"> The current array value</label>
+    <label><input type="radio" name="q5" value="b"> 1</label>
+    <label><input type="radio" name="q5" value="c"> 0</label></div>
+   <div class="question"><p>6. An array has six values with a total of 72. What is its average?</p>
+    <label><input type="radio" name="q6" value="a"> 78</label>
+    <label><input type="radio" name="q6" value="b"> 432</label>
+    <label><input type="radio" name="q6" value="c"> 12</label></div>
+   <button type="button" class="btn no-print" onclick="markQuiz()">Submit assessment</button>
+  </form>
+  <div id="quizResult" class="result" aria-live="polite">Your result will appear here after submission.</div>
+  <div id="nextStep"></div>
+ </section>
+ <section class="card no-print">
+  <h2>Lesson timer</h2>
+  <div class="timer"><strong id="clock">50:00</strong><button class="btn" onclick="startTimer()">Start</button><button class="btn" onclick="pauseTimer()">Pause</button><button class="btn" onclick="resetTimer()">Reset</button></div>
+  <p class="small">The timer is a classroom guide for the 50-minute lesson.</p>
+ </section>
+ <section class="card no-print"><h2>Finish and print</h2><button class="btn" onclick="window.print()">Print / Save as PDF</button><p class="small">Use your browser’s print dialog and choose “Save as PDF”.</p></section>
+</div>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+function runAll(){
+ const fields=[...document.querySelectorAll('.arrVal')],targetField=document.getElementById('target'),cutoffField=document.getElementById('cutoff');
+ if(fields.some(x=>x.value.trim()==='')||targetField.value.trim()===''||cutoffField.value.trim()===''){document.getElementById('allResults').textContent='Please complete all inputs.';return}
+ const a=fields.map(x=>Number(x.value)),target=Number(targetField.value),cutoff=Number(cutoffField.value);
+ if([...a,target,cutoff].some(x=>!Number.isFinite(x)||!Number.isInteger(x))){document.getElementById('allResults').textContent='Please enter integers only.';return}
+ let total=0,count=0,max=a[0],min=a[0],foundIndex=-1;
+ for(let i=0;i<a.length;i++){
+  total+=a[i];if(a[i]>=cutoff)count++;
+  if(a[i]>max)max=a[i];if(a[i]<min)min=a[i];
+  if(foundIndex===-1&&a[i]===target)foundIndex=i+1;
+ }
+ let sorted=[...a],trace='<h3>Bubble Sort pass trace (ascending)</h3><table><tr><th>Pass</th><th>Array after pass</th><th>Swaps</th></tr>';
+ for(let p=1;p<sorted.length;p++){
+  let swaps=0;
+  for(let i=0;i<sorted.length-p;i++){if(sorted[i]>sorted[i+1]){const t=sorted[i];sorted[i]=sorted[i+1];sorted[i+1]=t;swaps++}}
+  trace+=`<tr><td>${p}</td><td>${sorted.join(', ')}</td><td>${swaps}</td></tr>`;
+ }
+ trace+='</table>';
+ const avg=total/a.length;
+ document.getElementById('allResults').innerHTML=
+  `Original array: ${a.join(', ')}<br>`+
+  `Linear search for ${target}: ${foundIndex===-1?'Not found':`First occurrence at index ${foundIndex}`}<br>`+
+  `Maximum: ${max} | Minimum: ${min}<br>`+
+  `Total: ${total} | Count of values ≥ ${cutoff}: ${count}<br>`+
+  `Average: ${avg}<br><strong>Sorted array: ${sorted.join(', ')}</strong>`;
+ document.getElementById('sortTrace').innerHTML=trace;
+}
+const answers={q1:'b',q2:'a',q3:'c',q4:'a',q5:'b',q6:'c'};
+function markQuiz(){
+ const name=document.getElementById('studentName').value.trim();
+ if(name.length<3){alert('Please enter your full name before submitting.');document.getElementById('studentName').focus();return}
+ let score=0,unanswered=0;
+ for(const [q,a] of Object.entries(answers)){const chosen=document.querySelector(`input[name="${q}"]:checked`);if(!chosen)unanswered++;else if(chosen.value===a)score++}
+ if(unanswered){document.getElementById('quizResult').textContent=`Please answer all six questions. ${unanswered} question(s) remain unanswered.`;return}
+ const pct=Math.round(score/6*100);
+ document.getElementById('quizResult').innerHTML=`Student: ${escapeHTML(name)}<br>Score: ${score}/6 (${pct}%)<br>${pct>=70?'Well done! You have reached the 70% target.':'You are below 70%. Revisit the algorithm summaries and attempt the practice tasks again.'}`;
+ document.getElementById('nextStep').innerHTML=pct>=70?'<div class="note"><strong>Challenge unlocked:</strong> Design a complete algorithm that inputs six scores, calculates the total and average, finds the maximum and minimum, counts scores of 50 or above, and searches for a target score. Keep each task clearly separated and use suitable variables.</div>':'<div class="warn"><strong>Remedial practice:</strong> Review the purpose of each algorithm. Practise tracing a linear search, one Bubble Sort pass, and a running total/counter before repeating the assessment.</div>';
+}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+let remaining=3000,interval=null;
+function showClock(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(interval)return;interval=setInterval(()=>{if(remaining>0){remaining--;showClock()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(interval);interval=null}
+function resetTimer(){pauseTimer();remaining=3000;showClock()}
+showClock();
+</script>
+</body>
+</html>

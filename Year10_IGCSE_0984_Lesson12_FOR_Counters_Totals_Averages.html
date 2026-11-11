@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 IGCSE 0984 | Lesson 12 – FOR Loops: Counters and Totals</title>
+<style>
+:root{--gold:#f4c542;--pale:#fff4c2;--olive:#556b2f;--dark:#35451d;--ink:#202817;--paper:#fffdf3;--line:#d8d2ae;--green:#2e7d32;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#fff1b5,#f7f3d9 50%,#e8edcf);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:24px 5%;border-bottom:7px solid var(--gold)}
+.brand{font-size:.9rem;letter-spacing:1px;color:var(--pale);font-weight:bold}.school{font-size:.85rem;margin-top:5px}h1{margin:12px 0 4px;font-size:clamp(1.7rem,4vw,2.7rem)}header p{margin:5px 0;color:#f5f0d6}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff9df;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px #00000012}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer;background:var(--olive);color:white}button:hover{filter:brightness(1.1)}button.secondary{background:#e8d98f;color:#263018}button.gold{background:#d69d00;color:#211900}
+#clock{font-size:1.2rem;font-weight:bold;color:var(--dark);margin-left:auto}.progress{height:9px;background:#e5dfc2;border-radius:20px;overflow:hidden;flex-basis:100%}.progress span{display:block;height:100%;width:0;background:var(--olive)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #28330f10}.card h2{color:var(--dark);margin-top:0;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.tag{display:inline-block;background:var(--pale);color:#453600;border-radius:20px;padding:4px 10px;font-size:.8rem;font-weight:bold;margin:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.box{background:#fff8d9;border:1px solid #e4d58e;border-radius:12px;padding:14px}
+.code{background:#20291a;color:#f8f3d8;padding:15px;border-radius:10px;overflow:auto;font-family:Consolas,monospace;white-space:pre-wrap}
+.note{border-left:5px solid var(--gold);background:#fff6cf;padding:12px 15px;border-radius:8px;margin:12px 0}
+label{display:block;margin:8px 0}input[type=text],input[type=number],select{padding:9px;border:1px solid #aaa;border-radius:7px;max-width:100%}input[type=radio]{margin-right:7px}
+.question{padding:12px;border-bottom:1px solid var(--line)}.feedback{font-weight:bold;margin-left:8px}table{border-collapse:collapse;width:100%;margin:10px 0;background:white}th,td{border:1px solid #c9c3a3;padding:9px;text-align:left}th{background:#e8e1b7}
+textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #aaa;font-family:Consolas,monospace}.hidden{display:none}.good{color:var(--green);font-weight:bold}.bad{color:var(--red);font-weight:bold}.small{font-size:.9rem;color:#5d624d}
+footer{text-align:center;padding:25px;color:#4d552f;font-size:.9rem}
+@media print{body{background:white}.toolbar,button,#clock,.progress{display:none!important}.card{break-inside:avoid;box-shadow:none}header{background:#fff;color:#111;border:2px solid #333}header p,.brand{color:#222}.code{color:#111;background:#eee;border:1px solid #777}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RAVI RAJU’S PROGRAMMING LAB</div>
+<div class="school">Modern English School Cairo · Computer Science · Care · Challenge · Inspire</div>
+<h1>Lesson 12: FOR Loops – Counters, Totals and Averages</h1>
+<p>Cambridge IGCSE Computer Science 0984 · Applying count-controlled iteration to solve problems</p>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<button onclick="startTimer()">Start / Resume 50-minute lesson</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><button class="gold" onclick="window.print()">Print / Save as PDF</button>
+<span id="clock">50:00</span><div class="progress"><span id="bar"></span></div>
+</div>
+
+<section class="card">
+<span class="tag">50 minutes</span><span class="tag">FOR…NEXT practice</span><span class="tag">Counters and accumulators</span>
+<h2>Learning outcomes</h2>
+<ul>
+<li>Use a FOR loop to repeat input and processing a fixed number of times.</li>
+<li>Use a counter to keep track of occurrences.</li>
+<li>Use an accumulator to calculate a running total.</li>
+<li>Calculate an average from a total and a known number of values.</li>
+<li>Trace changes to a loop variable, counter and accumulator.</li>
+<li>Recognise the importance of initialising counters and totals before a loop.</li>
+</ul>
+<div class="note"><b>Lesson focus:</b> We are extending the FOR…NEXT skills from Lesson 11. We will practise counting, totalling and averaging. Arrays and nested loops are not introduced in this lesson.</div>
+</section>
+
+<section class="card">
+<h2>1. Recall – 5 minutes</h2>
+<div class="question"><b>1.</b> In Cambridge Pseudocode, what type must a FOR loop control variable be?
+<label><input type="radio" name="r1" value="a"> INTEGER</label><label><input type="radio" name="r1" value="b"> STRING</label><label><input type="radio" name="r1" value="c"> BOOLEAN</label></div>
+<div class="question"><b>2.</b> What does the end value in a Cambridge FOR…TO loop represent?
+<label><input type="radio" name="r2" value="a"> A value that is always excluded</label><label><input type="radio" name="r2" value="b"> The final boundary, included if reached by the loop sequence</label><label><input type="radio" name="r2" value="c"> The number of statements inside the loop</label></div>
+<div class="question"><b>3.</b> What should usually happen to Total before a loop adds values to it?
+<label><input type="radio" name="r3" value="a"> It should be initialised to 0</label><label><input type="radio" name="r3" value="b"> It should be set to 100</label><label><input type="radio" name="r3" value="c"> It should be left unassigned</label></div>
+<button onclick="checkRecall()">Check recall</button><span id="recallFeedback" class="feedback"></span>
+</section>
+
+<section class="card">
+<h2>2. Teacher demonstration – 10 minutes</h2>
+<h3>A. Counter – count how many times something happens</h3>
+<p>A <b>counter</b> is a variable that is increased when an event or condition occurs. It keeps track of how many times that event has happened.</p>
+<div class="code">PassCount ← 0
+FOR Student ← 1 TO 5
+  INPUT Mark
+  IF Mark &gt;= 50
+  THEN
+    PassCount ← PassCount + 1
+  ENDIF
+NEXT Student
+OUTPUT PassCount</div>
+<p>Each mark is entered once. If the mark is 50 or more, PassCount increases by one. The final output is the number of students who passed.</p>
+<h3>B. Accumulator – calculate a running total</h3>
+<p>An <b>accumulator</b> stores a value that is updated repeatedly, usually by adding a new value to the existing total.</p>
+<div class="code">Total ← 0
+FOR Count ← 1 TO 5
+  INPUT Score
+  Total ← Total + Score
+NEXT Count
+OUTPUT Total</div>
+<div class="note"><b>Why initialise Total to 0?</b> The first value is added to a known starting value. Without initialisation, the calculation would not have a reliable starting point.</div>
+<h3>C. Calculate an average</h3>
+<p>Average = Total ÷ Number of values. The total is accumulated during the loop; the average is calculated after all values have been processed.</p>
+<div class="code">Total ← 0
+FOR Count ← 1 TO 5
+  INPUT Score
+  Total ← Total + Score
+NEXT Count
+Average ← Total / 5
+OUTPUT Average</div>
+<h3>Dry run: five values</h3>
+<p>Suppose the entered values are 10, 20, 15, 25 and 30.</p>
+<table><thead><tr><th>Count</th><th>Score entered</th><th>Total before</th><th>Total after</th></tr></thead><tbody>
+<tr><td>1</td><td>10</td><td>0</td><td>10</td></tr><tr><td>2</td><td>20</td><td>10</td><td>30</td></tr><tr><td>3</td><td>15</td><td>30</td><td>45</td></tr><tr><td>4</td><td>25</td><td>45</td><td>70</td></tr><tr><td>5</td><td>30</td><td>70</td><td>100</td></tr>
+</tbody></table>
+<p>Average = 100 / 5 = 20.</p>
+<h3>Python comparison</h3>
+<div class="code">total = 0
+pass_count = 0
+
+for student in range(1, 6):
+    mark = int(input("Enter mark: "))
+    total = total + mark
+    if mark >= 50:
+        pass_count = pass_count + 1
+
+average = total / 5
+print("Total:", total)
+print("Average:", average)
+print("Number of passes:", pass_count)</div>
+<p class="small">The Python example uses the same logic. Python's range stop value is exclusive, so range(1, 6) repeats for student values 1 to 5.</p>
+</section>
+
+<section class="card">
+<h2>3. Interactive exploration – 10 minutes</h2>
+<h3>Explore a running total and average</h3>
+<p>Enter five whole-number values. The simulator displays the running total after each input.</p>
+<div class="grid">
+<div class="box">
+<label>Value 1 <input type="number" id="v1" value="10"></label>
+<label>Value 2 <input type="number" id="v2" value="20"></label>
+<label>Value 3 <input type="number" id="v3" value="15"></label>
+<label>Value 4 <input type="number" id="v4" value="25"></label>
+<label>Value 5 <input type="number" id="v5" value="30"></label>
+<button onclick="runTotal()">Calculate total and average</button>
+</div>
+<div class="box" id="totalOutput" aria-live="polite">Your calculation will appear here.</div>
+</div>
+<h3>Explore a counter</h3>
+<p>Enter five marks. The simulator counts how many are 50 or above.</p>
+<div class="grid">
+<div class="box">
+<label>Mark 1 <input type="number" id="m1" value="45" min="0" max="100"></label>
+<label>Mark 2 <input type="number" id="m2" value="67" min="0" max="100"></label>
+<label>Mark 3 <input type="number" id="m3" value="82" min="0" max="100"></label>
+<label>Mark 4 <input type="number" id="m4" value="39" min="0" max="100"></label>
+<label>Mark 5 <input type="number" id="m5" value="50" min="0" max="100"></label>
+<button onclick="runCounter()">Count passes</button>
+</div>
+<div class="box" id="counterOutput" aria-live="polite">The pass count will appear here.</div>
+</div>
+<div class="note">Observe the difference: a counter increases by a fixed amount (usually 1) when a condition is met. An accumulator adds the value being processed to a running total.</div>
+</section>
+
+<section class="card">
+<h2>4. Formal practice – 15 minutes</h2>
+<p>Write each solution in Cambridge Pseudocode. Initialise counters and totals before the FOR loop.</p>
+<div class="box"><h3>Task 1 – Count positive numbers</h3><p>Input 8 integers. Count how many are greater than zero. Display the count after all 8 numbers have been entered.</p><textarea rows="8" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('s1')">Show suggested answer</button><div id="s1" class="code hidden">PositiveCount ← 0
+FOR Count ← 1 TO 8
+  INPUT Number
+  IF Number &gt; 0
+  THEN
+    PositiveCount ← PositiveCount + 1
+  ENDIF
+NEXT Count
+OUTPUT PositiveCount</div></div>
+<div class="box"><h3>Task 2 – Total the prices</h3><p>Input the prices of 6 items. Calculate and display the total cost.</p><textarea rows="8" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('s2')">Show suggested answer</button><div id="s2" class="code hidden">Total ← 0
+FOR Item ← 1 TO 6
+  INPUT Price
+  Total ← Total + Price
+NEXT Item
+OUTPUT Total</div></div>
+<div class="box"><h3>Task 3 – Calculate the average mark</h3><p>Input 10 test marks. Calculate and display the average mark.</p><textarea rows="9" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('s3')">Show suggested answer</button><div id="s3" class="code hidden">Total ← 0
+FOR Student ← 1 TO 10
+  INPUT Mark
+  Total ← Total + Mark
+NEXT Student
+Average ← Total / 10
+OUTPUT Average</div></div>
+<div class="box"><h3>Task 4 – Count passes and calculate total</h3><p>Input 5 student marks. Calculate the total of the marks and count how many students passed (mark at least 50). Display both results.</p><textarea rows="11" placeholder="Write your pseudocode here..."></textarea><button class="secondary" onclick="toggle('s4')">Show suggested answer</button><div id="s4" class="code hidden">Total ← 0
+PassCount ← 0
+FOR Student ← 1 TO 5
+  INPUT Mark
+  Total ← Total + Mark
+  IF Mark &gt;= 50
+  THEN
+    PassCount ← PassCount + 1
+  ENDIF
+NEXT Student
+OUTPUT Total
+OUTPUT PassCount</div></div>
+<p class="small">Complete your own solution before revealing the suggested answer. Make sure the total and counter are initialised before the loop begins.</p>
+</section>
+
+<section class="card">
+<h2>5. Assessment and feedback – 10 minutes</h2>
+<p>Enter your full name and answer all six questions.</p>
+<label>Student full name (required): <input id="studentName" type="text" placeholder="Enter your full name" style="width:min(420px,100%)"></label>
+<form id="quiz">
+<div class="question"><b>1.</b> What is the purpose of a counter?
+<label><input type="radio" name="q1" value="a"> To keep track of how many times something occurs</label><label><input type="radio" name="q1" value="b"> To store a running total of different values</label><label><input type="radio" name="q1" value="c"> To control the screen colour</label></div>
+<div class="question"><b>2.</b> What is the usual initial value for a total accumulator?
+<label><input type="radio" name="q2" value="a"> 1</label><label><input type="radio" name="q2" value="b"> 0</label><label><input type="radio" name="q2" value="c"> 100</label></div>
+<div class="question"><b>3.</b> When should the average normally be calculated in a fixed five-value input task?
+<label><input type="radio" name="q3" value="a"> Before any values are entered</label><label><input type="radio" name="q3" value="b"> After all five values have been added to the total</label><label><input type="radio" name="q3" value="c"> After the first value only</label></div>
+<div class="question"><b>4.</b> What does this statement do? <code>PassCount ← PassCount + 1</code>
+<label><input type="radio" name="q4" value="a"> Increases the counter by one</label><label><input type="radio" name="q4" value="b"> Sets the counter to zero</label><label><input type="radio" name="q4" value="c"> Adds a student's mark to the counter</label></div>
+<div class="question"><b>5.</b> Five values are 4, 6, 8, 10 and 12. What is their total?
+<label><input type="radio" name="q5" value="a"> 30</label><label><input type="radio" name="q5" value="b"> 40</label><label><input type="radio" name="q5" value="c"> 50</label></div>
+<div class="question"><b>6.</b> Five students have marks 45, 50, 62, 39 and 80. How many passed if the pass mark is 50?
+<label><input type="radio" name="q6" value="a"> 2</label><label><input type="radio" name="q6" value="b"> 3</label><label><input type="radio" name="q6" value="c"> 4</label></div>
+</form>
+<button class="gold" onclick="submitQuiz()">Submit assessment</button>
+<div id="result" class="card hidden" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Teacher checkpoint</h2>
+<ul>
+<li>Students initialise counters and accumulators before the loop.</li>
+<li>Students distinguish a counter from an accumulator.</li>
+<li>Students place input and processing statements inside the FOR loop.</li>
+<li>Students calculate an average after the loop has completed.</li>
+<li>Students can trace the changing values of the loop variable, counter and total.</li>
+</ul>
+<div class="note"><b>Next lesson:</b> WHILE…DO – pre-condition iteration. Students will learn how a condition is tested before the loop statements execute.</div>
+<div class="note"><b>Syllabus reference:</b> Cambridge IGCSE 0984 (2026–2028), programming concepts 8.1.4(c) iteration and 8.1.4(d) totalling and counting. This class's 2027 examination uses the 2026–2028 syllabus.</div>
+</section>
+</main>
+<footer>Ravi Raju’s Programming Lab · Modern English School Cairo · Care · Challenge · Inspire</footer>
+<script>
+let remaining=3000,timer=null;
+function draw(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('clock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('bar').style.width=((3000-remaining)/3000*100)+'%'}
+function startTimer(){if(timer)return;timer=setInterval(()=>{if(remaining>0){remaining--;draw()}else{pauseTimer();alert('The 50-minute lesson time is complete.')}},1000)}
+function pauseTimer(){clearInterval(timer);timer=null}
+function resetTimer(){pauseTimer();remaining=3000;draw()}draw();
+function checkRecall(){let k=['a','b','a'],n=0;k.forEach((v,i)=>{let x=document.querySelector('input[name="r'+(i+1)+'"]:checked');if(x&&x.value===v)n++});document.getElementById('recallFeedback').textContent=' '+n+'/3 correct.'}
+function runTotal(){let a=[];for(let i=1;i<=5;i++){let el=document.getElementById('v'+i),v=Number(el.value);if(el.value.trim()===''||!Number.isFinite(v)){document.getElementById('totalOutput').textContent='Please enter a valid number in all five boxes.';return}a.push(v)}let total=0,rows=[];a.forEach((v,i)=>{let before=total;total+=v;rows.push('After value '+(i+1)+' ('+v+'): '+before+' + '+v+' = '+total)});document.getElementById('totalOutput').innerHTML='<b>Running total</b><br>'+rows.join('<br>')+'<hr><b>Total:</b> '+total+'<br><b>Average:</b> '+(total/a.length)}
+function runCounter(){let a=[];for(let i=1;i<=5;i++){let el=document.getElementById('m'+i),v=Number(el.value);if(el.value.trim()===''||!Number.isInteger(v)||v<0||v>100){document.getElementById('counterOutput').textContent='Enter five whole-number marks from 0 to 100.';return}a.push(v)}let c=0,rows=[];a.forEach((v,i)=>{let pass=v>=50;if(pass)c++;rows.push('Mark '+(i+1)+': '+v+' — '+(pass?'pass; counter becomes '+c:'not passed; counter remains '+c))});document.getElementById('counterOutput').innerHTML=rows.join('<br>')+'<hr><b>Total passes:</b> '+c+' out of 5'}
+function toggle(id){document.getElementById(id).classList.toggle('hidden')}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function submitQuiz(){let name=document.getElementById('studentName').value.trim();if(!name){alert('Please enter your full name.');document.getElementById('studentName').focus();return}let key={q1:'a',q2:'b',q3:'b',q4:'a',q5:'b',q6:'b'},score=0,missing=[];for(let q in key){let x=document.querySelector('input[name="'+q+'"]:checked');if(!x)missing.push(q);else if(x.value===key[q])score++}if(missing.length){alert('Please answer all six questions before submitting.');return}let p=Math.round(score/6*100),r=document.getElementById('result');r.classList.remove('hidden');r.innerHTML='<h3>Assessment result</h3><p><b>Student:</b> '+esc(name)+'</p><p><b>Score:</b> '+score+'/6 ('+p+'%)</p><p class="'+(p>=70?'good':'bad')+'">'+(p>=70?'Well done! You have achieved 70% or above.':'Review the counter and accumulator examples, then try the practice tasks again.')+'</p><p class="small">The result is displayed on this device. Use Print / Save as PDF to save the page and result.</p>';r.scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 4 | Relational Operators and Boolean Expressions | IGCSE 0984</title>
+<style>
+:root{--gold:#f4c542;--goldlight:#fff3bd;--olive:#465b25;--dark:#263817;--cream:#fffbea;--ink:#20251b;--muted:#59634d;--line:#d8d9bd;--green:#e5f1d8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--dark),var(--olive));color:#fff;padding:27px 5vw 24px;border-bottom:8px solid var(--gold)}
+.header-inner{max-width:1150px;margin:auto}.brand{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#f8df7d;font-weight:bold}
+h1{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:10px 0}.subtitle{font-size:1.08rem;color:#f4f0d9;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.meta span{background:#ffffff18;border:1px solid #ffffff55;padding:7px 12px;border-radius:20px;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;background:#fffdf1;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #26381712}
+.nav-inner{max-width:1150px;margin:auto;display:flex;gap:5px;overflow-x:auto;padding:9px 12px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--dark);font-weight:bold;font-size:.88rem;padding:8px 10px;border-radius:20px}nav a:hover{background:var(--goldlight)}
+main{max-width:1100px;margin:27px auto;padding:0 18px 55px}
+section{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin:19px 0;box-shadow:0 5px 18px #2638170b}
+h2{color:var(--dark);margin:0 0 12px;font-size:1.55rem}h3{color:var(--olive);margin:17px 0 7px}
+.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#8a6b00;font-weight:bold}
+.time{display:inline-block;background:var(--olive);color:#fff;padding:4px 10px;border-radius:15px;font-size:.82rem;font-weight:bold;margin:0 0 9px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fffef8}.card strong{color:var(--dark)}
+.callout,.success,.warning{padding:13px 16px;border-radius:9px;margin:13px 0}.callout{background:var(--goldlight);border-left:5px solid #d6a900}.success{background:var(--green);border-left:5px solid var(--olive)}.warning{background:#fff0e7;border-left:5px solid #b85b28}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#eef0dc;color:var(--dark)}
+pre{background:#182318;color:#f5f3d7;padding:16px;border-radius:12px;overflow-x:auto;font-size:.94rem;line-height:1.55;border:1px solid #31452a}
+code{font-family:Consolas,Monaco,monospace}.inline{background:#f0f1e5;padding:2px 5px;border-radius:4px;font-family:Consolas,monospace}
+button{border:0;background:var(--olive);color:#fff;padding:10px 15px;border-radius:8px;font-weight:bold;cursor:pointer}button:hover{background:var(--dark)}button.secondary{background:#e8edda;color:var(--dark);border:1px solid var(--line)}
+textarea{width:100%;min-height:100px;resize:vertical;font:inherit;padding:10px;border:1px solid #aeb59a;border-radius:8px}
+details{border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:10px 0;background:#fffef8}summary{cursor:pointer;font-weight:bold;color:var(--dark)}
+.quiz-item{padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fffef8}.quiz-item label{display:inline-block;margin:7px 12px 3px 0}.feedback{font-weight:bold;margin-top:5px}
+.timerbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f4f5e8;padding:13px;border-radius:12px}#clock{font-size:1.6rem;font-weight:bold;color:var(--dark);font-variant-numeric:tabular-nums;min-width:90px}
+footer{text-align:center;background:var(--dark);color:#f7f0cf;padding:22px}footer strong{color:var(--gold)}
+@media print{nav,.no-print,button{display:none!important}body{background:white;font-size:11pt}header{background:white!important;color:black;border-bottom:3px solid #777;padding:14px}.brand,.subtitle{color:#333}section{box-shadow:none;break-inside:avoid}pre{background:#eee;color:#111;white-space:pre-wrap}}
+</style>
+</head>
+<body>
+<header><div class="header-inner">
+ <div class="brand">Modern English School Cairo · Care · Challenge · Inspire</div>
+ <h1>Relational Operators and Boolean Expressions</h1>
+ <p class="subtitle">Year 10 · Cambridge IGCSE Computer Science 0984 · Lesson 4</p>
+ <div class="meta"><span>50-minute lesson</span><span>Decision-making foundations</span><span>Cambridge Pseudocode first</span><span>Ravi Raju’s Programming Lab</span></div>
+</div></header>
+<nav><div class="nav-inner">
+ <a href="#recall">Recall</a><a href="#demo">Demonstration</a><a href="#operators">Operators</a><a href="#explore">Predict</a><a href="#practice">Practice</a><a href="#assessment">Assessment</a>
+</div></nav>
+<main>
+<section>
+ <div class="kicker">Syllabus alignment</div><h2>Cambridge reference</h2>
+ <p>This lesson follows <strong>Cambridge IGCSE (9–1) Computer Science 0984, syllabus for examination in 2026, 2027 and 2028</strong>, Topic 8.1.4(f): relational operations.</p>
+ <p>The six relational symbols are <strong>=, &lt;, &lt;=, &gt;, &gt;= and &lt;&gt;</strong>. The result of a relational operation is always of data type <strong>BOOLEAN</strong>.</p>
+ <div class="warning"><strong>Scope for today:</strong> This lesson covers relational operators only. We will teach AND, OR and NOT in the next lesson, so students can understand and practise one new idea at a time.</div>
+ <p class="small">Official source: Cambridge 0984 syllabus 2026–2028, pseudocode reference section, relational operations. <a href="https://www.cambridgeinternational.org/Images/697248-2026-2028-syllabus.pdf" target="_blank" rel="noopener">Open official Cambridge syllabus (PDF)</a>.</p>
+</section>
+
+<section>
+ <div class="kicker">Learning goals</div><h2>By the end of this lesson, you should be able to…</h2>
+ <div class="grid">
+  <div class="card">Explain what a <strong>relational operator</strong> does.</div>
+  <div class="card">Use all six Cambridge relational symbols correctly.</div>
+  <div class="card">Evaluate a comparison and decide whether it is TRUE or FALSE.</div>
+  <div class="card">Store a comparison result in a BOOLEAN variable.</div>
+  <div class="card">Trace relational expressions using given values.</div>
+  <div class="card">Recognise the differences between Cambridge Pseudocode and Python comparison syntax.</div>
+ </div>
+ <div class="callout"><strong>Three-stage learning:</strong> Understand the problem → write Cambridge Pseudocode → compare with Python where useful.</div>
+ <div class="timerbox no-print"><strong>Lesson timer</strong><span id="clock">50:00</span><button onclick="startTimer()">Start</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="secondary" onclick="resetTimer()">Reset</button><span class="small">Suggested timings total 50 minutes.</span></div>
+</section>
+
+<section id="recall">
+ <div class="kicker">Activity 1</div><span class="time">5 minutes · Recall</span>
+ <h2>Recall variables and data types</h2>
+ <div class="quiz-item"><p><strong>1.</strong> Which data type stores TRUE or FALSE?</p>
+  <label><input type="radio" name="r1" value="a"> INTEGER</label><label><input type="radio" name="r1" value="b"> BOOLEAN</label><label><input type="radio" name="r1" value="c"> STRING</label><div class="feedback" id="rf1"></div></div>
+ <div class="quiz-item"><p><strong>2.</strong> What is the result of <code>12 &gt; 8</code>?</p>
+  <label><input type="radio" name="r2" value="a"> TRUE</label><label><input type="radio" name="r2" value="b"> FALSE</label><label><input type="radio" name="r2" value="c"> 4</label><div class="feedback" id="rf2"></div></div>
+ <button onclick="checkRecall()">Check recall</button>
+</section>
+
+<section id="demo">
+ <div class="kicker">Activity 2</div><span class="time">10 minutes · Teacher demonstration</span>
+ <h2>How can a computer compare two values?</h2>
+ <p><strong>Problem:</strong> A school system needs to check whether a student's mark is at least 50.</p>
+ <p>Ask students: What value do we need? What comparison should be made? What kind of result will the comparison produce?</p>
+ <pre><code>// Check whether a student has reached 50 marks
+DECLARE StudentMark : INTEGER
+DECLARE HasPassed : BOOLEAN
+
+StudentMark ← 67
+
+HasPassed ← StudentMark >= 50
+
+OUTPUT HasPassed</code></pre>
+ <div class="success"><strong>Expected result:</strong> TRUE, because 67 is greater than or equal to 50.</div>
+ <p>Change <code class="inline">StudentMark</code> to 42. Ask students to predict the result. It becomes FALSE.</p>
+ <div class="callout"><strong>Key concept:</strong> A relational operation compares values. Its result is not the difference between the values; it is a Boolean value: TRUE or FALSE.</div>
+</section>
+
+<section id="operators">
+ <div class="kicker">Core knowledge</div><span class="time">Included in the 10-minute demonstration</span>
+ <h2>The six Cambridge relational operators</h2>
+ <table><thead><tr><th>Symbol</th><th>Meaning</th><th>Example</th><th>Result</th></tr></thead><tbody>
+  <tr><td><strong>=</strong></td><td>Equal to</td><td><code>7 = 7</code></td><td>TRUE</td></tr>
+  <tr><td><strong>&lt;</strong></td><td>Less than</td><td><code>4 &lt; 9</code></td><td>TRUE</td></tr>
+  <tr><td><strong>&lt;=</strong></td><td>Less than or equal to</td><td><code>5 &lt;= 5</code></td><td>TRUE</td></tr>
+  <tr><td><strong>&gt;</strong></td><td>Greater than</td><td><code>3 &gt; 8</code></td><td>FALSE</td></tr>
+  <tr><td><strong>&gt;=</strong></td><td>Greater than or equal to</td><td><code>6 &gt;= 4</code></td><td>TRUE</td></tr>
+  <tr><td><strong>&lt;&gt;</strong></td><td>Not equal to</td><td><code>10 &lt;&gt; 10</code></td><td>FALSE</td></tr>
+ </tbody></table>
+ <div class="warning"><strong>Do not confuse these symbols:</strong> In Cambridge Pseudocode, <code class="inline">=</code> means equal to in a comparison. Assignment uses <code class="inline">←</code>. The symbol <code class="inline">&lt;&gt;</code> means not equal to.</div>
+ <h3>Python comparison syntax</h3>
+ <table><thead><tr><th>Meaning</th><th>Cambridge Pseudocode</th><th>Python 3</th></tr></thead><tbody>
+  <tr><td>Equal to</td><td><code>=</code></td><td><code>==</code></td></tr>
+  <tr><td>Not equal to</td><td><code>&lt;&gt;</code></td><td><code>!=</code></td></tr>
+  <tr><td>Less than</td><td><code>&lt;</code></td><td><code>&lt;</code></td></tr>
+  <tr><td>Less than or equal to</td><td><code>&lt;=</code></td><td><code>&lt;=</code></td></tr>
+  <tr><td>Greater than</td><td><code>&gt;</code></td><td><code>&gt;</code></td></tr>
+  <tr><td>Greater than or equal to</td><td><code>&gt;=</code></td><td><code>&gt;=</code></td></tr>
+ </tbody></table>
+ <div class="callout"><strong>Important:</strong> Python uses <code class="inline">==</code> for equality because a single <code class="inline">=</code> is used for assignment. Python uses <code class="inline">!=</code> for not equal. Keep the two notations separate in your answers.</div>
+</section>
+
+<section id="explore">
+ <div class="kicker">Activity 3</div><span class="time">10 minutes · Interactive exploration</span>
+ <h2>Predict the result: TRUE or FALSE?</h2>
+ <p>For each comparison, select TRUE or FALSE. Think carefully about the meaning of the symbol.</p>
+ <div id="predictQuiz"></div>
+ <button onclick="markPredict()">Check predictions</button> <button class="secondary" onclick="resetPredict()">Try again</button>
+ <div id="predictResult" class="success" aria-live="polite">Your score will appear here.</div>
+ <h3>Store the result in a Boolean variable</h3>
+ <pre><code>DECLARE Temperature : REAL
+DECLARE IsHot : BOOLEAN
+
+Temperature ← 31.5
+IsHot ← Temperature > 30
+
+OUTPUT IsHot</code></pre>
+ <p>Expected output: <strong>TRUE</strong>. The expression <code class="inline">Temperature &gt; 30</code> is evaluated first; its Boolean result is stored in <code class="inline">IsHot</code>.</p>
+</section>
+
+<section id="practice">
+ <div class="kicker">Activity 4</div><span class="time">15 minutes · Formal practice</span>
+ <h2>Write and trace relational expressions</h2>
+ <p>For each problem, identify the values, choose suitable variable types, write the Pseudocode and state the Boolean result.</p>
+ <div class="task"><h3>Question 1 · Minimum age</h3>
+  <p>Input a person's age. Store TRUE in <code class="inline">CanRegister</code> if the age is 16 or above; otherwise, store FALSE. Display the Boolean result. (Use the relational comparison only; do not use IF yet.)</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Minimum age pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Check whether the person is at least 16
+DECLARE Age : INTEGER
+DECLARE CanRegister : BOOLEAN
+
+INPUT Age
+CanRegister ← Age >= 16
+OUTPUT CanRegister</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 2 · Stock availability</h3>
+  <p>Input the number of items in stock. Store the result of the comparison <code class="inline">Stock &lt;&gt; 0</code> in a Boolean variable called <code class="inline">ItemsAvailable</code>. Display the result.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Stock availability pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Check whether any items remain in stock
+DECLARE Stock : INTEGER
+DECLARE ItemsAvailable : BOOLEAN
+
+INPUT Stock
+ItemsAvailable ← Stock <> 0
+OUTPUT ItemsAvailable</code></pre></details>
+ </div>
+ <div class="task"><h3>Question 3 · Temperature comparison</h3>
+  <p>Input two temperatures. Store TRUE in <code class="inline">SameTemperature</code> if both values are equal. Display the result.</p>
+  <textarea placeholder="Write your Cambridge Pseudocode here…" aria-label="Temperature comparison pseudocode"></textarea>
+  <details><summary>Show one possible solution</summary><pre><code>// Compare two temperature readings
+DECLARE Temperature1 : REAL
+DECLARE Temperature2 : REAL
+DECLARE SameTemperature : BOOLEAN
+
+INPUT Temperature1
+INPUT Temperature2
+
+SameTemperature ← Temperature1 = Temperature2
+
+OUTPUT SameTemperature</code></pre></details>
+ </div>
+ <p class="small">Teacher note: These questions practise relational operations and Boolean assignment only. Do not introduce IF, AND, OR or NOT in this lesson.</p>
+</section>
+
+<section id="assessment">
+ <div class="kicker">Activity 5</div><span class="time">10 minutes · Assessment and feedback</span>
+ <h2>Check your understanding</h2>
+ <p>Answer all six questions. Submit to receive your score and explanations.</p>
+ <div id="assessmentQuiz"></div>
+ <button onclick="markAssessment()">Submit assessment</button> <button class="secondary" onclick="resetAssessment()">Reset</button>
+ <div id="assessmentResult" class="success" aria-live="polite">Your result will appear here.</div>
+</section>
+
+<section>
+ <h2>Lesson reflection</h2>
+ <ol>
+  <li>What type of value does a relational operation always produce?</li>
+  <li>What is the difference between <code class="inline">=</code> and <code class="inline">←</code> in Cambridge Pseudocode?</li>
+  <li>Which Cambridge symbol means “not equal to”?</li>
+  <li>How does Python represent equality and inequality?</li>
+ </ol>
+ <div class="success"><strong>Key message:</strong> Relational operators compare values and produce a Boolean result: TRUE or FALSE. The result can be stored in a BOOLEAN variable and used later in an algorithm.</div>
+ <p class="small">Next lesson: logical operators AND, OR and NOT – combining or changing Boolean conditions.</p>
+ <div class="no-print"><button onclick="window.print()">Print lesson / Save as PDF</button></div>
+</section>
+</main>
+<footer><strong>Ravi Raju’s Programming Lab</strong><br>Modern English School Cairo · Care · Challenge · Inspire<br><span class="small" style="color:#e6e4cc">Year 10 · Cambridge IGCSE Computer Science 0984</span></footer>
+<script>
+let remaining=50*60,timer=null;
+function showTime(){document.getElementById('clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function startTimer(){if(timer!==null)return;timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else pauseTimer()},1000)}
+function pauseTimer(){if(timer!==null){clearInterval(timer);timer=null}}
+function resetTimer(){pauseTimer();remaining=3000;showTime()}showTime();
+function checkRecall(){let keys={r1:'b',r2:'a'},s=0;Object.keys(keys).forEach((k,i)=>{let x=document.querySelector('input[name="'+k+'"]:checked'),ok=x&&x.value===keys[k];if(ok)s++;let f=document.getElementById('rf'+(i+1));f.textContent=ok?'Correct!':'Review the Boolean data type and comparison result.';f.style.color=ok?'#365d20':'#8b3030'});alert('Recall score: '+s+'/2')}
+const predictItems=[
+ {q:'8 = 8',a:'TRUE',why:'Both values are equal.'},
+ {q:'5 < 3',a:'FALSE',why:'5 is not less than 3.'},
+ {q:'9 >= 9',a:'TRUE',why:'Greater than or equal includes equality.'},
+ {q:'4 <> 4',a:'FALSE',why:'The values are equal, so they are not unequal.'},
+ {q:'12 > 7',a:'TRUE',why:'12 is greater than 7.'},
+ {q:'6 <= 5',a:'FALSE',why:'6 is neither less than nor equal to 5.'},
+ {q:'3 <> 8',a:'TRUE',why:'The two values are different.'},
+ {q:'10 = 12',a:'FALSE',why:'10 is not equal to 12.'},
+ {q:'2.5 < 2.8',a:'TRUE',why:'2.5 is less than 2.8.'},
+ {q:'0 >= -1',a:'TRUE',why:'0 is greater than -1.'}
+];
+function buildPredict(){let root=document.getElementById('predictQuiz');root.innerHTML='';predictItems.forEach((it,i)=>{let d=document.createElement('div');d.className='quiz-item';d.innerHTML='<p><strong>'+(i+1)+'.</strong> <code>'+it.q+'</code></p><label><input type="radio" name="p'+i+'" value="TRUE"> TRUE</label><label><input type="radio" name="p'+i+'" value="FALSE"> FALSE</label><div class="feedback" id="pf'+i+'"></div>';root.appendChild(d)})}
+function markPredict(){let score=0;predictItems.forEach((it,i)=>{let x=document.querySelector('input[name="p'+i+'"]:checked'),ok=x&&x.value===it.a;if(ok)score++;let f=document.getElementById('pf'+i);f.textContent=(ok?'Correct. ':'Correct answer: '+it.a+'. ')+it.why;f.style.color=ok?'#365d20':'#8b3030'});document.getElementById('predictResult').textContent='Your score: '+score+'/'+predictItems.length+'. '+(score>=8?'Excellent comparison skills.':score>=6?'Good effort. Review the explanations for missed items.':'Practise reading each symbol carefully, then try again.')}
+function resetPredict(){buildPredict();document.getElementById('predictResult').textContent='Your score will appear here.'}
+buildPredict();
+const assessItems=[
+ {q:'Which Cambridge symbol means “not equal to”?',o:['!=','<>','='],a:1,e:'Cambridge Pseudocode uses <> for not equal to.'},
+ {q:'What is the result of 14 <= 14?',o:['TRUE','FALSE','14'],a:0,e:'<= means less than or equal to. Equal values satisfy this comparison.'},
+ {q:'A relational operation always returns a value of which type?',o:['INTEGER','BOOLEAN','REAL'],a:1,e:'The result is always BOOLEAN: TRUE or FALSE.'},
+ {q:'Which Cambridge statement correctly stores a comparison result?',o:['Passed = Mark >= 50','Passed ← Mark >= 50','Passed ← OUTPUT Mark'],a:1,e:'Use the assignment arrow to store the Boolean result of the comparison.'},
+ {q:'Which Python operator tests equality?',o:['=','==','<>'],a:1,e:'Python uses == for equality; a single = is assignment.'},
+ {q:'If X is 7, what is the result of X <> 5?',o:['TRUE','FALSE','7'],a:0,e:'7 and 5 are different, so the comparison is TRUE.'}
+];
+function buildAssessment(){let root=document.getElementById('assessmentQuiz');root.innerHTML='';assessItems.forEach((it,i)=>{let d=document.createElement('div');d.className='quiz-item';d.innerHTML='<p><strong>'+(i+1)+'. '+it.q+'</strong></p>'+it.o.map((op,j)=>'<label><input type="radio" name="a'+i+'" value="'+j+'"> '+op+'</label>').join('')+'<div class="feedback" id="af'+i+'"></div>';root.appendChild(d)})}
+function markAssessment(){let score=0;assessItems.forEach((it,i)=>{let x=document.querySelector('input[name="a'+i+'"]:checked'),ok=x&&Number(x.value)===it.a;if(ok)score++;let f=document.getElementById('af'+i);f.textContent=(ok?'Correct. ':'Review: ')+it.e;f.style.color=ok?'#365d20':'#8b3030'});document.getElementById('assessmentResult').textContent='Your score: '+score+'/'+assessItems.length+'. '+(score>=5?'Excellent – you are ready to combine conditions in the next lesson.':score>=4?'Good progress. Review the missed explanations.':'Revisit the operator table and examples, then try again.')}
+function resetAssessment(){buildAssessment();document.getElementById('assessmentResult').textContent='Your result will appear here.'}
+buildAssessment();
+</script>
+</body>
+</html>

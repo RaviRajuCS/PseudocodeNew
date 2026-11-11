@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE 0984 Algorithm Design and Problem-solving | Learning Hub</title>
+<style>
+:root{--gold:#f4c542;--gold-light:#ffe89a;--olive:#596b22;--olive-dark:#354313;--cream:#fff9e8;--ink:#263016;--muted:#62684b;--line:#d9ce91}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#fff4c7 0%,#f8e7a4 55%,#f6edc9 100%);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+.hero{background:linear-gradient(120deg,var(--olive-dark),var(--olive));color:#fff;padding:42px 6% 36px;border-bottom:8px solid var(--gold);position:relative;overflow:hidden}
+.hero:after{content:"0984";position:absolute;right:5%;top:10px;font-size:clamp(5rem,18vw,12rem);font-weight:900;color:#ffffff0d;pointer-events:none}
+.brand{font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);font-weight:800}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.12;margin:12px 0}
+.hero p{max-width:760px;font-size:1.08rem;margin:8px 0}
+.motto{display:inline-block;margin-top:15px;padding:8px 14px;border:1px solid #ffffff70;border-radius:30px;color:var(--gold-light);font-weight:bold;letter-spacing:1px}
+.wrap{max-width:1200px;margin:auto;padding:24px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:-4px}
+.stat{background:var(--cream);border:1px solid var(--line);border-radius:13px;padding:15px;text-align:center;box-shadow:0 4px 12px #594c1c12}
+.stat strong{display:block;font-size:1.7rem;color:var(--olive-dark)}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:24px 0 14px}
+.search{flex:1;min-width:230px;padding:13px 15px;border:2px solid var(--olive);border-radius:10px;font-size:1rem;background:#fffdf3}
+.filter{padding:12px 14px;border:1px solid var(--olive);border-radius:10px;background:var(--cream);font-weight:bold;color:var(--olive-dark)}
+.unit-section{margin:30px 0}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:15px;border-bottom:3px solid var(--gold);padding-bottom:10px;margin-bottom:14px}
+.section-heading h2{margin:0;color:var(--olive-dark);font-size:1.55rem}
+.section-heading p{margin:4px 0 0;color:var(--muted)}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}
+.lesson-card{display:flex;flex-direction:column;min-height:165px;padding:17px;background:var(--cream);border:1px solid #d8c77e;border-left:6px solid var(--olive);border-radius:12px;text-decoration:none;color:var(--ink);box-shadow:0 4px 12px #594c1c12;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.lesson-card:hover,.lesson-card:focus{transform:translateY(-3px);box-shadow:0 9px 20px #594c1c22;border-color:var(--gold);outline:3px solid #f4c54255}
+.lesson-number{font-size:.76rem;letter-spacing:1px;font-weight:900;color:var(--olive)}
+.lesson-title{font-size:1.08rem;font-weight:800;line-height:1.3;margin:9px 0 8px}
+.lesson-group{font-size:.84rem;color:var(--muted);margin-bottom:13px}
+.open-label{margin-top:auto;color:var(--olive-dark);font-weight:800}
+.note{background:#edf4dc;border-left:5px solid var(--olive);padding:15px 17px;border-radius:8px;margin:25px 0}
+footer{text-align:center;background:var(--olive-dark);color:#fff;padding:22px;margin-top:38px}
+footer strong{color:var(--gold-light)}
+.empty{display:none;background:var(--cream);padding:18px;border-radius:10px;text-align:center;color:var(--muted)}
+@media(max-width:600px){.wrap{padding:16px}.hero{padding:30px 6%}.section-heading{display:block}}
+@media print{body{background:#fff}.hero,footer{background:#fff;color:#000;border:1px solid #777}.brand,.motto{color:#000}.toolbar{display:none}.lesson-card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="brand">Ravi Raju’s Programming Lab · Modern English School Cairo</div>
+ <h1>Algorithm Design &amp;<br>Problem-solving Learning Hub</h1>
+ <p>Cambridge IGCSE Computer Science 0984 · Year 10</p>
+ <p>A structured learning pathway from pseudocode foundations to arrays and the standard methods of solution. Select any lesson below to open its individual learning page.</p>
+ <div class="motto">CARE · CHALLENGE · INSPIRE</div>
+</header>
+<main class="wrap">
+ <div class="summary">
+  <div class="stat"><strong>24</strong>Individual lessons</div>
+  <div class="stat"><strong>5</strong>Learning sections</div>
+  <div class="stat"><strong>50 min</strong>Lesson structure</div>
+  <div class="stat"><strong>0984</strong>Cambridge IGCSE</div>
+ </div>
+ <div class="note"><strong>How to use this hub:</strong> All lesson cards are one-way links from this landing page to the corresponding lesson. Keep this landing page and all 24 lesson HTML files together in the same folder. No changes to the individual lesson pages are required.</div>
+ <div class="toolbar">
+  <input class="search" id="searchBox" type="search" placeholder="Search lessons by title or topic…" aria-label="Search lessons">
+  <select class="filter" id="sectionFilter" aria-label="Filter by section">
+   <option value="all">All sections</option>
+   <option value="programming foundations">Programming Foundations</option>
+   <option value="selection">Selection Statements</option>
+   <option value="iteration">Iteration Statements</option>
+   <option value="one-dimensional arrays">One-Dimensional Arrays</option>
+   <option value="standard methods and scenarios">Standard Methods in Context</option>
+  </select>
+ </div>
+ <div id="sections">
+  <section class="unit-section">
+      <div class="section-heading"><div><h2>Programming Foundations</h2><p>Lessons 1–5: pseudocode, variables, data types and operators</p></div></div>
+      <div class="lesson-grid"><a class="lesson-card" href="./Year10_IGCSE_0984_Lesson1_Introduction_to_Pseudocode.html" target="_self" data-group="programming foundations" data-title="introduction to pseudocode">
+      <span class="lesson-number">LESSON 01</span>
+      <span class="lesson-title">Introduction to Pseudocode</span>
+      <span class="lesson-group">Programming foundations</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson2_Variables_and_Data_Types.html" target="_self" data-group="programming foundations" data-title="variables and data types">
+      <span class="lesson-number">LESSON 02</span>
+      <span class="lesson-title">Variables and Data Types</span>
+      <span class="lesson-group">Programming foundations</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson3_Arithmetic_Operators.html" target="_self" data-group="programming foundations" data-title="arithmetic operators and expressions">
+      <span class="lesson-number">LESSON 03</span>
+      <span class="lesson-title">Arithmetic Operators and Expressions</span>
+      <span class="lesson-group">Programming foundations</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson4_Relational_Operators.html" target="_self" data-group="programming foundations" data-title="relational operators">
+      <span class="lesson-number">LESSON 04</span>
+      <span class="lesson-title">Relational Operators</span>
+      <span class="lesson-group">Programming foundations</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson5_Logical_Operators.html" target="_self" data-group="programming foundations" data-title="logical operators">
+      <span class="lesson-number">LESSON 05</span>
+      <span class="lesson-title">Logical Operators</span>
+      <span class="lesson-group">Programming foundations</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a></div>
+    </section><section class="unit-section">
+      <div class="section-heading"><div><h2>Selection Statements</h2><p>Lessons 6–9: selection, nested selection and CASE</p></div></div>
+      <div class="lesson-grid"><a class="lesson-card" href="./Year10_IGCSE_0984_Lesson6_Selection_Statements.html" target="_self" data-group="selection" data-title="selection statements">
+      <span class="lesson-number">LESSON 06</span>
+      <span class="lesson-title">Selection Statements</span>
+      <span class="lesson-group">Selection</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson7_Nested_Selection.html" target="_self" data-group="selection" data-title="nested selection">
+      <span class="lesson-number">LESSON 07</span>
+      <span class="lesson-title">Nested Selection</span>
+      <span class="lesson-group">Selection</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson8_CASE_Selection.html" target="_self" data-group="selection" data-title="case selection">
+      <span class="lesson-number">LESSON 08</span>
+      <span class="lesson-title">CASE Selection</span>
+      <span class="lesson-group">Selection</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson9_Selection_Consolidation.html" target="_self" data-group="selection" data-title="selection consolidation">
+      <span class="lesson-number">LESSON 09</span>
+      <span class="lesson-title">Selection Consolidation</span>
+      <span class="lesson-group">Selection</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a></div>
+    </section><section class="unit-section">
+      <div class="section-heading"><div><h2>Iteration Statements</h2><p>Lessons 10–15: FOR, WHILE, REPEAT and consolidation</p></div></div>
+      <div class="lesson-grid"><a class="lesson-card" href="./Year10_IGCSE_0984_Lesson10_Introduction_to_Iteration.html" target="_self" data-group="iteration" data-title="introduction to iteration">
+      <span class="lesson-number">LESSON 10</span>
+      <span class="lesson-title">Introduction to Iteration</span>
+      <span class="lesson-group">Iteration</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson11_FOR_NEXT_Iteration.html" target="_self" data-group="iteration" data-title="for…next count-controlled iteration">
+      <span class="lesson-number">LESSON 11</span>
+      <span class="lesson-title">FOR…NEXT Count-Controlled Iteration</span>
+      <span class="lesson-group">Iteration</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson12_FOR_Counters_Totals_Averages.html" target="_self" data-group="iteration" data-title="for loops: counters, totals and averages">
+      <span class="lesson-number">LESSON 12</span>
+      <span class="lesson-title">FOR Loops: Counters, Totals and Averages</span>
+      <span class="lesson-group">Iteration</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson13_WHILE_DO_Precondition_Iteration.html" target="_self" data-group="iteration" data-title="while…do pre-condition iteration">
+      <span class="lesson-number">LESSON 13</span>
+      <span class="lesson-title">WHILE…DO Pre-condition Iteration</span>
+      <span class="lesson-group">Iteration</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson14_REPEAT_UNTIL_Postcondition_Iteration.html" target="_self" data-group="iteration" data-title="repeat…until post-condition iteration">
+      <span class="lesson-number">LESSON 14</span>
+      <span class="lesson-title">REPEAT…UNTIL Post-condition Iteration</span>
+      <span class="lesson-group">Iteration</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson15_Iteration_Consolidation.html" target="_self" data-group="iteration" data-title="iteration consolidation">
+      <span class="lesson-number">LESSON 15</span>
+      <span class="lesson-title">Iteration Consolidation</span>
+      <span class="lesson-group">Iteration</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a></div>
+    </section><section class="unit-section">
+      <div class="section-heading"><div><h2>One-Dimensional Arrays</h2><p>Lessons 16–23: array operations and standard array algorithms</p></div></div>
+      <div class="lesson-grid"><a class="lesson-card" href="./Year10_IGCSE_0984_Lesson16_Introduction_to_1D_Arrays.html" target="_self" data-group="one-dimensional arrays" data-title="introduction to one-dimensional arrays">
+      <span class="lesson-number">LESSON 16</span>
+      <span class="lesson-title">Introduction to One-Dimensional Arrays</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson17_Populating_and_Traversing_1D_Arrays.html" target="_self" data-group="one-dimensional arrays" data-title="populating and traversing 1d arrays">
+      <span class="lesson-number">LESSON 17</span>
+      <span class="lesson-title">Populating and Traversing 1D Arrays</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson18_Linear_Search.html" target="_self" data-group="one-dimensional arrays" data-title="linear search">
+      <span class="lesson-number">LESSON 18</span>
+      <span class="lesson-title">Linear Search</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson19_Maximum_and_Minimum_in_Arrays.html" target="_self" data-group="one-dimensional arrays" data-title="finding maximum and minimum values">
+      <span class="lesson-number">LESSON 19</span>
+      <span class="lesson-title">Finding Maximum and Minimum Values</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson20_Bubble_Sort.html" target="_self" data-group="one-dimensional arrays" data-title="bubble sort">
+      <span class="lesson-number">LESSON 20</span>
+      <span class="lesson-title">Bubble Sort</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson21_Totalling_and_Counting_Arrays.html" target="_self" data-group="one-dimensional arrays" data-title="totalling and counting array values">
+      <span class="lesson-number">LESSON 21</span>
+      <span class="lesson-title">Totalling and Counting Array Values</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson22_Average_of_Array_Values.html" target="_self" data-group="one-dimensional arrays" data-title="finding the average of array values">
+      <span class="lesson-number">LESSON 22</span>
+      <span class="lesson-title">Finding the Average of Array Values</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a>
+<a class="lesson-card" href="./Year10_IGCSE_0984_Lesson23_Array_Algorithms_Consolidation.html" target="_self" data-group="one-dimensional arrays" data-title="array algorithms consolidation">
+      <span class="lesson-number">LESSON 23</span>
+      <span class="lesson-title">Array Algorithms Consolidation</span>
+      <span class="lesson-group">One-dimensional arrays</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a></div>
+    </section><section class="unit-section">
+      <div class="section-heading"><div><h2>Standard Methods in Context</h2><p>Lesson 24: applying algorithms to examination-style scenarios</p></div></div>
+      <div class="lesson-grid"><a class="lesson-card" href="./Year10_IGCSE_0984_Lesson24_Standard_Methods_Scenarios.html" target="_self" data-group="standard methods and scenarios" data-title="standard methods: applying algorithms to scenarios">
+      <span class="lesson-number">LESSON 24</span>
+      <span class="lesson-title">Standard Methods: Applying Algorithms to Scenarios</span>
+      <span class="lesson-group">Standard methods and scenarios</span>
+      <span class="open-label">Open lesson <span aria-hidden="true">→</span></span>
+    </a></div>
+    </section>
+ </div>
+ <div class="empty" id="emptyMessage">No lessons match your search. Try another keyword or select “All sections”.</div>
+</main>
+<footer>
+ <strong>Ravi Raju’s Programming Lab</strong><br>
+ Modern English School Cairo · Computer Science Educator<br>
+ Care · Challenge · Inspire
+</footer>
+<script>
+const searchBox=document.getElementById('searchBox');
+const sectionFilter=document.getElementById('sectionFilter');
+const cards=[...document.querySelectorAll('.lesson-card')];
+const sections=[...document.querySelectorAll('.unit-section')];
+function filterLessons(){
+ const q=searchBox.value.trim().toLowerCase();
+ const group=sectionFilter.value;
+ let visible=0;
+ cards.forEach(card=>{
+  const matchText=card.dataset.title.includes(q)||card.textContent.toLowerCase().includes(q);
+  const matchGroup=group==='all'||card.dataset.group===group;
+  const show=matchText&&matchGroup;
+  card.style.display=show?'flex':'none';
+  if(show)visible++;
+ });
+ sections.forEach(section=>{
+  const hasVisible=[...section.querySelectorAll('.lesson-card')].some(card=>card.style.display!=='none');
+  section.style.display=hasVisible?'block':'none';
+ });
+ document.getElementById('emptyMessage').style.display=visible?'none':'block';
+}
+searchBox.addEventListener('input',filterLessons);
+sectionFilter.addEventListener('change',filterLessons);
+</script>
+</body>
+</html>
